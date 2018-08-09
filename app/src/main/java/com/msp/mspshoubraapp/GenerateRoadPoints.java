@@ -37,7 +37,7 @@ public class GenerateRoadPoints {
         });
 
         VolleySingleton.getInstance(context).addToRequestQueue(roadPointsJsonObject);
-
+        Log.d("QWERTY", latLngs.size()+"");
         return latLngs;
     }
 
