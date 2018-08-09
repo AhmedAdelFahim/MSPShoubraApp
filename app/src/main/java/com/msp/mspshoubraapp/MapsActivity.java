@@ -9,7 +9,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -53,9 +52,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 public void onLocationChanged(Location location) {
                     double lat=location.getLatitude();
                     double lng=location.getLongitude();
-                    Log.d("NPQWERT", lat + " " + lng);
                     currentLocaion=new LatLng(lat,lng);
-//                    locList.add(currentLocaion);
+                    locList.add(currentLocaion);
                 }
 
                 @Override
@@ -79,9 +77,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 public void onLocationChanged(Location location) {
                     double lat=location.getLatitude();
                     double lng=location.getLongitude();
-                    Log.d("QWERT", lat + " " + lng);
                     LatLng currentLocaion=new LatLng(lat,lng);
-//                    locList.add(currentLocaion);
+                    locList.add(currentLocaion);
                 }
 
                 @Override
@@ -120,35 +117,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Output format
         String output = "json";
 
-        return "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters;
+        return "https://maps.googleapis.com/maps/api/directions/"+output+"?"+parameters+"&key=AIzaSyB6p2mWkU0gvPM5Q20iH5q6CtSSmr6MITw";
     }
     LatLng SFE = new LatLng(30.0996, 31.2486);
-    LatLng x = new LatLng(30.0819, 31.2446);
-    String url = getDirectionsUrl(x, SFE);
+    LatLng cL = new LatLng(30.0819,31.2446);
+
+//    String url = getDirectionsUrl(currentLocaion,SFE);
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        locList.add(SFE);
+//        locList.add(cL);
         // Add a marker in SFE and move the camera
 //        30.0884332,31.2430711,15
         LatLng SFE = new LatLng(30.0996, 31.2486);
-        ArrayList<LatLng> latLngs = new ArrayList<>();
-        latLngs.add(new LatLng(31.0990309, 31.249847));
-        latLngs.add(new LatLng(31.0947791, 31.2493744));
-        latLngs.add(new LatLng(31.0908806, 31.2488598));
-        latLngs.add(new LatLng(31.0968886, 31.2941708));
-        latLngs.add(new LatLng(31.09231459999999, 31.3100087));
-        latLngs.add(new LatLng(31.0628488, 31.3485263));
-        latLngs.add(new LatLng(31.0590878, 31.3470052));
-        latLngs.add(new LatLng(31.0106548, 31.3837493));
-        latLngs.add(new LatLng(30.7278971, 31.2695243));
-
 //        mMap.addMarker(new MarkerOptions().position(SFE).title("Faculty of Engineering at Shoubra"));
-        mMap.addPolyline((new PolylineOptions()).addAll(latLngs)
+        mMap.addPolyline((new PolylineOptions()).addAll(locList)
                 .width(5)
-                .color(Color.RED)
-                .geodesic(false));
+                .color(Color.RED));
+//                .geodesic(false));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SFE,17.0F));
     }
 }
