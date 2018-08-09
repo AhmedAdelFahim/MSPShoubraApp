@@ -61,9 +61,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 public void onLocationChanged(Location location) {
                     double lat=location.getLatitude();
                     double lng=location.getLongitude();
-                    Log.d("NPQWERT", lat + " " + lng);
                     currentLocaion=new LatLng(lat,lng);
-//                    locList.add(currentLocaion);
+                    locList.add(currentLocaion);
                 }
 
                 @Override
@@ -87,9 +86,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 public void onLocationChanged(Location location) {
                     double lat=location.getLatitude();
                     double lng=location.getLongitude();
-                    Log.d("QWERT", lat + " " + lng);
                     LatLng currentLocaion=new LatLng(lat,lng);
-//                    locList.add(currentLocaion);
+                    locList.add(currentLocaion);
                 }
 
                 @Override
@@ -128,24 +126,76 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Output format
         String output = "json";
 
-        return "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters;
+        return "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=AIzaSyB6p2mWkU0gvPM5Q20iH5q6CtSSmr6MITw";
     }
     LatLng SFE = new LatLng(30.0996, 31.2486);
-    LatLng x = new LatLng(30.0819, 31.2446);
-    String url = getDirectionsUrl(x, SFE);
+    LatLng cL = new LatLng(30.0819, 31.2446);
+
+    String url = getDirectionsUrl(currentLocaion, SFE);
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        locList.add(SFE);
+//        locList.add(cL);
         // Add a marker in SFE and move the camera
 //        30.0884332,31.2430711,15
         LatLng SFE = new LatLng(30.0996, 31.2486);
 //        mMap.addMarker(new MarkerOptions().position(SFE).title("Faculty of Engineering at Shoubra"));
-        mMap.addPolyline((new PolylineOptions()).addAll(locList)
-                .width(5)
-                .color(Color.RED));
-//                .geodesic(false));
+        JsonObjectRequest roadPointsJsonObject = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                //Log.d("QWERTY", response.toString());
+                ArrayList<LatLng> locList = buildData(response);
+
+
+                mMap.addPolyline((new PolylineOptions()).addAll(locList)
+                        .width(5)
+                        .color(Color.RED));
+                //                .geodesic(false));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+
+            }
+        });
+
+        VolleySingleton.getInstance(this).addToRequestQueue(roadPointsJsonObject);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SFE,17.0F));
     }
+
+    private static ArrayList<LatLng> buildData(JSONObject jsonObject) {
+        ArrayList<LatLng> latLngs = new ArrayList<>();
+
+        try {
+            String status = jsonObject.getString("status");
+            if (!status.equals("OK")) {
+                return null;
+            }
+
+            JSONArray routes = jsonObject.getJSONArray("routes");
+            JSONObject object = routes.getJSONObject(0);
+            JSONArray legs = object.getJSONArray("legs");
+            JSONObject obj = legs.getJSONObject(0);
+            JSONArray steps = obj.getJSONArray("steps");
+
+            for (int i = 0; i < steps.length(); ++i) {
+                JSONObject jsonObj = steps.getJSONObject(i);
+
+                JSONObject end_location = jsonObj.getJSONObject("end_location");
+
+                double lat = end_location.getDouble("lat");
+                double lng = end_location.getDouble("lng");
+                latLngs.add(new LatLng(lat, lng));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return latLngs;
+    }
+
 }
