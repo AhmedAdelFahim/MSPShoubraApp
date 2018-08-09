@@ -120,12 +120,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return "https://maps.googleapis.com/maps/api/directions/"+output+"?"+parameters+"&key=AIzaSyB6p2mWkU0gvPM5Q20iH5q6CtSSmr6MITw";
     }
     LatLng SFE = new LatLng(30.0996, 31.2486);
-    String url = getDirectionsUrl(currentLocaion,SFE);
+    LatLng cL = new LatLng(30.0819,31.2446);
 
+    String url = getDirectionsUrl(cL,SFE);
+    
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        locList.add(SFE);
+        locList.add(cL);
         // Add a marker in SFE and move the camera
 //        30.0884332,31.2430711,15
         LatLng SFE = new LatLng(30.0996, 31.2486);
