@@ -123,7 +123,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LatLng cL = new LatLng(30.0819,31.2446);
 
     String url = getDirectionsUrl(cL,SFE);
-    
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
