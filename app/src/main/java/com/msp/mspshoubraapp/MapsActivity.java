@@ -1,16 +1,9 @@
 package com.msp.mspshoubraapp;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -29,19 +22,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static android.location.LocationManager.NETWORK_PROVIDER;
-
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private static final int MIN_TIME_BW_UPDATES = 10;
     private GoogleMap mMap;
     LocationManager locationManager;
     ArrayList<LatLng> locList = new ArrayList<LatLng>();
     LatLng currentLocaion;
-    private boolean canGetLocation;
-    private float MIN_DISTANCE_CHANGE_FOR_UPDATES = 0;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,81 +37,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
-
-    private LatLng getCurrLocation() {
-        double latitude, longitude;
-        LatLng ret = new LatLng(30.0819, 31.2446);
-        try {
-            LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-            // getting GPS status
-            boolean isGPSEnabled = locationManager
-                    .isProviderEnabled(LocationManager.GPS_PROVIDER);
-
-            // getting network status
-            boolean isNetworkEnabled = locationManager
-                    .isProviderEnabled(NETWORK_PROVIDER);
-
-            if (!isGPSEnabled && !isNetworkEnabled) {
-
-                Toast.makeText(this, "Cannot find location no provider", Toast.LENGTH_SHORT).show();
-            } else {
-                this.canGetLocation = true;
-                Location location;
-
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-//                    return TODO;
-                }
-                locationManager.requestLocationUpdates(
-                        NETWORK_PROVIDER,
-                        MIN_TIME_BW_UPDATES,
-                        MIN_DISTANCE_CHANGE_FOR_UPDATES, (LocationListener) this);
-                    Log.d("Network", "Network");
-                    if (locationManager != null) {
-                        location = locationManager
-                                .getLastKnownLocation(NETWORK_PROVIDER);
-                        if (location != null) {
-                            latitude = location.getLatitude();
-                            longitude = location.getLongitude();
-//                            Toast.makeText(this, "+"+latitude, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-                // if GPS Enabled get lat/long using GPS Services
-                if (isGPSEnabled) {
-                    Location location=null;
-                    if (location == null) {
-                        locationManager.requestLocationUpdates(
-                                LocationManager.GPS_PROVIDER,
-                                MIN_TIME_BW_UPDATES,
-                                MIN_DISTANCE_CHANGE_FOR_UPDATES, (LocationListener) this);
-                        Log.d("GPS Enabled", "GPS Enabled");
-                        if (locationManager != null) {
-                            location = locationManager
-                                    .getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                            if (location != null) {
-                                latitude = location.getLatitude();
-                                longitude = location.getLongitude();
-                                ret=new LatLng(latitude,longitude);
-//                                Toast.makeText(this, "+"+latitude, Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
-                }
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ret;
-    }
+    GPSTracker gps = new GPSTracker(this);
 
     private String getDirectionsUrl(LatLng origin,LatLng dest){
 
@@ -147,7 +59,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=AIzaSyB6p2mWkU0gvPM5Q20iH5q6CtSSmr6MITw";
     }
     LatLng SFE = new LatLng(30.0996, 31.2486);
-    LatLng cL = getCurrLocation();
+    LatLng cL = new LatLng(gps.getLatitude(), gps.getLongitude());
 
     String url = getDirectionsUrl(cL, SFE);
 
