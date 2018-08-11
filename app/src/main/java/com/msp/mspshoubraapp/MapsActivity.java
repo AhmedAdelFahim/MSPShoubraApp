@@ -41,7 +41,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LocationManager locationManager;
     ArrayList<LatLng> locList = new ArrayList<LatLng>();
     LatLng currentLocaion;
-
+    String url;
     // The entry points to the Places API.
     private GeoDataClient mGeoDataClient;
     private PlaceDetectionClient mPlaceDetectionClient;
@@ -59,6 +59,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Location mLastKnownLocation;
 
     private final LatLng mDefaultLocation = new LatLng(30.0996, 31.2486);
+    private LatLng cL;
 
 
     @Override
@@ -103,7 +104,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LatLng SFE = new LatLng(30.0996, 31.2486);
     //LatLng cL = new LatLng(gps.getLatitude(), gps.getLongitude());
 
-    //String url = getDirectionsUrl(cL, SFE);
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -117,28 +117,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         getLocationPermission();
 
         getDeviceLocation();
+//        if(mLastKnownLocation!=null)
+//        cL=new LatLng(mLastKnownLocation.getLatitude(),mLastKnownLocation.getLongitude());
+//        String url = geturl();
 //        mMap.addMarker(new MarkerOptions().position(SFE).title("Faculty of Engineering at Shoubra"));
-       /* JsonObjectRequest roadPointsJsonObject = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                //Log.d("QWERTY", response.toString());
-                ArrayList<LatLng> locList = buildData(response);
 
-                Log.d("QWERTY", locList.size()+"");
-                mMap.addPolyline((new PolylineOptions()).addAll(locList)
-                        .width(5)
-                        .color(Color.RED));
-                //                .geodesic(false));
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-
-            }
-        });
-
-        VolleySingleton.getInstance(this).addToRequestQueue(roadPointsJsonObject);*/
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SFE,17.0F));
     }
 
@@ -192,9 +175,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             Log.d("QWERTYU", task.getResult().getLatitude() + "  " + task.getResult().getLongitude());
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
+                            cL=new LatLng(mLastKnownLocation.getLatitude(),
+                                    mLastKnownLocation.getLongitude());
+                                    url = getDirectionsUrl(cL, SFE);
+                                    getUrl(url);
+                                    //_________
+                            JsonObjectRequest roadPointsJsonObject = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    //Log.d("QWERTY", response.toString());
+                                    ArrayList<LatLng> locList = buildData(response);
+
+                                    Log.d("QWERTY", locList.size()+"");
+                                    mMap.addPolyline((new PolylineOptions()).addAll(locList)
+                                            .width(5)
+                                            .color(Color.RED));
+                                    //                .geodesic(false));
+                                }
+                            }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+
+
+                                }
+                            }
+                            );
+
+                            VolleySingleton.getInstance(MapsActivity.this).addToRequestQueue(roadPointsJsonObject);
+                            //_________
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                    new LatLng(mLastKnownLocation.getLatitude(),
-                                            mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                                    cL, DEFAULT_ZOOM));
                         } else {
                             Log.d("QWERTYU", "Current location is null. Using defaults.");
                             Log.e("QWERTYU", "Exception: %s", task.getException());
@@ -227,8 +237,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
     }
-
-
+    private void getUrl(String str){
+        url=str;
+//        return url;
+    }
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String permissions[],
@@ -246,3 +258,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //updateLocationUI();
     }
 }
+
