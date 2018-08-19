@@ -38,10 +38,17 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".FoodActivity"
+            android:label="@string/title_activity_food"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
