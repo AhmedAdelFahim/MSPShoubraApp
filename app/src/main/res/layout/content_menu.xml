@@ -8,4 +8,11 @@
     tools:context=".MenuActivity"
     tools:showIn="@layout/app_bar_menu">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/menuCustomRecycleview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:listitem="@layout/menu_list_item" />
 </android.support.constraint.ConstraintLayout>

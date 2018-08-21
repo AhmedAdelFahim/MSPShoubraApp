@@ -43,7 +43,9 @@ public class foodRecyclerviewAdapter extends RecyclerView.Adapter<foodRecyclervi
         holder.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //handle after creating menu activity.
+                Intent menuIntent = new Intent(currActivity,MenuActivity.class);
+                menuIntent.putExtra("menu",currItem.getMenu());
+                currActivity.startActivity(menuIntent);
             }
         });
         holder.mapBtn.setOnClickListener(new View.OnClickListener() {

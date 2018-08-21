@@ -34,7 +34,7 @@ public class FoodActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         itemList.add(new foodListItem("Maxicno","0101234567","shoubra st.","https://scontent-cai1-1.xx.fbcdn.net/v/t1.0-9/31265219_1311493952328670_8886136977208901632_n.jpg",30.0589,31.2215,"max"));
-        recyclerView=findViewById(R.id.customRecycleview);
+        recyclerView=findViewById(R.id.foodCustomRecycleview);
         adapter=new foodRecyclerviewAdapter(FoodActivity.this,itemList);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(FoodActivity.this);
