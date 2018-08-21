@@ -5,6 +5,45 @@ public class foodListItem {
     private String telephone;
     private String address;
     private String imgURL;
+    private Double lat;
+    private Double lng;
+    private String menu;
+
+    public foodListItem(String title, String telephone, String address, String imgURL, Double lat, Double lng, String menu) {
+
+        this.title = title;
+        this.telephone = telephone;
+        this.address = address;
+        this.imgURL = imgURL;
+        this.lat = lat;
+        this.lng = lng;
+        this.menu = menu;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public void setLng(Double lng) {
+        this.lng = lng;
+    }
+
+    public void setMenu(String menu) {
+        this.menu = menu;
+    }
+
+    public Double getLat() {
+
+        return lat;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public String getMenu() {
+        return menu;
+    }
 
     public foodListItem(String title, String telephone, String address, String imgURL) {
         this.title = title;

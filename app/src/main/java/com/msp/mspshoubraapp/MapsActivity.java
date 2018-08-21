@@ -1,5 +1,6 @@
 package com.msp.mspshoubraapp;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -60,7 +61,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private final LatLng mDefaultLocation = new LatLng(30.0996, 31.2486);
     private LatLng cL;
-
+    private LatLng dist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        Intent intent = getIntent();
+        dist = new LatLng(intent.getDoubleExtra("distLat",30.0996),intent.getDoubleExtra("distLng",31.2486));
     }
     //GPSTracker gps = new GPSTracker(this);
 
@@ -101,18 +104,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         return "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters /*+ "&key=AIzaSyB6p2mWkU0gvPM5Q20iH5q6CtSSmr6MITw"*/;
     }
-    LatLng SFE = new LatLng(30.0996, 31.2486);
+//    LatLng SFE = new LatLng(30.0996, 31.2486);
     //LatLng cL = new LatLng(gps.getLatitude(), gps.getLongitude());
 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        locList.add(SFE);
+        locList.add(dist);
 //        locList.add(cL);
         // Add a marker in SFE and move the camera
 //        30.0884332,31.2430711,15
-        LatLng SFE = new LatLng(30.0996, 31.2486);
+//        LatLng SFE = new LatLng(30.0996, 31.2486);
         // Prompt the user for permission.
         getLocationPermission();
 
@@ -122,7 +125,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        String url = geturl();
 //        mMap.addMarker(new MarkerOptions().position(SFE).title("Faculty of Engineering at Shoubra"));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SFE,17.0F));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(dist,17.0F));
     }
 
     private static ArrayList<LatLng> buildData(JSONObject jsonObject) {
@@ -177,7 +180,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             mLastKnownLocation = task.getResult();
                             cL=new LatLng(mLastKnownLocation.getLatitude(),
                                     mLastKnownLocation.getLongitude());
-                                    url = getDirectionsUrl(cL, SFE);
+                                    url = getDirectionsUrl(cL, dist);
                                     getUrl(url);
                                     //_________
                             JsonObjectRequest roadPointsJsonObject = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
