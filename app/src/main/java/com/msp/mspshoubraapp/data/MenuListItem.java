@@ -1,10 +1,10 @@
-package com.msp.mspshoubraapp;
+package com.msp.mspshoubraapp.data;
 
-public class menuListItem {
+public class MenuListItem {
     private String title;
     private String value;
 
-    public menuListItem(String title, String value) {
+    public MenuListItem(String title, String value) {
         this.title = title;
         this.value = value;
     }

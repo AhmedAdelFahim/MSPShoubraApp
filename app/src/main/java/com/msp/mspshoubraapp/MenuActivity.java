@@ -13,13 +13,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.msp.mspshoubraapp.adapter.MenuRecyclerviewAdapter;
+import com.msp.mspshoubraapp.data.MenuListItem;
+
 import java.util.ArrayList;
 
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private RecyclerView recyclerView;
-    private menuRecyclerviewAdapter adapter;
-    private ArrayList<menuListItem> itemList= new ArrayList<>();
+    private MenuRecyclerviewAdapter adapter;
+    private ArrayList<MenuListItem> itemList = new ArrayList<>();
     String menu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +43,13 @@ public class MenuActivity extends AppCompatActivity
         Intent intent = getIntent();
         menu=intent.getStringExtra("menu");
 
-        itemList.add(new menuListItem("Btates","8"));
-        itemList.add(new menuListItem("kreb","21"));
+        itemList.add(new MenuListItem("Btates", "8"));
+        itemList.add(new MenuListItem("kreb", "21"));
         recyclerView=findViewById(R.id.menuCustomRecycleview);
-        adapter=new menuRecyclerviewAdapter(MenuActivity.this,itemList);
-        recyclerView.setAdapter(adapter);
+        adapter = new MenuRecyclerviewAdapter(MenuActivity.this, itemList);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(MenuActivity.this);
         recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override

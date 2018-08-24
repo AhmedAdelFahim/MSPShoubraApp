@@ -4,11 +4,12 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.msp.mspshoubraapp"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -33,5 +34,15 @@ dependencies {
     //    implementation 'com.google.android.gms:play-services:12.0.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.squareup.picasso:picasso:2.5.0'
+    implementation 'com.android.support:support-vector-drawable:27.1.1'
+
+    //implementation 'com.borjabravo:readmoretextview:2.1.0'
+    /*implementation 'com.facebook.fresco:fresco:1.10.0'
+    implementation 'me.relex:photodraweeview:1.1.3'*/
+    //implementation 'com.github.yuzumone:ExpandableTextView:0.2.2'
+
+    implementation 'nb.scode:ExpandableTextView:0.0.1d'
+    implementation 'com.jsibbold:zoomage:1.1.0'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 
 }

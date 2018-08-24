@@ -1,6 +1,7 @@
-package com.msp.mspshoubraapp;
+package com.msp.mspshoubraapp.data;
 
-public class foodListItem {
+public class FoodListItem {
+
     private String title;
     private String telephone;
     private String address;
@@ -9,7 +10,7 @@ public class foodListItem {
     private Double lng;
     private String menu;
 
-    public foodListItem(String title, String telephone, String address, String imgURL, Double lat, Double lng, String menu) {
+    public FoodListItem(String title, String telephone, String address, String imgURL, Double lat, Double lng, String menu) {
 
         this.title = title;
         this.telephone = telephone;
@@ -45,7 +46,7 @@ public class foodListItem {
         return menu;
     }
 
-    public foodListItem(String title, String telephone, String address, String imgURL) {
+    public FoodListItem(String title, String telephone, String address, String imgURL) {
         this.title = title;
         this.telephone = telephone;
         this.address = address;

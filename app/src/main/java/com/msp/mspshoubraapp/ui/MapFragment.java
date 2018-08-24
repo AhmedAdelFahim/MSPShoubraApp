@@ -1,16 +1,20 @@
-package com.msp.mspshoubraapp;
+package com.msp.mspshoubraapp.ui;
 
-import android.content.Intent;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -23,12 +27,14 @@ import com.google.android.gms.location.places.PlaceDetectionClient;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.msp.mspshoubraapp.R;
+import com.msp.mspshoubraapp.VolleySingleton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +42,15 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+
+/**
+ * Created by Laila Al Ashkar on 8/14/2018.
+ */
+
+public class MapFragment extends Fragment implements OnMapReadyCallback {
+
+    private MapView mapView;
+
 
     private GoogleMap mMap;
     LocationManager locationManager;
@@ -63,51 +77,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LatLng cL;
     private LatLng dist;
 
-
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_map, null);
 
+        mapView = view.findViewById(R.id.map_view);
+
+        mapView.onCreate(savedInstanceState);
+
+        mapView.onResume(); // needed to get the map to display immediately
         // Construct a GeoDataClient.
-        mGeoDataClient = Places.getGeoDataClient(this, null);
+        mGeoDataClient = Places.getGeoDataClient(getActivity(), null);
 
         // Construct a PlaceDetectionClient.
-        mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null);
+        mPlaceDetectionClient = Places.getPlaceDetectionClient(getActivity(), null);
 
         // Construct a FusedLocationProviderClient.
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-        Intent intent = getIntent();
-        dist = new LatLng(intent.getDoubleExtra("distLat",30.0996),intent.getDoubleExtra("distLng",31.2486));
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+        dist = new LatLng(30.0996, 31.2486);
+        mapView.getMapAsync(this);
+        return view;
     }
-    //GPSTracker gps = new GPSTracker(this);
-
-    private String getDirectionsUrl(LatLng origin,LatLng dest){
-
-        // Origin of route
-        String str_origin = "origin="+origin.latitude+","+origin.longitude;
-
-        // Destination of route
-        String str_dest = "destination="+dest.latitude+","+dest.longitude;
-
-        // Sensor enabled
-        String sensor = "sensor=false";
-
-        // Building the parameters to the web service
-        String parameters = str_origin+"&"+str_dest+"&"+sensor;
-
-        // Output format
-        String output = "json";
-
-        return "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters /*+ "&key=AIzaSyB6p2mWkU0gvPM5Q20iH5q6CtSSmr6MITw"*/;
-    }
-//    LatLng SFE = new LatLng(30.0996, 31.2486);
-    //LatLng cL = new LatLng(gps.getLatitude(), gps.getLongitude());
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -126,8 +117,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        String url = geturl();
 //        mMap.addMarker(new MarkerOptions().position(SFE).title("Faculty of Engineering at Shoubra"));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(dist,17.0F));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(dist, 17.0F));
     }
+
 
     private static ArrayList<LatLng> buildData(JSONObject jsonObject) {
         ArrayList<LatLng> latLngs = new ArrayList<>();
@@ -171,7 +163,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         try {
             if (mLocationPermissionGranted) {
                 Task<Location> locationResult = mFusedLocationProviderClient.getLastLocation();
-                locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
+                locationResult.addOnCompleteListener(getActivity(), new OnCompleteListener<Location>() {
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
                         if (task.isSuccessful()) {
@@ -179,18 +171,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             Log.d("QWERTYU", task.getResult().getLatitude() + "  " + task.getResult().getLongitude());
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
-                            cL=new LatLng(mLastKnownLocation.getLatitude(),
+                            cL = new LatLng(mLastKnownLocation.getLatitude(),
                                     mLastKnownLocation.getLongitude());
-                                    url = getDirectionsUrl(cL, dist);
-                                    getUrl(url);
-                                    //_________
+                            url = getDirectionsUrl(cL, dist);
+                            getUrl(url);
+                            //_________
                             JsonObjectRequest roadPointsJsonObject = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject response) {
                                     //Log.d("QWERTY", response.toString());
                                     ArrayList<LatLng> locList = buildData(response);
 
-                                    Log.d("QWERTY", locList.size()+"");
+                                    Log.d("QWERTY", locList.size() + "");
                                     mMap.addPolyline((new PolylineOptions()).addAll(locList)
                                             .width(2)
                                             .color(Color.RED));
@@ -204,8 +196,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 }
                             }
                             );
-
-                            VolleySingleton.getInstance(MapsActivity.this).addToRequestQueue(roadPointsJsonObject);
+                            Context context = MapFragment.this.getActivity();
+                            VolleySingleton.getInstance(context).addToRequestQueue(roadPointsJsonObject);
                             //_________
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                     cL, DEFAULT_ZOOM));
@@ -231,20 +223,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
          * device. The result of the permission request is handled by a callback,
          * onRequestPermissionsResult.
          */
-        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+        if (ContextCompat.checkSelfPermission(getActivity().getApplicationContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mLocationPermissionGranted = true;
         } else {
-            ActivityCompat.requestPermissions(this,
+            ActivityCompat.requestPermissions(getActivity(),
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
     }
-    private void getUrl(String str){
-        url=str;
+
+    private void getUrl(String str) {
+        url = str;
 //        return url;
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String permissions[],
@@ -261,5 +255,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         //updateLocationUI();
     }
-}
 
+    private String getDirectionsUrl(LatLng origin, LatLng dest) {
+
+        // Origin of route
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
+
+        // Destination of route
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
+
+        // Sensor enabled
+        String sensor = "sensor=false";
+
+        // Building the parameters to the web service
+        String parameters = str_origin + "&" + str_dest + "&" + sensor;
+
+        // Output format
+        String output = "json";
+
+        return "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters /*+ "&key=AIzaSyB6p2mWkU0gvPM5Q20iH5q6CtSSmr6MITw"*/;
+    }
+
+}

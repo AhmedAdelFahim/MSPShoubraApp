@@ -10,4 +10,16 @@
     <string name="title_activity_food_acticity">FoodActicity</string>
     <string name="title_activity_food">FoodActivity</string>
     <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_test2">Test2Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="news_feed">News Feed</string>
+    <string name="map">Map</string>
+    <string name="food">Food</string>
+    <string name="table">Table</string>
+    <string name="title_activity_tools">ToolsActivity</string>
+    <string name="title_activity_gallery">GalleryActivity</string>
+    <string name="tools">Tools</string>
 </resources>

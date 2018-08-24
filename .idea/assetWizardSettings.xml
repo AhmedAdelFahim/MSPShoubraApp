@@ -16,26 +16,11 @@
                   <entry key="vectorAssetStep">
                     <value>
                       <PersistentState>
-                        <option name="children">
-                          <map>
-                            <entry key="clipartAsset">
-                              <value>
-                                <PersistentState>
-                                  <option name="values">
-                                    <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/maps/ic_local_phone_black_24dp.xml" />
-                                    </map>
-                                  </option>
-                                </PersistentState>
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_icon_food" />
-                            <entry key="sourceFile" value="C:\Users\Moh.Massoud\Desktop\icon_Food.svg" />
+                            <entry key="outputName" value="ic_tools" />
+                            <entry key="sourceFile" value="/media/ahmed/7290CABC90CA85D7/MSP PRO/maths-class-materials-cross-of-a-pencil-and-a-ruler.svg" />
                           </map>
                         </option>
                       </PersistentState>
