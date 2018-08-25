@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -53,9 +52,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
 
     private GoogleMap mMap;
-    LocationManager locationManager;
     ArrayList<LatLng> locList = new ArrayList<LatLng>();
-    LatLng currentLocaion;
     String url;
     // The entry points to the Places API.
     private GeoDataClient mGeoDataClient;
@@ -104,19 +101,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         locList.add(dist);
-//        locList.add(cL);
-        // Add a marker in SFE and move the camera
-//        30.0884332,31.2430711,15
-//        LatLng SFE = new LatLng(30.0996, 31.2486);
-        // Prompt the user for permission.
         getLocationPermission();
-
         getDeviceLocation();
-//        if(mLastKnownLocation!=null)
-//        cL=new LatLng(mLastKnownLocation.getLatitude(),mLastKnownLocation.getLongitude());
-//        String url = geturl();
-//        mMap.addMarker(new MarkerOptions().position(SFE).title("Faculty of Engineering at Shoubra"));
-
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(dist, 17.0F));
     }
 
@@ -174,19 +160,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                             cL = new LatLng(mLastKnownLocation.getLatitude(),
                                     mLastKnownLocation.getLongitude());
                             url = getDirectionsUrl(cL, dist);
-                            getUrl(url);
-                            //_________
+
                             JsonObjectRequest roadPointsJsonObject = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject response) {
-                                    //Log.d("QWERTY", response.toString());
                                     ArrayList<LatLng> locList = buildData(response);
 
                                     Log.d("QWERTY", locList.size() + "");
+                                    locList.add(cL);
                                     mMap.addPolyline((new PolylineOptions()).addAll(locList)
                                             .width(2)
-                                            .color(Color.RED));
-                                    //                .geodesic(false));
+                                            .color(Color.RED)
+                                            .geodesic(true));
+
                                 }
                             }, new Response.ErrorListener() {
                                 @Override
@@ -198,7 +184,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                             );
                             Context context = MapFragment.this.getActivity();
                             VolleySingleton.getInstance(context).addToRequestQueue(roadPointsJsonObject);
-                            //_________
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                     cL, DEFAULT_ZOOM));
                         } else {
@@ -234,10 +219,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-    private void getUrl(String str) {
-        url = str;
-//        return url;
-    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -253,7 +235,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 }
             }
         }
-        //updateLocationUI();
     }
 
     private String getDirectionsUrl(LatLng origin, LatLng dest) {

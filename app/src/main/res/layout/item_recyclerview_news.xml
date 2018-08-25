@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true"
+    app:contentPadding="8dp">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,13 +18,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            app:layout_constraintEnd_toEndOf="parent"
             android:scaleType="fitStart"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/doc"
-
-            />
+            app:srcCompat="@drawable/doc" />
 
 
         <nb.scode.lib.ExpandableTextView
@@ -28,16 +30,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="ay7hghg hjgjhghjgh ghghghjg hghgh ghghgjhg jhgjhg jhgjhghjg hghg h ghjgh jghgh ghgh ghaga"
-            app:etv_textContentColor="@color/black"
-            app:etv_textContentSize="12sp"
             app:etv_animationTime="2"
             app:etv_expandLines="2"
             app:etv_showLine="false"
+            app:etv_textContentColor="@color/black"
+            app:etv_textContentSize="12sp"
             app:etv_textExpand="More"
             app:etv_textShrink="Less"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +56,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toEndOf="@+id/down"
             app:layout_constraintTop_toBottomOf="@+id/view"
-            app:srcCompat="@drawable/ic_arrow_up_24px" />
+            app:srcCompat="@drawable/ic_up_btn" />
 
         <ImageView
             android:id="@+id/down"
@@ -67,7 +69,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/up"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/ic_arrow_down_24px" />
+            app:srcCompat="@drawable/ic_down_btn" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline6"
