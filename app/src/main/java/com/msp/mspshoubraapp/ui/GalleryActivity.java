@@ -2,19 +2,15 @@ package com.msp.mspshoubraapp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.msp.mspshoubraapp.R;
@@ -115,15 +111,18 @@ public class GalleryActivity extends AppCompatActivity
 
         switch (item.getItemId()) {
             case R.id.nav_food:
-                fragment = new FoodFragment();
-                //addToStack = true;
-                getSupportActionBar().setTitle("Food");
-                Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
+                Intent intent = new Intent(this, HomeActivity.class);
+                intent.putExtra("nextFregment",3);
+                startActivity(intent);
+//                fragment = new FoodFragment();
+//                //addToStack = true;
+//                getSupportActionBar().setTitle("Food");
+//                Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
                 break;
             case R.id.nav_tools:
-                Intent intent = new Intent(this, GalleryActivity.class);
-                intent.putExtra("title", "Gallery");
-                startActivity(intent);
+//                Intent intent = new Intent(this, GalleryActivity.class);
+//                intent.putExtra("title", "Gallery");
+//                startActivity(intent);
                 break;
         }
 

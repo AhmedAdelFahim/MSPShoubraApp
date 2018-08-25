@@ -62,6 +62,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+    private static final int ACCESS_COARSE_LOCATION =2;
     private boolean mLocationPermissionGranted;
     private static final int DEFAULT_ZOOM = 15;
 
@@ -101,6 +102,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         locList.add(dist);
+        getGPSpermisssion();
         getLocationPermission();
         getDeviceLocation();
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(dist, 17.0F));
@@ -200,7 +202,22 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             Log.e("Exception: %s", e.getMessage());
         }
     }
-
+    private void getGPSpermisssion(){
+        /*
+         * Request location permission, so that we can get the location of the
+         * device. The result of the permission request is handled by a callback,
+         * onRequestPermissionsResult.
+         */
+        if (ContextCompat.checkSelfPermission(getActivity().getApplicationContext(),
+                android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mLocationPermissionGranted = true;
+        } else {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                    ACCESS_COARSE_LOCATION);
+        }
+    }
 
     private void getLocationPermission() {
         /*

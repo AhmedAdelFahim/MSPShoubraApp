@@ -4,18 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-
 
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.TablesFragment;
@@ -23,6 +21,7 @@ import com.msp.mspshoubraapp.TablesFragment;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private int currFragment=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +42,12 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        loadFragment(new NewsFragment());
+        currFragment=getIntent().getIntExtra("nextFregment",0);
+        if(currFragment==0) {
+            loadFragment(new NewsFragment());
+        }else if(currFragment==3){
+            loadFragment(new FoodFragment());
+        }
         BottomNavigationView navigation = findViewById(R.id.bottom_nav);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -53,21 +56,30 @@ public class HomeActivity extends AppCompatActivity
 
                 switch (item.getItemId()) {
                     case R.id.navigation_news:
-                        fragment = new NewsFragment();
-                        getSupportActionBar().setTitle("News Feed");
-                        Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
+                        if(currFragment!=0){
+                            fragment = new NewsFragment();
+                            getSupportActionBar().setTitle("News Feed");
+                            Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
+                            currFragment=0;
+                        }
                         break;
 
                     case R.id.navigation_map:
-                        fragment = new MapFragment();
-                        getSupportActionBar().setTitle("Map");
-                        Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
+                        if(currFragment!=1) {
+                            fragment = new MapFragment();
+                            getSupportActionBar().setTitle("Map");
+                            Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
+                            currFragment=1;
+                        }
                         break;
 
                     case R.id.navigation_tables:
-                        fragment = new TablesFragment();
-                        getSupportActionBar().setTitle("Table");
-                        Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
+                        if(currFragment!=2) {
+                            fragment = new TablesFragment();
+                            getSupportActionBar().setTitle("Table");
+                            Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
+                            currFragment=2;
+                        }
                         break;
                 }
 
@@ -135,15 +147,19 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
         switch (item.getItemId()) {
             case R.id.nav_food:
-                fragment = new FoodFragment();
-                //addToStack = true;
-                getSupportActionBar().setTitle("Food");
-                Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
+                if(currFragment!=3) {
+                    fragment = new FoodFragment();
+                    //addToStack = true;
+                    getSupportActionBar().setTitle("Food");
+                    Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
+                    currFragment=3;
+                }
                 break;
             case R.id.nav_tools:
                 Intent intent = new Intent(this, GalleryActivity.class);
                 intent.putExtra("title", "Gallery");
                 startActivity(intent);
+                currFragment=4;
                 break;
 
         }
