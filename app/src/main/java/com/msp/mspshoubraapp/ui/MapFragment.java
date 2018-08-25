@@ -172,7 +172,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                             .width(2)
                                             .color(Color.RED)
                                             .geodesic(true));
-
+                                    mMap.setMyLocationEnabled(true);
                                 }
                             }, new Response.ErrorListener() {
                                 @Override
