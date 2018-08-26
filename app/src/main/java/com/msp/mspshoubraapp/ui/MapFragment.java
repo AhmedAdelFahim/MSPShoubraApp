@@ -1,9 +1,13 @@
 package com.msp.mspshoubraapp.ui;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -63,7 +67,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private static final int ACCESS_COARSE_LOCATION =2;
-    private boolean mLocationPermissionGranted;
+    private boolean mLocationPermissionGranted=false;
+    private boolean mLocationPermissionGranted2=false;
     private static final int DEFAULT_ZOOM = 15;
 
 
@@ -74,10 +79,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private final LatLng mDefaultLocation = new LatLng(30.0996, 31.2486);
     private LatLng cL;
     private LatLng dist;
-
+    private LocationManager manager;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        manager = (LocationManager) getActivity().getSystemService( Context.LOCATION_SERVICE );
+
         View view = inflater.inflate(R.layout.fragment_map, null);
 
         mapView = view.findViewById(R.id.map_view);
@@ -98,12 +105,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         return view;
     }
 
+
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         locList.add(dist);
         getGPSpermisssion();
         getLocationPermission();
+        if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+            buildAlertNoGPS();
+        }
         getDeviceLocation();
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(dist, 17.0F));
     }
@@ -149,13 +161,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
          * cases when a location is not available.
          */
         try {
-            if (mLocationPermissionGranted) {
+            Log.d("QWERTYU",mLocationPermissionGranted+" "+mLocationPermissionGranted2);
+            if (mLocationPermissionGranted&&mLocationPermissionGranted2) {
                 Task<Location> locationResult = mFusedLocationProviderClient.getLastLocation();
                 locationResult.addOnCompleteListener(getActivity(), new OnCompleteListener<Location>() {
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
                         if (task.isSuccessful()) {
-
                             Log.d("QWERTYU", task.getResult().getLatitude() + "  " + task.getResult().getLongitude());
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
@@ -211,12 +223,32 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         if (ContextCompat.checkSelfPermission(getActivity().getApplicationContext(),
                 android.Manifest.permission.ACCESS_COARSE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            mLocationPermissionGranted = true;
+            mLocationPermissionGranted2 = true;
         } else {
             ActivityCompat.requestPermissions(getActivity(),
                     new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
                     ACCESS_COARSE_LOCATION);
         }
+    }
+
+    private void buildAlertNoGPS() {
+        mLocationPermissionGranted2=false;
+        mLocationPermissionGranted=false;
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Your GPS is disabled, can you enable it?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 
     private void getLocationPermission() {
