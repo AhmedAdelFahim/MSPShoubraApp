@@ -14,11 +14,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.msp.mspshoubraapp.MapsActivity;
-import com.msp.mspshoubraapp.MenuActivity;
+
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.data.FoodListItem;
-import com.msp.mspshoubraapp.ui.HomeActivity;
 import com.msp.mspshoubraapp.ui.MapFragment;
 import com.msp.mspshoubraapp.ui.MenuFragment;
 import com.squareup.picasso.Picasso;
@@ -53,7 +51,7 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
         holder.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent menuIntent = new Intent(currActivity,MenuActivity.class);
+                /*Intent menuIntent = new Intent(currActivity,);
                 menuIntent.putExtra("menu",currItem.getMenu());
                 currActivity.startActivity(menuIntent);*/
                 loadFragment(new MenuFragment(), "menu");

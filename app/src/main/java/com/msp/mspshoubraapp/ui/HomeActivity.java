@@ -43,9 +43,10 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         currFragment=getIntent().getIntExtra("nextFregment",0);
-        if(currFragment==0) {
+
+        if (currFragment == 0) {
             loadFragment(new NewsFragment());
-        }else if(currFragment==3){
+        } else if (currFragment == 3) {
             loadFragment(new FoodFragment());
         }
         BottomNavigationView navigation = findViewById(R.id.bottom_nav);
@@ -143,8 +144,9 @@ public class HomeActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
 
         Fragment fragment = null;
-        boolean addToStack = false;
+        // boolean addToStack = false;
         int id = item.getItemId();
+        Intent intent;
         switch (item.getItemId()) {
             case R.id.nav_food:
                 if(currFragment!=3) {
@@ -156,10 +158,16 @@ public class HomeActivity extends AppCompatActivity
                 }
                 break;
             case R.id.nav_tools:
-                Intent intent = new Intent(this, GalleryActivity.class);
-                intent.putExtra("title", "Gallery");
+                intent = new Intent(this, GalleryActivity.class);
+                intent.putExtra("title", "Tools");
                 startActivity(intent);
-                currFragment=4;
+                //currFragment=4;
+                break;
+            case R.id.nav_lec_table:
+                intent = new Intent(this, LecTableActivity.class);
+                intent.putExtra("title", "Lecture Table");
+                startActivity(intent);
+                //currFragment=4;
                 break;
 
         }
