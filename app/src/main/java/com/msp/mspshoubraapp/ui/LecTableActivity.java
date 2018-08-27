@@ -1,5 +1,7 @@
 package com.msp.mspshoubraapp.ui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,9 +17,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.adapter.FragmentAdapter;
+
+import java.util.ArrayList;
 
 public class LecTableActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -49,7 +56,35 @@ public class LecTableActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(LecTableActivity.this);
+                View alertDialogView = getLayoutInflater().inflate(R.layout.change_group_dialog, null);
 
+                Spinner spinnerGroup = alertDialogView.findViewById(R.id.spinner_group);
+                Button ok = alertDialogView.findViewById(R.id.change_group_btn);
+
+                ArrayList<Integer> groups = new ArrayList<>();
+
+
+                for (int i = 1; i <= 6; i++) {
+
+                    groups.add(i);
+
+
+                }
+
+                ArrayAdapter<Integer> groupAdapter = new ArrayAdapter<Integer>(LecTableActivity.this, android.R.layout.simple_spinner_item, groups);
+                groupAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerGroup.setAdapter(groupAdapter);
+
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
+                alertDialog.setView(alertDialogView);
+                alertDialog.create().show();
             }
         });
 
