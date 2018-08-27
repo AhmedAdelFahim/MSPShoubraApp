@@ -41,8 +41,8 @@ public class LecTableActivity extends AppCompatActivity
         tabLayout = findViewById(R.id.tabs);
         drawer = findViewById(R.id.drawer_layout);
 
-        String title = getIntent().getStringExtra("title");
-        getSupportActionBar().setTitle(title);
+        //String title = getIntent().getStringExtra("title");
+        //getSupportActionBar().setTitle(title);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

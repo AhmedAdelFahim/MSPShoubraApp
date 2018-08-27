@@ -22,6 +22,6 @@
     <string name="title_activity_tools">ToolsActivity</string>
     <string name="title_activity_gallery">GalleryActivity</string>
     <string name="tools">Tools</string>
-    <string name="title_activity_lec_table">LecTableActivity</string>
+    <string name="title_activity_lec_table">Lecture Table</string>
     <string name="lecture_table">Lecture Table</string>
 </resources>
