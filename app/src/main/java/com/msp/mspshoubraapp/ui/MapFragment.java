@@ -37,7 +37,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.msp.mspshoubraapp.R;
-import com.msp.mspshoubraapp.VolleySingleton;
+import com.msp.mspshoubraapp.networking.VolleySingleton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
