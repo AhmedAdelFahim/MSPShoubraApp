@@ -44,11 +44,11 @@ public class NewsFragment extends Fragment {
         imageList = new ArrayList<>();
 
         //imageList.add(R.drawable.red);
-        imageList.add(R.drawable.anonymous_half);
+       /* imageList.add(R.drawable.anonymous_half);
         imageList.add(R.drawable.ic_jerry);
         imageList.add(R.drawable.article);
-        imageList.add(R.drawable.doc);
-        NewsItem newsItem = new NewsItem("السلام عليكم\nازيكم \nتيست تيست تيست", imageList);
+        imageList.add(R.drawable.doc);*/
+        NewsItem newsItem = new NewsItem("ay7hghg hjgjhghjgh ghghghjg hghgh ghghgjhg jhgjhg jhgjhghjg hghg h ghjgh jghgh ghgh ghaga", imageList);
         newsItems.add(newsItem);
 
        /* NewsItem newsItem = new NewsItem("السلام عليكم\nازيكم \nتيست تيست تيست", imageList);
@@ -79,7 +79,7 @@ public class NewsFragment extends Fragment {
         imageList.add(R.drawable.doc);
         imageList.add(R.drawable.doc);
 */
-        for (int i = 0; i < 20; i++) {
+        /*for (int i = 0; i < 20; i++) {
             imageList = new ArrayList<>();
             for (int j = 0; j < i; ++j) {
                 imageList.add(R.drawable.doc);
@@ -88,7 +88,7 @@ public class NewsFragment extends Fragment {
             newsItem = new NewsItem("السلام عليكم\nازيكم \nتيست تيست تيست", imageList);
             newsItems.add(newsItem);
             //imageList.remove(4-i);
-        }
+        }*/
         adapter = new NewsFeedRecyclerViewAdapter(newsItems, getActivity());
 
         recyclerView.setAdapter(adapter);

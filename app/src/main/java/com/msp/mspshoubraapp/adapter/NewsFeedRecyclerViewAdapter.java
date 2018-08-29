@@ -1,6 +1,8 @@
 package com.msp.mspshoubraapp.adapter;
 
 import android.app.Activity;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
@@ -67,10 +69,15 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         final NewsItem newsItem = newsItemList.get(position);
         //Log.d("QWEERTYUUIOP",position+" BIND "+newsItem.getImageList().size());
         final ArrayList<Integer> images = newsItem.getImageList();
-
+        /*Rect bounds = new Rect();
+        Paint paint = new Paint();
+        paint.setTextSize(12);
+        paint.getTextBounds(newsItemList.get(position).getNewsTitle(), 0, newsItemList.get(position).getNewsTitle().length(), bounds);
+        int numLines = (int) Math.ceil((float) bounds.width() / 12);
+        Log.d("QWEERTYUUIOP",position+" numLines = "+numLines);*/
         if (holder.getItemViewType() == 0) {
-            Holder holder0 = (Holder) holder;
-            holder0.news_title.setOnStateChangeListener(
+            final Holder holder0 = (Holder) holder;
+            /*holder0.news_title.setOnStateChangeListener(
                     new ExpandableTextView.OnStateChangeListener() {
                         @Override
                         public void onStateChange(boolean isShrink) {
@@ -80,7 +87,19 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                         }
                     });
             holder0.news_title.setText(newsItem.getNewsTitle());
-            holder0.news_title.resetState(newsItemList.get(position).isShrink());
+            holder0.news_title.resetState(newsItemList.get(position).isShrink());*/
+            holder0.news_title.setText("ay7hghg hjgjhghjgh ");
+
+            holder0.news_title.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (holder0.news_title.getLineCount() <= 2)
+                        /*Log.v("Line count: ", holder0.post.getLineCount()+"");*/
+                        holder0.seeMore.setVisibility(View.GONE);
+                }
+            });
+            //Log.d("QWEERTYUUIOP",position + " BIND " + holder0.post.getLineCount());
+
         } else if (holder.getItemViewType() == 1) {
             HolderWithOneImage holder1 = (HolderWithOneImage) holder;
             holder1.news_title.setOnStateChangeListener(
@@ -313,17 +332,18 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     public class Holder extends RecyclerView.ViewHolder {
 
         private ImageView news_img;
-        private ExpandableTextView news_title;
-        private ImageView up, down, img1, img2, img3;
+        private TextView news_title;
+        private ImageView up, down, img1, img2, img3, seeMore;
         private ConstraintLayout galleryView;
         private android.support.constraint.Guideline vLine, hLine;
-
+        private TextView post;
         public Holder(View itemView) {
             super(itemView);
-
+            //post = itemView.findViewById(R.id.post);
             news_title = itemView.findViewById(R.id.recyclerview_item_txt);
             up = itemView.findViewById(R.id.up);
             down = itemView.findViewById(R.id.down);
+            seeMore = itemView.findViewById(R.id.see_more);
         }
     }
 

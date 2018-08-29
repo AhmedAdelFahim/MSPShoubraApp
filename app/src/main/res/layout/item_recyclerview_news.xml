@@ -13,6 +13,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!--<TextView
+            android:id="@+id/post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:text="ay7hghg hjgjhghjgh ghghghjg jkjlk jllkjk jkljlk kjlkj kljklj lkj jl klj kjljl lkjlkjkl kljklj lkjkl kjljlkjlk  hghgh ghghgjhg jhgjhg jhgjhghjg hghg h ghjgh jghgh ghgh ghaga"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />-->
+
         <android.support.constraint.ConstraintLayout
             android:id="@+id/gallery_view"
             android:layout_width="match_parent"
@@ -118,7 +135,27 @@
             app:srcCompat="@drawable/doc" />
 
 
-        <nb.scode.lib.ExpandableTextView
+        <TextView
+            android:id="@+id/recyclerview_item_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="ay7hghg hjgjhghjgh ghghghjg hghgh ghghgjhg jhgjhg jhgjhghjg hghg h ghjgh jghgh ghgh ghaga"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:minLines="2"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gallery_view">
+
+        </TextView>
+        <!--<nb.scode.lib.ExpandableTextView
             android:id="@+id/recyclerview_item_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -138,7 +175,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gallery_view" />
+            app:layout_constraintTop_toBottomOf="@+id/gallery_view" >
+
+        </nb.scode.lib.ExpandableTextView>-->
 
         <ImageView
             android:id="@+id/up"
@@ -176,12 +215,21 @@
             android:id="@+id/view"
             android:layout_width="0dp"
             android:layout_height="0.5dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="#9e9e9e"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerview_item_txt"
+            app:layout_constraintTop_toBottomOf="@+id/see_more"
             app:layout_constraintWidth_percent="0.85" />
+
+        <ImageView
+            android:id="@+id/see_more"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@+id/recyclerview_item_txt"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerview_item_txt"
+            app:srcCompat="@drawable/ic_arrow_down_24px" />
 
 
     </android.support.constraint.ConstraintLayout>
