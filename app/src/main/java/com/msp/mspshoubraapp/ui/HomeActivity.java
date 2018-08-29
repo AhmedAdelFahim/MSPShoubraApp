@@ -49,6 +49,12 @@ public class HomeActivity extends AppCompatActivity
         } else if (currFragment == 3) {
             loadFragment(new FoodFragment());
         }
+        else if (currFragment == 4) {
+            loadFragment(new CoworkingSpacesFragment());
+        }
+        else if (currFragment == 5) {
+            loadFragment(new StudentActivityFragment());
+        }
         BottomNavigationView navigation = findViewById(R.id.bottom_nav);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -82,6 +88,8 @@ public class HomeActivity extends AppCompatActivity
                             currFragment=2;
                         }
                         break;
+
+
                 }
 
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -169,6 +177,26 @@ public class HomeActivity extends AppCompatActivity
                 startActivity(intent);
                 //currFragment=4;
                 break;
+
+            case R.id.nav_coworkingspaces:
+                if(currFragment!=4) {
+                    fragment = new CoworkingSpacesFragment();
+                    //addToStack = true;
+                    getSupportActionBar().setTitle("Co-Working Spaces");
+                    //Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
+                    currFragment=4;
+                }
+
+            case R.id.nav_studentactivities:
+                if(currFragment!=5) {
+                    fragment = new StudentActivityFragment();
+                    //addToStack = true;
+                    getSupportActionBar().setTitle("Student Activities");
+                    //Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
+                    currFragment=5;
+                }
+
+
 
         }
 

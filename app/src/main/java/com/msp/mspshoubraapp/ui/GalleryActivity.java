@@ -108,10 +108,10 @@ public class GalleryActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         Fragment fragment = null;
         int id = item.getItemId();
-
+        Intent intent;
         switch (item.getItemId()) {
             case R.id.nav_food:
-                Intent intent = new Intent(this, HomeActivity.class);
+                intent = new Intent(this, HomeActivity.class);
                 intent.putExtra("nextFregment",3);
                 startActivity(intent);
 //                fragment = new FoodFragment();
@@ -127,6 +127,16 @@ public class GalleryActivity extends AppCompatActivity
             case R.id.nav_lec_table:
                 intent = new Intent(this, LecTableActivity.class);
                 intent.putExtra("title", "Lecture");
+                startActivity(intent);
+                break;
+            case R.id.nav_coworkingspaces:
+                intent = new Intent(this, HomeActivity.class);
+                intent.putExtra("nextFregment",4);
+                startActivity(intent);
+                break;
+            case R.id.nav_studentactivities:
+                intent = new Intent(this, HomeActivity.class);
+                intent.putExtra("nextFregment",5);
                 startActivity(intent);
                 break;
         }

@@ -18,6 +18,17 @@
             android:id="@+id/nav_lec_table"
             android:icon="@drawable/ic_baseline_table_chart_24px"
             android:title="@string/lecture_table" />
+
+        <item
+            android:id="@+id/nav_coworkingspaces"
+            android:icon="@drawable/ic_networking"
+            android:title="@string/coworkingspaces"/>
+
+        <item
+            android:id="@+id/nav_studentactivities"
+            android:icon="@drawable/ic_work_team"
+            android:title="@string/studentactivities"/>
+
     </group>
 
 

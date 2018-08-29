@@ -54,6 +54,7 @@
             android:name=".ui.LecTableActivity"
             android:label="@string/title_activity_lec_table"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>
