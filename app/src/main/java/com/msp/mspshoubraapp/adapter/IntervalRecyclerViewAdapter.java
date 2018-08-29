@@ -38,6 +38,7 @@ public class IntervalRecyclerViewAdapter extends RecyclerView.Adapter<IntervalRe
         holder.sectionNum.setText(intervalData.getSectionNum());
         holder.subjectName.setText(intervalData.getSubjectName());
         holder.instructor.setText(intervalData.getInstructor());
+
         holder.place.setText(intervalData.getPlace());
     }
 

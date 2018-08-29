@@ -12,15 +12,45 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@mipmap/ic_launcher"
-        app:zoomage_restrictBounds="false"
+        app:layout_constraintVertical_bias="0.0"
         app:zoomage_animateOnReset="true"
-        app:zoomage_autoResetMode="UNDER"
         app:zoomage_autoCenter="true"
-        app:zoomage_zoomable="true"
-        app:zoomage_translatable="true"
+        app:zoomage_autoResetMode="UNDER"
+        app:zoomage_maxScale="8"
         app:zoomage_minScale="0.6"
-        app:zoomage_maxScale="8" />
+        app:zoomage_restrictBounds="false"
+        app:zoomage_translatable="true"
+        app:zoomage_zoomable="true"
+        tools:srcCompat="@drawable/red" />
+
+    <ImageView
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back_btn_24px"
+        android:background="@android:color/transparent" />
+
+    <ImageView
+        android:id="@+id/forward_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_forward_btn_24px"
+        android:background="@android:color/transparent" />
 </android.support.constraint.ConstraintLayout>

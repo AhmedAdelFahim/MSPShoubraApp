@@ -1,5 +1,7 @@
 package com.msp.mspshoubraapp.data;
 
+import java.util.ArrayList;
+
 /**
  * Created by Laila Al Ashkar on 8/14/2018.
  */
@@ -7,11 +9,12 @@ package com.msp.mspshoubraapp.data;
 public class NewsItem {
     private String newsTitle;
     private int newsImg;
+    private ArrayList<Integer> imageList;
     private boolean isShrink = true;
 
-    public NewsItem(String newsTitle, int newsImg) {
+    public NewsItem(String newsTitle, ArrayList<Integer> imageList) {
         this.newsTitle = newsTitle;
-        this.newsImg = newsImg;
+        this.imageList = imageList;
     }
 
     public String getNewsTitle() {
@@ -20,6 +23,10 @@ public class NewsItem {
 
     public int getNewsImg() {
         return newsImg;
+    }
+
+    public ArrayList<Integer> getImageList() {
+        return imageList;
     }
 
     public boolean isShrink() {
