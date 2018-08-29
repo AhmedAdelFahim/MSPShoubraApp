@@ -104,6 +104,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
         dist = new LatLng(30.0996, 31.2486);
         mapView.getMapAsync(this);
+
         return view;
     }
 

@@ -10,7 +10,9 @@ public class NewsItem {
     private String newsTitle;
     private int newsImg;
     private ArrayList<Integer> imageList;
-    private boolean isShrink = true;
+    private boolean isExpanded = false;
+
+
 
     public NewsItem(String newsTitle, ArrayList<Integer> imageList) {
         this.newsTitle = newsTitle;
@@ -29,11 +31,11 @@ public class NewsItem {
         return imageList;
     }
 
-    public boolean isShrink() {
-        return isShrink;
+    public boolean isExpanded() {
+        return isExpanded;
     }
 
-    public void setShrink(boolean shrink) {
-        isShrink = shrink;
+    public void setExpanded(boolean expand) {
+        isExpanded = expand;
     }
 }

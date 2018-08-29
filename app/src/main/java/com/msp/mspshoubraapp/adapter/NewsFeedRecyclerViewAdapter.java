@@ -1,8 +1,6 @@
 package com.msp.mspshoubraapp.adapter;
 
 import android.app.Activity;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
@@ -14,17 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-
 import com.jsibbold.zoomage.ZoomageView;
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.data.NewsItem;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import nb.scode.lib.ExpandableTextView;
-
 
 /**
  * Created by Laila Al Ashkar on 8/14/2018.
@@ -65,54 +58,116 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
         final NewsItem newsItem = newsItemList.get(position);
         //Log.d("QWEERTYUUIOP",position+" BIND "+newsItem.getImageList().size());
         final ArrayList<Integer> images = newsItem.getImageList();
-        /*Rect bounds = new Rect();
-        Paint paint = new Paint();
-        paint.setTextSize(12);
-        paint.getTextBounds(newsItemList.get(position).getNewsTitle(), 0, newsItemList.get(position).getNewsTitle().length(), bounds);
-        int numLines = (int) Math.ceil((float) bounds.width() / 12);
-        Log.d("QWEERTYUUIOP",position+" numLines = "+numLines);*/
         if (holder.getItemViewType() == 0) {
             final Holder holder0 = (Holder) holder;
-            /*holder0.news_title.setOnStateChangeListener(
-                    new ExpandableTextView.OnStateChangeListener() {
-                        @Override
-                        public void onStateChange(boolean isShrink) {
-
-                            newsItem.setShrink(isShrink);
-                            newsItemList.set(holder.getAdapterPosition(), newsItem);
-                        }
-                    });
             holder0.news_title.setText(newsItem.getNewsTitle());
-            holder0.news_title.resetState(newsItemList.get(position).isShrink());*/
-            holder0.news_title.setText("ay7hghg hjgjhghjgh ");
-
+            //Log.d("QWEERTYUUIOP",position+" AAA "+holder0.news_title.getText()+"");
             holder0.news_title.post(new Runnable() {
                 @Override
                 public void run() {
-                    if (holder0.news_title.getLineCount() <= 2)
-                        /*Log.v("Line count: ", holder0.post.getLineCount()+"");*/
-                        holder0.seeMore.setVisibility(View.GONE);
+                    //Log.d("QWEERTYUUIOP",position+" AAA "+holder0.news_title.getText().length()+" "+newsItem.getNewsTitle().length());
+                    //Log.d("QWEERTYUUIOP",holder0.news_title.getLineCount()+"");
+                    if (holder0.news_title.getLineCount() <= 2) {
+                        holder0.seeMoreImg.setVisibility(View.GONE);
+                        holder0.seeMoreTxt.setVisibility(View.GONE);
+                    }
+                    holder0.news_title.setMaxLines(2);
+
+                }
+            });
+            holder0.seeMoreImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Log.d("QWEERTYUUIOP",newsItem.isExpanded()+"");
+                    if (!newsItem.isExpanded()) {
+                        holder0.news_title.setMaxLines(100);
+                        holder0.seeMoreImg.setImageResource(R.drawable.ic_arrow_up_24px);
+                        holder0.seeMoreTxt.setText("See Less");
+                        newsItem.setExpanded(true);
+                    } else {
+                        holder0.news_title.setMaxLines(2);
+                        holder0.seeMoreImg.setImageResource(R.drawable.ic_arrow_down_24px);
+                        holder0.seeMoreTxt.setText("See More");
+                        newsItem.setExpanded(false);
+                    }
+                }
+            });
+
+            holder0.seeMoreTxt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Log.d("QWEERTYUUIOP",newsItem.isExpanded()+"");
+                    if (!newsItem.isExpanded()) {
+                        holder0.news_title.setMaxLines(100);
+                        holder0.seeMoreImg.setImageResource(R.drawable.ic_arrow_up_24px);
+                        holder0.seeMoreTxt.setText("See Less");
+                        newsItem.setExpanded(true);
+                    } else {
+                        holder0.news_title.setMaxLines(2);
+                        holder0.seeMoreImg.setImageResource(R.drawable.ic_arrow_down_24px);
+                        holder0.seeMoreTxt.setText("See More");
+                        newsItem.setExpanded(false);
+                    }
                 }
             });
             //Log.d("QWEERTYUUIOP",position + " BIND " + holder0.post.getLineCount());
 
         } else if (holder.getItemViewType() == 1) {
-            HolderWithOneImage holder1 = (HolderWithOneImage) holder;
-            holder1.news_title.setOnStateChangeListener(
-                    new ExpandableTextView.OnStateChangeListener() {
-                        @Override
-                        public void onStateChange(boolean isShrink) {
-
-                            newsItem.setShrink(isShrink);
-                            newsItemList.set(holder.getAdapterPosition(), newsItem);
-                        }
-                    });
+            final HolderWithOneImage holder1 = (HolderWithOneImage) holder;
             holder1.news_title.setText(newsItem.getNewsTitle());
-            holder1.news_title.resetState(newsItemList.get(position).isShrink());
+            //Log.d("QWEERTYUUIOP",position+" AAA "+holder0.news_title.getText()+"");
+            holder1.news_title.post(new Runnable() {
+                @Override
+                public void run() {
+                    //Log.d("QWEERTYUUIOP",position+" AAA "+holder0.news_title.getText().length()+" "+newsItem.getNewsTitle().length());
+                    //Log.d("QWEERTYUUIOP",holder0.news_title.getLineCount()+"");
+                    if (holder1.news_title.getLineCount() <= 2) {
+                        holder1.seeMoreImg.setVisibility(View.GONE);
+                        holder1.seeMoreTxt.setVisibility(View.GONE);
+                    }
+                    holder1.news_title.setMaxLines(2);
+
+                }
+            });
+            holder1.seeMoreImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Log.d("QWEERTYUUIOP",newsItem.isExpanded()+"");
+                    if (!newsItem.isExpanded()) {
+                        holder1.news_title.setMaxLines(100);
+                        holder1.seeMoreImg.setImageResource(R.drawable.ic_arrow_up_24px);
+                        holder1.seeMoreTxt.setText("See Less");
+                        newsItem.setExpanded(true);
+                    } else {
+                        holder1.news_title.setMaxLines(2);
+                        holder1.seeMoreImg.setImageResource(R.drawable.ic_arrow_down_24px);
+                        holder1.seeMoreTxt.setText("See More");
+                        newsItem.setExpanded(false);
+                    }
+                }
+            });
+
+            holder1.seeMoreTxt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Log.d("QWEERTYUUIOP",newsItem.isExpanded()+"");
+                    if (!newsItem.isExpanded()) {
+                        holder1.news_title.setMaxLines(100);
+                        holder1.seeMoreImg.setImageResource(R.drawable.ic_arrow_up_24px);
+                        holder1.seeMoreTxt.setText("See Less");
+                        newsItem.setExpanded(true);
+                    } else {
+                        holder1.news_title.setMaxLines(2);
+                        holder1.seeMoreImg.setImageResource(R.drawable.ic_arrow_down_24px);
+                        holder1.seeMoreTxt.setText("See More");
+                        newsItem.setExpanded(false);
+                    }
+                }
+            });
             holder1.img1.setImageResource(images.get(0));
             holder1.img1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -121,18 +176,57 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 }
             });
         } else if (holder.getItemViewType() == 2) {
-            HolderWithTwoImage holder2 = (HolderWithTwoImage) holder;
-            holder2.news_title.setOnStateChangeListener(
-                    new ExpandableTextView.OnStateChangeListener() {
-                        @Override
-                        public void onStateChange(boolean isShrink) {
-
-                            newsItem.setShrink(isShrink);
-                            newsItemList.set(holder.getAdapterPosition(), newsItem);
-                        }
-                    });
+            final HolderWithTwoImage holder2 = (HolderWithTwoImage) holder;
             holder2.news_title.setText(newsItem.getNewsTitle());
-            holder2.news_title.resetState(newsItemList.get(position).isShrink());
+            //Log.d("QWEERTYUUIOP",position+" AAA "+holder0.news_title.getText()+"");
+            holder2.news_title.post(new Runnable() {
+                @Override
+                public void run() {
+                    //Log.d("QWEERTYUUIOP",position+" AAA "+holder0.news_title.getText().length()+" "+newsItem.getNewsTitle().length());
+                    //Log.d("QWEERTYUUIOP",holder0.news_title.getLineCount()+"");
+                    if (holder2.news_title.getLineCount() <= 2) {
+                        holder2.seeMoreImg.setVisibility(View.GONE);
+                        holder2.seeMoreTxt.setVisibility(View.GONE);
+                    }
+                    holder2.news_title.setMaxLines(2);
+
+                }
+            });
+            holder2.seeMoreImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Log.d("QWEERTYUUIOP",newsItem.isExpanded()+"");
+                    if (!newsItem.isExpanded()) {
+                        holder2.news_title.setMaxLines(100);
+                        holder2.seeMoreImg.setImageResource(R.drawable.ic_arrow_up_24px);
+                        holder2.seeMoreTxt.setText("See Less");
+                        newsItem.setExpanded(true);
+                    } else {
+                        holder2.news_title.setMaxLines(2);
+                        holder2.seeMoreImg.setImageResource(R.drawable.ic_arrow_down_24px);
+                        holder2.seeMoreTxt.setText("See More");
+                        newsItem.setExpanded(false);
+                    }
+                }
+            });
+
+            holder2.seeMoreTxt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Log.d("QWEERTYUUIOP",newsItem.isExpanded()+"");
+                    if (!newsItem.isExpanded()) {
+                        holder2.news_title.setMaxLines(100);
+                        holder2.seeMoreImg.setImageResource(R.drawable.ic_arrow_up_24px);
+                        holder2.seeMoreTxt.setText("See Less");
+                        newsItem.setExpanded(true);
+                    } else {
+                        holder2.news_title.setMaxLines(2);
+                        holder2.seeMoreImg.setImageResource(R.drawable.ic_arrow_down_24px);
+                        holder2.seeMoreTxt.setText("See More");
+                        newsItem.setExpanded(false);
+                    }
+                }
+            });
             holder2.img1.setImageResource(images.get(0));
             holder2.img2.setImageResource(images.get(1));
 
@@ -149,18 +243,57 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 }
             });
         } else if (holder.getItemViewType() == 3) {
-            HolderWithThreeImage holder3 = (HolderWithThreeImage) holder;
-            holder3.news_title.setOnStateChangeListener(
-                    new ExpandableTextView.OnStateChangeListener() {
-                        @Override
-                        public void onStateChange(boolean isShrink) {
-
-                            newsItem.setShrink(isShrink);
-                            newsItemList.set(holder.getAdapterPosition(), newsItem);
-                        }
-                    });
+            final HolderWithThreeImage holder3 = (HolderWithThreeImage) holder;
             holder3.news_title.setText(newsItem.getNewsTitle());
-            holder3.news_title.resetState(newsItemList.get(position).isShrink());
+            //Log.d("QWEERTYUUIOP",position+" AAA "+holder0.news_title.getText()+"");
+            holder3.news_title.post(new Runnable() {
+                @Override
+                public void run() {
+                    //Log.d("QWEERTYUUIOP",position+" AAA "+holder0.news_title.getText().length()+" "+newsItem.getNewsTitle().length());
+                    //Log.d("QWEERTYUUIOP",holder0.news_title.getLineCount()+"");
+                    if (holder3.news_title.getLineCount() <= 2) {
+                        holder3.seeMoreImg.setVisibility(View.GONE);
+                        holder3.seeMoreTxt.setVisibility(View.GONE);
+                    }
+                    holder3.news_title.setMaxLines(2);
+
+                }
+            });
+            holder3.seeMoreImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Log.d("QWEERTYUUIOP",newsItem.isExpanded()+"");
+                    if (!newsItem.isExpanded()) {
+                        holder3.news_title.setMaxLines(100);
+                        holder3.seeMoreImg.setImageResource(R.drawable.ic_arrow_up_24px);
+                        holder3.seeMoreTxt.setText("See Less");
+                        newsItem.setExpanded(true);
+                    } else {
+                        holder3.news_title.setMaxLines(2);
+                        holder3.seeMoreImg.setImageResource(R.drawable.ic_arrow_down_24px);
+                        holder3.seeMoreTxt.setText("See More");
+                        newsItem.setExpanded(false);
+                    }
+                }
+            });
+
+            holder3.seeMoreTxt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Log.d("QWEERTYUUIOP",newsItem.isExpanded()+"");
+                    if (!newsItem.isExpanded()) {
+                        holder3.news_title.setMaxLines(100);
+                        holder3.seeMoreImg.setImageResource(R.drawable.ic_arrow_up_24px);
+                        holder3.seeMoreTxt.setText("See Less");
+                        newsItem.setExpanded(true);
+                    } else {
+                        holder3.news_title.setMaxLines(2);
+                        holder3.seeMoreImg.setImageResource(R.drawable.ic_arrow_down_24px);
+                        holder3.seeMoreTxt.setText("See More");
+                        newsItem.setExpanded(false);
+                    }
+                }
+            });
             holder3.img1.setImageResource(images.get(0));
             holder3.img2.setImageResource(images.get(1));
             holder3.img3.setImageResource(images.get(2));
@@ -183,18 +316,57 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 }
             });
         } else if (holder.getItemViewType() > 3) {
-            HolderWithMoreThanThreeImage holder4 = (HolderWithMoreThanThreeImage) holder;
-            holder4.news_title.setOnStateChangeListener(
-                    new ExpandableTextView.OnStateChangeListener() {
-                        @Override
-                        public void onStateChange(boolean isShrink) {
-
-                            newsItem.setShrink(isShrink);
-                            newsItemList.set(holder.getAdapterPosition(), newsItem);
-                        }
-                    });
+            final HolderWithMoreThanThreeImage holder4 = (HolderWithMoreThanThreeImage) holder;
             holder4.news_title.setText(newsItem.getNewsTitle());
-            holder4.news_title.resetState(newsItemList.get(position).isShrink());
+            //Log.d("QWEERTYUUIOP",position+" AAA "+holder0.news_title.getText()+"");
+            holder4.news_title.post(new Runnable() {
+                @Override
+                public void run() {
+                    //Log.d("QWEERTYUUIOP",position+" AAA "+holder0.news_title.getText().length()+" "+newsItem.getNewsTitle().length());
+                    //Log.d("QWEERTYUUIOP",holder0.news_title.getLineCount()+"");
+                    if (holder4.news_title.getLineCount() <= 2) {
+                        holder4.seeMoreImg.setVisibility(View.GONE);
+                        holder4.seeMoreTxt.setVisibility(View.GONE);
+                    }
+                    holder4.news_title.setMaxLines(2);
+
+                }
+            });
+            holder4.seeMoreImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Log.d("QWEERTYUUIOP",newsItem.isExpanded()+"");
+                    if (!newsItem.isExpanded()) {
+                        holder4.news_title.setMaxLines(100);
+                        holder4.seeMoreImg.setImageResource(R.drawable.ic_arrow_up_24px);
+                        holder4.seeMoreTxt.setText("See Less");
+                        newsItem.setExpanded(true);
+                    } else {
+                        holder4.news_title.setMaxLines(2);
+                        holder4.seeMoreImg.setImageResource(R.drawable.ic_arrow_down_24px);
+                        holder4.seeMoreTxt.setText("See More");
+                        newsItem.setExpanded(false);
+                    }
+                }
+            });
+
+            holder4.seeMoreTxt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Log.d("QWEERTYUUIOP",newsItem.isExpanded()+"");
+                    if (!newsItem.isExpanded()) {
+                        holder4.news_title.setMaxLines(100);
+                        holder4.seeMoreImg.setImageResource(R.drawable.ic_arrow_up_24px);
+                        holder4.seeMoreTxt.setText("See Less");
+                        newsItem.setExpanded(true);
+                    } else {
+                        holder4.news_title.setMaxLines(2);
+                        holder4.seeMoreImg.setImageResource(R.drawable.ic_arrow_down_24px);
+                        holder4.seeMoreTxt.setText("See More");
+                        newsItem.setExpanded(false);
+                    }
+                }
+            });
             holder4.img1.setImageResource(images.get(0));
             holder4.img2.setImageResource(images.get(1));
             holder4.img3.setImageResource(images.get(2));
@@ -221,62 +393,6 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             });
         }
 
-        /*Log.d("JKLOIU","BIND "+position);
-        holder.news_title.setOnStateChangeListener(
-                new ExpandableTextView.OnStateChangeListener() {
-                    @Override
-                    public void onStateChange(boolean isShrink) {
-
-                        newsItem.setShrink(isShrink);
-                        newsItemList.set(holder.getAdapterPosition(), newsItem);
-                    }
-                });
-        holder.news_title.setText(newsItem.getNewsTitle());
-        holder.news_title.resetState(newsItemList.get(position).isShrink());*/
-       /* ArrayList<Integer> images = newsItem.getImageList();
-        Log.d("QWEERTYUUIOP",position+" BIND "+newsItem.getImageList().size());
-        if(images.size() == 0)
-        {
-            holder.galleryView.setVisibility(View.GONE);
-
-        }
-        else if(images.size() == 1)
-        {
-            holder.vLine.setGuidelinePercent(1);
-            holder.img1.setImageResource(images.get(0));
-        }
-        else if (images.size() == 2)
-        {
-            holder.hLine.setGuidelinePercent(1);
-            holder.img1.setImageResource(images.get(0));
-            holder.img2.setImageResource(images.get(1));
-        }
-        else // (images.size() == 3)
-        {
-            //holder.hLine.setGuidelinePercent(1);
-            holder.img1.setImageResource(images.get(0));
-            holder.img2.setImageResource(images.get(1));
-            holder.img3.setImageResource(images.get(2));
-        }
-*/
-
-
-
-        /*holder.news_img.setImageResource(newsItem.getNewsImg());
-        holder.news_img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(activity, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-                LayoutInflater inflater = activity.getLayoutInflater();
-                View dialogView = inflater.inflate(R.layout.image_full_screen_dialog, null);
-                builder.setView(dialogView);
-
-                ImageView imageView = dialogView.findViewById(R.id.image_full_screen);
-                imageView.setImageResource(newsItem.getNewsImg());
-
-                builder.create().show();
-            }
-        });*/
     }
 
     public void enterFullScreen(int pos, final ArrayList<Integer> imageList) {
@@ -331,29 +447,25 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
     public class Holder extends RecyclerView.ViewHolder {
 
-        private ImageView news_img;
-        private TextView news_title;
-        private ImageView up, down, img1, img2, img3, seeMore;
-        private ConstraintLayout galleryView;
-        private android.support.constraint.Guideline vLine, hLine;
-        private TextView post;
+
+        private TextView news_title, seeMoreTxt;
+        private ImageView up, down, seeMoreImg;
         public Holder(View itemView) {
             super(itemView);
-            //post = itemView.findViewById(R.id.post);
             news_title = itemView.findViewById(R.id.recyclerview_item_txt);
             up = itemView.findViewById(R.id.up);
             down = itemView.findViewById(R.id.down);
-            seeMore = itemView.findViewById(R.id.see_more);
+            seeMoreImg = itemView.findViewById(R.id.see_more_img);
+            seeMoreTxt = itemView.findViewById(R.id.see_more_txt);
         }
     }
 
     public class HolderWithOneImage extends RecyclerView.ViewHolder {
 
-        private ImageView news_img;
-        private ExpandableTextView news_title;
-        private ImageView up, down, img1, img2, img3;
+        private TextView news_title, seeMoreTxt;
+        private ImageView up, down, img1, seeMoreImg;
         private ConstraintLayout galleryView;
-        private android.support.constraint.Guideline vLine, hLine;
+        private android.support.constraint.Guideline vLine;
 
         public HolderWithOneImage(View itemView) {
             super(itemView);
@@ -364,13 +476,11 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             down = itemView.findViewById(R.id.down);
             galleryView = itemView.findViewById(R.id.gallery_view);
             img1 = itemView.findViewById(R.id.img1);
-            //img2 = itemView.findViewById(R.id.img2);
-            //img3 = itemView.findViewById(R.id.img3);
             vLine = itemView.findViewById(R.id.gallery_view_v_guideline);
-            //hLine = itemView.findViewById(R.id.gallery_view_h_guideline);
+            seeMoreImg = itemView.findViewById(R.id.see_more_img);
+            seeMoreTxt = itemView.findViewById(R.id.see_more_txt);
 
             galleryView.setVisibility(View.VISIBLE);
-
             vLine.setGuidelinePercent(1);
 
 
@@ -379,28 +489,25 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
     public class HolderWithTwoImage extends RecyclerView.ViewHolder {
 
-        private ImageView news_img;
-        private ExpandableTextView news_title;
-        private ImageView up, down, img1, img2, img3;
+        private TextView news_title, seeMoreTxt;
+        private ImageView up, down, img1, img2, seeMoreImg;
         private ConstraintLayout galleryView;
-        private android.support.constraint.Guideline vLine, hLine;
+        private android.support.constraint.Guideline hLine;
 
         public HolderWithTwoImage(View itemView) {
             super(itemView);
 
-            //news_img = itemView.findViewById(R.id.recyclerview_item_img);
             news_title = itemView.findViewById(R.id.recyclerview_item_txt);
             up = itemView.findViewById(R.id.up);
             down = itemView.findViewById(R.id.down);
             galleryView = itemView.findViewById(R.id.gallery_view);
             img1 = itemView.findViewById(R.id.img1);
             img2 = itemView.findViewById(R.id.img2);
-            //img3 = itemView.findViewById(R.id.img3);
-            //vLine = itemView.findViewById(R.id.gallery_view_v_guideline);
             hLine = itemView.findViewById(R.id.gallery_view_h_guideline);
+            seeMoreImg = itemView.findViewById(R.id.see_more_img);
+            seeMoreTxt = itemView.findViewById(R.id.see_more_txt);
 
             galleryView.setVisibility(View.VISIBLE);
-
             hLine.setGuidelinePercent(1);
 
 
@@ -409,16 +516,14 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
     public class HolderWithThreeImage extends RecyclerView.ViewHolder {
 
-        private ImageView news_img;
-        private ExpandableTextView news_title;
-        private ImageView up, down, img1, img2, img3;
+        private TextView news_title, seeMoreTxt;
+        private ImageView up, down, img1, img2, img3, seeMoreImg;
         private ConstraintLayout galleryView;
-        private android.support.constraint.Guideline vLine, hLine;
+
 
         public HolderWithThreeImage(View itemView) {
             super(itemView);
 
-            //news_img = itemView.findViewById(R.id.recyclerview_item_img);
             news_title = itemView.findViewById(R.id.recyclerview_item_txt);
             up = itemView.findViewById(R.id.up);
             down = itemView.findViewById(R.id.down);
@@ -426,8 +531,8 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             img1 = itemView.findViewById(R.id.img1);
             img2 = itemView.findViewById(R.id.img2);
             img3 = itemView.findViewById(R.id.img3);
-            //vLine = itemView.findViewById(R.id.gallery_view_v_guideline);
-            //hLine = itemView.findViewById(R.id.gallery_view_h_guideline);
+            seeMoreImg = itemView.findViewById(R.id.see_more_img);
+            seeMoreTxt = itemView.findViewById(R.id.see_more_txt);
 
             galleryView.setVisibility(View.VISIBLE);
 
@@ -439,10 +544,9 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
     public class HolderWithMoreThanThreeImage extends RecyclerView.ViewHolder {
 
-        private ExpandableTextView news_title;
-        private ImageView up, down, img1, img2, img3;
+        private TextView news_title, seeMoreTxt, numOfImage;
+        private ImageView up, down, img1, img2, img3, seeMoreImg;
         private ConstraintLayout galleryView;
-        private TextView numOfImage;
 
         public HolderWithMoreThanThreeImage(View itemView) {
             super(itemView);
@@ -455,6 +559,9 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             img2 = itemView.findViewById(R.id.img2);
             img3 = itemView.findViewById(R.id.img3);
             numOfImage = itemView.findViewById(R.id.num_of_images);
+            seeMoreImg = itemView.findViewById(R.id.see_more_img);
+            seeMoreTxt = itemView.findViewById(R.id.see_more_txt);
+
             galleryView.setVisibility(View.VISIBLE);
             numOfImage.setVisibility(View.VISIBLE);
             //hLine.setGuidelinePercent(1);
