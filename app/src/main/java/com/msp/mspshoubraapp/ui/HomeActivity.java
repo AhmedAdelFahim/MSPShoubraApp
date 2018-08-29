@@ -48,11 +48,9 @@ public class HomeActivity extends AppCompatActivity
             loadFragment(new NewsFragment());
         } else if (currFragment == 3) {
             loadFragment(new FoodFragment());
-        }
-        else if (currFragment == 4) {
+        } else if (currFragment == 4) {
             loadFragment(new CoworkingSpacesFragment());
-        }
-        else if (currFragment == 5) {
+        } else if (currFragment == 5) {
             loadFragment(new StudentActivityFragment());
         }
         BottomNavigationView navigation = findViewById(R.id.bottom_nav);
