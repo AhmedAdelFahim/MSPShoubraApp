@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -37,6 +38,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.msp.mspshoubraapp.R;
+import com.msp.mspshoubraapp.networking.ConnectivityStatus;
 import com.msp.mspshoubraapp.networking.VolleySingleton;
 
 import org.json.JSONArray;
@@ -116,9 +118,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
             buildAlertNoGPS();
         }
+        if(!ConnectivityStatus.isConnected(getActivity())){
+            buildAlertNoInternet();
+        }
         getDeviceLocation();
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(dist, 17.0F));
     }
+
+
 
 
     private static ArrayList<LatLng> buildData(JSONObject jsonObject) {
@@ -250,7 +257,23 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         final AlertDialog alert = builder.create();
         alert.show();
     }
-
+    private void buildAlertNoInternet() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Your not connected to internet, can connect it?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
     private void getLocationPermission() {
         /*
          * Request location permission, so that we can get the location of the
