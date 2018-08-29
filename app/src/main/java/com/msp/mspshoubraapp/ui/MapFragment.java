@@ -118,9 +118,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         getLocationPermission();
         if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
             buildAlertNoGPS();
+
         }
         if(!ConnectivityStatus.isConnected(getActivity())){
             buildAlertNoInternet();
+
         }
         getDeviceLocation();
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(dist, 17.0F));
@@ -189,9 +191,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                     ArrayList<LatLng> locList = buildData(response);
 
                                     Log.d("QWERTY", locList.size() + "");
-                                    locList.add(cL);
-                                    mMap.addPolyline((new PolylineOptions()).addAll(locList)
-                                            .width(2)
+                                    Log.d("QWERTYj", !locList.contains(cL)+" bool");
+//                                    if(!locList.contains(cL)){
+//                                        locList.add(cL);
+//                                    }
+                                    mMap.addPolyline((new PolylineOptions()).add(cL).addAll(locList)
+                                            .width(10)
                                             .color(Color.RED)
                                             .geodesic(true));
                                     mMap.setMyLocationEnabled(true);
@@ -248,6 +253,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                        reloadMap();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -265,11 +271,24 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                        reloadMap();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
+    private void reloadMap() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Reload map")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        getActivity().finish();
+                        getActivity().startActivity(getActivity().getIntent());
                     }
                 });
         final AlertDialog alert = builder.create();
