@@ -195,7 +195,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 //                                        locList.add(cL);
 //                                    }
                                     mMap.addPolyline((new PolylineOptions()).add(cL).addAll(locList)
-                                            .width(2)
+                                            .width(10)
                                             .color(Color.RED)
                                             .geodesic(true));
                                     mMap.setMyLocationEnabled(true);
