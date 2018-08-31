@@ -184,6 +184,7 @@ public class HomeActivity extends AppCompatActivity
                     //Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
                     currFragment=4;
                 }
+                break;
 
             case R.id.nav_studentactivities:
                 if(currFragment!=5) {
@@ -193,6 +194,7 @@ public class HomeActivity extends AppCompatActivity
                     //Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
                     currFragment=5;
                 }
+                break;
 
 
 

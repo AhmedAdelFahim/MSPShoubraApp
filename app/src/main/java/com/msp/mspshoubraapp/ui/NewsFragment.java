@@ -93,7 +93,7 @@ public class NewsFragment extends Fragment {
 
         imageList = new ArrayList<>();
 
-        //imageList.add(R.drawable.red);
+        imageList.add(R.drawable.red);
         imageList.add(R.drawable.anonymous_half);
         imageList.add(R.drawable.ic_jerry);
         imageList.add(R.drawable.article);

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <com.jsibbold.zoomage.ZoomageView
         android:id="@+id/image_full_screen"
         android:layout_width="match_parent"
