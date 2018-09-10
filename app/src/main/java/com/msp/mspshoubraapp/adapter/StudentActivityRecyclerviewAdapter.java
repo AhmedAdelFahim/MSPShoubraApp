@@ -20,11 +20,15 @@ public class StudentActivityRecyclerviewAdapter extends RecyclerView.Adapter<Stu
     private final Context currActivity;
     private final List<StudentActivityListItem> dataList;
     private final LayoutInflater inflater;
+    final private listItemClickListener itemClickListener;
 
-    public StudentActivityRecyclerviewAdapter(Context currActivity, List<StudentActivityListItem> dataList) {
+    public StudentActivityRecyclerviewAdapter(Context currActivity,
+                                              List<StudentActivityListItem> dataList,
+                                              listItemClickListener itemClickListener) {
         this.currActivity = currActivity;
         this.dataList = dataList;
         this.inflater = LayoutInflater.from(currActivity);
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -43,7 +47,7 @@ public class StudentActivityRecyclerviewAdapter extends RecyclerView.Adapter<Stu
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // loadFragment(new MenuFragment(), "menu");
+                //open StudentActivitiesActivity.class
 
 
             }
@@ -54,14 +58,25 @@ public class StudentActivityRecyclerviewAdapter extends RecyclerView.Adapter<Stu
     @Override
     public int getItemCount() { return dataList.size(); }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView titleTextView;
         ImageView imageView;
         public ViewHolder(View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.studentactivity_title_textview);
             imageView = itemView.findViewById(R.id.studentactivity_logo);
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            int clickedPosition = getAdapterPosition();
+            itemClickListener.onListItemClick(clickedPosition);
+        }
+    }
+
+    public interface listItemClickListener{
+        void onListItemClick(int clickedItemIndex);
     }
 
     /*private boolean loadFragment(Fragment fragment, String addToStack) {

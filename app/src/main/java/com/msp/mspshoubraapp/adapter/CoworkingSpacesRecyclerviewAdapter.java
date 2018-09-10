@@ -1,6 +1,7 @@
 package com.msp.mspshoubraapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.data.CoworkingSpacesListItem;
+import com.msp.mspshoubraapp.ui.CoworkingSpacesActivity;
 import com.msp.mspshoubraapp.ui.MenuFragment;
 import com.squareup.picasso.Picasso;
 
@@ -24,11 +26,15 @@ public class CoworkingSpacesRecyclerviewAdapter extends RecyclerView.Adapter<Cow
     private final Context currActivity;
     private final List<CoworkingSpacesListItem> dataList;
     private final LayoutInflater inflater;
+    final private listItemClickListener itemClickListener;
 
-    public CoworkingSpacesRecyclerviewAdapter(Context currActivity, List<CoworkingSpacesListItem> dataList) {
+    public CoworkingSpacesRecyclerviewAdapter
+            (Context currActivity, List<CoworkingSpacesListItem> dataList,
+             listItemClickListener itemClickListener) {
         this.currActivity = currActivity;
         this.dataList = dataList;
         this.inflater = LayoutInflater.from(currActivity);
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -49,9 +55,7 @@ public class CoworkingSpacesRecyclerviewAdapter extends RecyclerView.Adapter<Cow
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // loadFragment(new MenuFragment(), "menu");
-
-
+                //open CoworkingSpacesActivity.class
             }
         });
 
@@ -60,7 +64,7 @@ public class CoworkingSpacesRecyclerviewAdapter extends RecyclerView.Adapter<Cow
     @Override
     public int getItemCount() { return dataList.size(); }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView titleTextView;
         TextView addressTextView;
         TextView telephoneTextView;
@@ -71,25 +75,17 @@ public class CoworkingSpacesRecyclerviewAdapter extends RecyclerView.Adapter<Cow
             addressTextView = itemView.findViewById(R.id.coworking_address_textview);
             telephoneTextView = itemView.findViewById(R.id.coworking_telephone_textView);
             imageView = itemView.findViewById(R.id.coworking_logo);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int clickedPosition = getAdapterPosition();
+            itemClickListener.onListItemClick(clickedPosition);
         }
     }
 
-    /*private boolean loadFragment(Fragment fragment, String addToStack) {
-        if (fragment != null) {
-            FragmentManager fragmentManager = ((FragmentActivity) currActivity).getSupportFragmentManager();
-            if (addToStack.equals("")) {
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, fragment)
-                        .commit();
-                return true;
-            } else {
-                // Add the new tab fragment
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, fragment, addToStack)
-                        .addToBackStack(addToStack + "Fragment")
-                        .commit();
-            }
-        }
-        return false;
-    }*/
+    public interface listItemClickListener{
+        void onListItemClick(int clickedItemIndex);
+    }
 }

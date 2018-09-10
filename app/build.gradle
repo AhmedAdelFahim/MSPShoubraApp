@@ -17,6 +17,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
 }
 
 dependencies {
@@ -43,5 +45,7 @@ dependencies {
 
     implementation 'com.jsibbold:zoomage:1.1.0'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    implementation 'com.thoughtbot:expandablerecyclerview:1.3'
 
 }

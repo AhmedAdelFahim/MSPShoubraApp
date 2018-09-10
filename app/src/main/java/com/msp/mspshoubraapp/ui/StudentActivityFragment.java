@@ -1,5 +1,6 @@
 package com.msp.mspshoubraapp.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,7 +17,8 @@ import com.msp.mspshoubraapp.data.StudentActivityListItem;
 
 import java.util.ArrayList;
 
-public class StudentActivityFragment extends Fragment {
+public class StudentActivityFragment extends Fragment implements
+StudentActivityRecyclerviewAdapter.listItemClickListener{
     private RecyclerView recyclerView;
     private StudentActivityRecyclerviewAdapter adapter;
     private ArrayList<StudentActivityListItem> itemList = new ArrayList<>();
@@ -28,10 +30,17 @@ public class StudentActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_studentactivities, container, false);
         itemList.add(new StudentActivityListItem("MSP Tech Club Shoubra Engineering","https://scontent-cai1-1.xx.fbcdn.net/v/t1.0-9/12348129_935001243231666_5803219402411515065_n.jpg?_nc_cat=0&oh=5a6e134bfe4cd24596afad0e657fe7ab&oe=5C30762C"));
         recyclerView = view.findViewById(R.id.studentactivitiesCustomRecycleview);
-        adapter = new StudentActivityRecyclerviewAdapter(getActivity(), itemList);
+        adapter = new StudentActivityRecyclerviewAdapter(getActivity(), itemList, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
         return view;
+    }
+
+    @Override
+    public void onListItemClick(int clickedItemIndex) {
+        Intent intent = new Intent(getActivity(), StudentActivitiesActivity.class);
+
+        startActivity(intent);
     }
 }

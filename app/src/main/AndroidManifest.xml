@@ -54,7 +54,12 @@
             android:name=".ui.LecTableActivity"
             android:label="@string/title_activity_lec_table"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.CoworkingSpacesActivity"
+            android:label="@string/coworkingspaces"/>
 
+        <activity android:name=".ui.StudentActivitiesActivity"
+            android:label="@string/studentactivities"/>
     </application>
 
 </manifest>

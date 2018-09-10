@@ -1,5 +1,6 @@
 package com.msp.mspshoubraapp.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,11 +16,13 @@ import com.msp.mspshoubraapp.adapter.CoworkingSpacesRecyclerviewAdapter;
 import com.msp.mspshoubraapp.data.CoworkingSpacesListItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class CoworkingSpacesFragment extends Fragment{
+public class CoworkingSpacesFragment extends Fragment implements
+CoworkingSpacesRecyclerviewAdapter.listItemClickListener{
     private RecyclerView recyclerView;
     private CoworkingSpacesRecyclerviewAdapter adapter;
-    private ArrayList<CoworkingSpacesListItem> itemList = new ArrayList<>();
+    private List<CoworkingSpacesListItem> itemList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -28,10 +31,18 @@ public class CoworkingSpacesFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_coworkingspaces, container, false);
         itemList.add(new CoworkingSpacesListItem("Kitchen MakerSpace","58 Rood El Farag Street, Cairo, Egypt" ,"0111234567" ,"https://scontent-cai1-1.xx.fbcdn.net/v/t1.0-9/19990107_1984411215172755_227107490940945033_n.png?_nc_cat=0&oh=551ff776ecb9a5d8244c8a6b439f0f6e&oe=5BF1F3CC"));
         recyclerView = view.findViewById(R.id.coworkingSpacesCustomRecycleview);
-        adapter = new CoworkingSpacesRecyclerviewAdapter(getActivity(), itemList);
+        adapter = new CoworkingSpacesRecyclerviewAdapter(getActivity(), itemList,this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
+
         return view;
+    }
+
+    @Override
+    public void onListItemClick(int clickedItemIndex) {
+        Intent intent = new Intent(getActivity(), CoworkingSpacesActivity.class);
+
+        startActivity(intent);
     }
 }
