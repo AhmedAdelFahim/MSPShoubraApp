@@ -52,7 +52,8 @@ public class HomeActivity extends AppCompatActivity
             loadFragment(new CoworkingSpacesFragment());
         } else if (currFragment == 5) {
             loadFragment(new StudentActivityFragment());
-        }
+        } else if(currFragment == 6)
+            loadFragment(new SubjectsFragment());
         BottomNavigationView navigation = findViewById(R.id.bottom_nav);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -193,6 +194,15 @@ public class HomeActivity extends AppCompatActivity
                     getSupportActionBar().setTitle("Student Activities");
                     //Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
                     currFragment=5;
+                }
+                break;
+            case R.id.nav_subjects:
+                if(currFragment!=6) {
+                    fragment = new SubjectsFragment();
+                    //addToStack = true;
+                    getSupportActionBar().setTitle("Subjects");
+                    //Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
+                    currFragment=6;
                 }
                 break;
 

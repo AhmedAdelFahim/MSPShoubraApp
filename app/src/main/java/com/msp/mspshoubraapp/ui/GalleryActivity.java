@@ -139,6 +139,11 @@ public class GalleryActivity extends AppCompatActivity
                 intent.putExtra("nextFregment",5);
                 startActivity(intent);
                 break;
+            case R.id.nav_subjects:
+                intent = new Intent(this, HomeActivity.class);
+                intent.putExtra("nextFregment",6);
+                startActivity(intent);
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

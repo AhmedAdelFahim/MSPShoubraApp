@@ -29,6 +29,11 @@
             android:icon="@drawable/ic_work_team"
             android:title="@string/studentactivities"/>
 
+        <item
+            android:id="@+id/nav_subjects"
+            android:icon="@drawable/notebook"
+            android:title="@string/subjects"/>
+
     </group>
 
 

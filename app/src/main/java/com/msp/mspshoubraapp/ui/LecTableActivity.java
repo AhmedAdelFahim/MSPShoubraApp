@@ -158,6 +158,21 @@ public class LecTableActivity extends AppCompatActivity
 //                getSupportActionBar().setTitle("Food");
 //                Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
                 break;
+            case R.id.nav_coworkingspaces:
+                intent = new Intent(this, HomeActivity.class);
+                intent.putExtra("nextFregment", 4);
+                startActivity(intent);
+                break;
+            case R.id.nav_studentactivities:
+                intent = new Intent(this, HomeActivity.class);
+                intent.putExtra("nextFregment", 5);
+                startActivity(intent);
+                break;
+            case R.id.nav_subjects:
+                intent = new Intent(this, HomeActivity.class);
+                intent.putExtra("nextFregment", 6);
+                startActivity(intent);
+                break;
             case R.id.nav_tools:
                 intent = new Intent(this, GalleryActivity.class);
                 intent.putExtra("title", "Tools");
