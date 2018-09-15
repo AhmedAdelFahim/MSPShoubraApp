@@ -43,7 +43,7 @@ public class StudentActivityRecyclerviewAdapter extends RecyclerView.Adapter<Stu
         final StudentActivityListItem currItem = dataList.get(position);
 
         holder.titleTextView.setText(currItem.getTitle());
-        Picasso.with(currActivity).load(currItem.getImg()).into(holder.imageView);
+        //Picasso.get().load(currItem.getImg()).into(holder.imageView);
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +52,7 @@ public class StudentActivityRecyclerviewAdapter extends RecyclerView.Adapter<Stu
 
             }
         });
-
+        holder.imageView.setImageResource(R.drawable.ieee_logo);
     }
 
     @Override

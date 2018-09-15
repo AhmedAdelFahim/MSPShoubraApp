@@ -4,12 +4,10 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@color/black"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:id="@+id/recyclerview_item_coworkingspace_photo"/>
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_marginRight="8dp"
+        android:id="@+id/recyclerview_item_coworkingspace_photo"
+        android:layout_marginEnd="8dp" />
 
 </LinearLayout>

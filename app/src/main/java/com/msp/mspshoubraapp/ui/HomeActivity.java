@@ -21,7 +21,7 @@ import com.msp.mspshoubraapp.TablesFragment;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private int currFragment=0;
+    private int currFragment = 0, previousActivity = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,18 +42,17 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        currFragment=getIntent().getIntExtra("nextFregment",0);
+        currFragment = getIntent().getIntExtra("nextFregment", 0);
+        if (getIntent().hasExtra("previousActivity")) {
+            previousActivity = getIntent().getIntExtra("previousActivity", 0);
+        }
 
         if (currFragment == 0) {
             loadFragment(new NewsFragment());
-        } else if (currFragment == 3) {
-            loadFragment(new FoodFragment());
-        } else if (currFragment == 4) {
-            loadFragment(new CoworkingSpacesFragment());
-        } else if (currFragment == 5) {
-            loadFragment(new StudentActivityFragment());
-        } else if(currFragment == 6)
-            loadFragment(new SubjectsFragment());
+        } else if (currFragment == 1) {
+            loadFragment(new MapFragment());
+        }
+
         BottomNavigationView navigation = findViewById(R.id.bottom_nav);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -65,7 +64,7 @@ public class HomeActivity extends AppCompatActivity
                         if(currFragment!=0){
                             fragment = new NewsFragment();
                             getSupportActionBar().setTitle("News Feed");
-                            Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
+                            //Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
                             currFragment=0;
                         }
                         break;
@@ -74,7 +73,7 @@ public class HomeActivity extends AppCompatActivity
                         if(currFragment!=1) {
                             fragment = new MapFragment();
                             getSupportActionBar().setTitle("Map");
-                            Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
+                            //Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
                             currFragment=1;
                         }
                         break;
@@ -83,7 +82,7 @@ public class HomeActivity extends AppCompatActivity
                         if(currFragment!=2) {
                             fragment = new TablesFragment();
                             getSupportActionBar().setTitle("Table");
-                            Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
+                            //Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
                             currFragment=2;
                         }
                         break;
@@ -91,11 +90,11 @@ public class HomeActivity extends AppCompatActivity
 
                 }
 
-                FragmentManager fragmentManager = getSupportFragmentManager();
+                /*FragmentManager fragmentManager = getSupportFragmentManager();
                 if (fragmentManager.getBackStackEntryCount() >= 1) {
                     fragmentManager.popBackStack("foodFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     fragmentManager.popBackStack("menuFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                }
+                }*/
                 return loadFragment(fragment);
             }
         });
@@ -103,24 +102,21 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        FragmentManager fragments = getSupportFragmentManager();
-        //Fragment homeFrag = fragments.findFragmentByTag("food");
 
-        if (fragments.getBackStackEntryCount() > 1) {
-            // We have fragments on the backstack that are poppable
-            fragments.popBackStackImmediate();
-        }/* else if (homeFrag == null || !homeFrag.isVisible()) {
-            // We aren't showing the home screen, so that is the next stop on the back journey
-            nav.setCurrentItem(0);
-        } else {
-            // We are already showing the home screen, so the next stop is out of the app.
-            supportFinishAfterTransition();
-        }*/
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            if (previousActivity == 3) {
+                previousActivity = 0;
+                finish();
+                startActivity(new Intent(this, FoodActivity.class));
+            } else if (previousActivity == 4) {
+                previousActivity = 0;
+                finish();
+                //startActivity(new Intent(this,CoworkingSpacesActivity.class));
+            }
         }
     }
 
@@ -153,66 +149,61 @@ public class HomeActivity extends AppCompatActivity
         Fragment fragment = null;
         // boolean addToStack = false;
         int id = item.getItemId();
-        Intent intent;
+        Intent intent = null;
         switch (item.getItemId()) {
             case R.id.nav_food:
-                if(currFragment!=3) {
-                    fragment = new FoodFragment();
-                    //addToStack = true;
-                    getSupportActionBar().setTitle("Food");
-                    Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
-                    currFragment=3;
-                }
+
+                intent = new Intent(this, FoodActivity.class);
+                //intent.putExtra("title", "Tools");
+                //startActivity(intent);
                 break;
             case R.id.nav_tools:
                 intent = new Intent(this, GalleryActivity.class);
                 intent.putExtra("title", "Tools");
-                startActivity(intent);
+                //startActivity(intent);
                 //currFragment=4;
                 break;
             case R.id.nav_lec_table:
                 intent = new Intent(this, LecTableActivity.class);
                 intent.putExtra("title", "Lecture Table");
-                startActivity(intent);
+                //startActivity(intent);
                 //currFragment=4;
                 break;
 
             case R.id.nav_coworkingspaces:
-                if(currFragment!=4) {
-                    fragment = new CoworkingSpacesFragment();
-                    //addToStack = true;
-                    getSupportActionBar().setTitle("Co-Working Spaces");
-                    //Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
-                    currFragment=4;
-                }
+                intent = new Intent(this, CoworkingSpacesActivity.class);
+                //intent.putExtra("title", "Tools");
+                //startActivity(intent);
+
                 break;
 
             case R.id.nav_studentactivities:
-                if(currFragment!=5) {
-                    fragment = new StudentActivityFragment();
-                    //addToStack = true;
-                    getSupportActionBar().setTitle("Student Activities");
-                    //Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
-                    currFragment=5;
-                }
+                intent = new Intent(this, StudentActivitiesActivity.class);
+                //intent.putExtra("title", "Tools");
+                //startActivity(intent);
                 break;
             case R.id.nav_subjects:
-                if(currFragment!=6) {
-                    fragment = new SubjectsFragment();
-                    //addToStack = true;
-                    getSupportActionBar().setTitle("Subjects");
-                    //Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
-                    currFragment=6;
-                }
+                intent = new Intent(this, SubjectsActivity.class);
+                //intent.putExtra("title", "Tools");
+                //startActivity(intent);
                 break;
-
-
-
         }
+
+        if (previousActivity == 3) {
+            //previousActivity = 0;
+            finish();
+            startActivity(intent);
+        } else if (previousActivity == 0) {
+            startActivity(intent);
+        } else if (previousActivity == 4) {
+            finish();
+            //startActivity(new Intent(this,CoworkingSpacesActivity.class));
+        }
+        previousActivity = 0;
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return loadFragment(fragment);
+        return true;
     }
 
 

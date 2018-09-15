@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/coworkingspace_internal_logo"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/majal_logo"
+            app:layout_constraintEnd_toStartOf="@+id/coworking_vertical_guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/coworkingspace_internal_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/montserrat"
+            android:text="Majal - مجال"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_normal"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/coworking_vertical_guideline"
+            app:layout_constraintTop_toTopOf="@+id/coworkingspace_internal_logo" />
+
+        <ImageView
+            android:id="@+id/coworking_address_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/coworking_address_textview"
+            app:layout_constraintStart_toStartOf="@+id/coworkingspace_internal_title"
+            app:layout_constraintTop_toTopOf="@+id/coworking_address_textview"
+            app:srcCompat="@drawable/ic_place_black_24dp" />
+
+        <ImageView
+            android:id="@+id/coworking_telephonet_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/coworking_telephone_textView"
+            app:layout_constraintStart_toStartOf="@+id/coworking_address_imageView"
+            app:layout_constraintTop_toTopOf="@+id/coworking_telephone_textView"
+            app:srcCompat="@drawable/ic_local_phone_black_24dp" />
+
+        <TextView
+            android:id="@+id/coworking_address_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Al Saed, Menyat as Serg, As Sahel"
+            android:textSize="12sp"
+            app:fontFamily="@font/montserrat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/coworking_address_imageView"
+            app:layout_constraintTop_toBottomOf="@+id/coworkingspace_internal_title" />
+
+        <TextView
+            android:id="@+id/coworking_telephone_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="01012345678"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/coworking_address_textview"
+            app:layout_constraintTop_toBottomOf="@+id/coworking_address_textview" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/coworking_vertical_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.36491227" />
+
+        <ImageButton
+            android:id="@+id/map_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="8dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="@+id/coworking_telephonet_imageView"
+            app:layout_constraintTop_toBottomOf="@+id/coworking_telephonet_imageView"
+            app:srcCompat="@drawable/ic_icon_map" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_coworkingspace_photos"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/map_btn" />
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/pricesRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerview_coworkingspace_photos">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

@@ -17,22 +17,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.msp.mspshoubraapp.R;
-import com.msp.mspshoubraapp.adapter.StudentActivityRecyclerviewAdapter;
-import com.msp.mspshoubraapp.data.StudentActivityListItem;
+import com.msp.mspshoubraapp.adapter.FoodRecyclerviewAdapter;
+import com.msp.mspshoubraapp.data.FoodListItem;
 
 import java.util.ArrayList;
 
-public class StudentActivitiesActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-        StudentActivityRecyclerviewAdapter.listItemClickListener {
+public class FoodActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView recyclerView;
-    private StudentActivityRecyclerviewAdapter adapter;
-    private ArrayList<StudentActivityListItem> itemList = new ArrayList<>();
+    private FoodRecyclerviewAdapter adapter;
+    private ArrayList<FoodListItem> itemList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_activities);
+        setContentView(R.layout.activity_food);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -46,9 +46,9 @@ public class StudentActivitiesActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        itemList.add(new StudentActivityListItem("IEEE Cairo University Student Branch", "https://scontent-cai1-1.xx.fbcdn.net/v/t1.0-9/12348129_935001243231666_5803219402411515065_n.jpg?_nc_cat=0&oh=5a6e134bfe4cd24596afad0e657fe7ab&oe=5C30762C"));
-        recyclerView = findViewById(R.id.studentactivitiesCustomRecycleview);
-        adapter = new StudentActivityRecyclerviewAdapter(this, itemList, this);
+        itemList.add(new FoodListItem("Maxicno", "0101234567", "Haret Mongi, Al Hanafi, El-Sayeda Zainab", "https://scontent-cai1-1.xx.fbcdn.net/v/t1.0-9/31265219_1311493952328670_8886136977208901632_n.jpg", 30.0589, 31.2215, "max"));
+        recyclerView = findViewById(R.id.foodCustomRecycleview);
+        adapter = new FoodRecyclerviewAdapter(this, itemList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
@@ -71,12 +71,12 @@ public class StudentActivitiesActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         Intent intent = null;
         switch (item.getItemId()) {
-            case R.id.nav_food:
+            /*case R.id.nav_food:
 
                 intent = new Intent(this, FoodActivity.class);
                 //intent.putExtra("title", "Tools");
                 //startActivity(intent);
-                break;
+                break;*/
             case R.id.nav_tools:
                 intent = new Intent(this, GalleryActivity.class);
                 intent.putExtra("title", "Tools");
@@ -97,11 +97,11 @@ public class StudentActivitiesActivity extends AppCompatActivity
 
                 break;
 
-            /*case R.id.nav_studentactivities:
+            case R.id.nav_studentactivities:
                 intent = new Intent(this, StudentActivitiesActivity.class);
                 //intent.putExtra("title", "Tools");
                 //startActivity(intent);
-                break;*/
+                break;
             case R.id.nav_subjects:
                 intent = new Intent(this, SubjectsActivity.class);
                 //intent.putExtra("title", "Tools");
@@ -113,15 +113,9 @@ public class StudentActivitiesActivity extends AppCompatActivity
             startActivity(intent);
         }
 
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    @Override
-    public void onListItemClick(int clickedItemIndex) {
-        Intent intent = new Intent(this, StudentActivitiesActivityDetails.class);
-
-        startActivity(intent);
     }
 }

@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <com.jsibbold.zoomage.ZoomageView
         android:id="@+id/image_full_screen"
         android:layout_width="match_parent"
@@ -54,4 +53,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_forward_btn_24px"
         android:background="@android:color/transparent" />
+
+    <!--<com.veinhorn.scrollgalleryview.ScrollGalleryView
+        android:id="@+id/scroll_gallery_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />-->
 </android.support.constraint.ConstraintLayout>

@@ -114,10 +114,7 @@ public class GalleryActivity extends AppCompatActivity
                 intent = new Intent(this, HomeActivity.class);
                 intent.putExtra("nextFregment",3);
                 startActivity(intent);
-//                fragment = new FoodFragment();
-//                //addToStack = true;
-//                getSupportActionBar().setTitle("Food");
-//                Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
+
                 break;
             case R.id.nav_tools:
 //                Intent intent = new Intent(this, GalleryActivity.class);

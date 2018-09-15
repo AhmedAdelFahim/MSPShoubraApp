@@ -1,5 +1,6 @@
 package com.msp.mspshoubraapp.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -17,18 +18,18 @@ import android.widget.TextView;
 
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.data.FoodListItem;
-import com.msp.mspshoubraapp.ui.MapFragment;
-import com.msp.mspshoubraapp.ui.MenuFragment;
+import com.msp.mspshoubraapp.ui.HomeActivity;
+import com.msp.mspshoubraapp.ui.MenuActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclerviewAdapter.ViewHolder> {
-    private final Context currActivity;
+    private final Activity currActivity;
     private final List<FoodListItem> dataList;
     private final LayoutInflater inflater;
 
-    public FoodRecyclerviewAdapter(Context currActivity, List<FoodListItem> dataList) {
+    public FoodRecyclerviewAdapter(Activity currActivity, List<FoodListItem> dataList) {
         this.currActivity = currActivity;
         this.dataList = dataList;
         this.inflater = LayoutInflater.from(currActivity);
@@ -47,15 +48,13 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
         holder.tilteTextview.setText(currItem.getTitle());
         holder.telephoneTextview.setText(currItem.getTelephone());
         holder.addressTextview.setText(currItem.getAddress());
-        Picasso.with(currActivity).load(currItem.getImgURL()).into(holder.imageView);
+        Picasso.get().load(currItem.getImgURL()).into(holder.imageView);
         holder.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent menuIntent = new Intent(currActivity,);
+                Intent menuIntent = new Intent(currActivity, MenuActivity.class);
                 menuIntent.putExtra("menu",currItem.getMenu());
-                currActivity.startActivity(menuIntent);*/
-                loadFragment(new MenuFragment(), "menu");
-
+                currActivity.startActivity(menuIntent);
 
             }
         });
@@ -66,7 +65,13 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
                 mapIntent.putExtra("distLat",currItem.getLat());
                 mapIntent.putExtra("distLng",currItem.getLng());
                 currActivity.startActivity(mapIntent);*/
-                loadFragment(new MapFragment(), "map");
+                //loadFragment(new MapFragment(), "map");
+                currActivity.finish();
+                Intent homeIntent = new Intent(currActivity, HomeActivity.class);
+                homeIntent.putExtra("nextFregment", 1);
+                homeIntent.putExtra("previousActivity", 3);
+                currActivity.startActivity(homeIntent);
+
             }
         });
     }
@@ -95,7 +100,7 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
     }
 
 
-    private boolean loadFragment(Fragment fragment, String addToStack) {
+    /*private boolean loadFragment(Fragment fragment, String addToStack) {
         if (fragment != null) {
             FragmentManager fragmentManager = ((FragmentActivity) currActivity).getSupportFragmentManager();
             if (addToStack.equals("")) {
@@ -113,6 +118,6 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
             }
         }
         return false;
-    }
+    }*/
 
 }

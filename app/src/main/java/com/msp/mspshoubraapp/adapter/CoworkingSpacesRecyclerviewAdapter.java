@@ -15,8 +15,7 @@ import android.widget.TextView;
 
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.data.CoworkingSpacesListItem;
-import com.msp.mspshoubraapp.ui.CoworkingSpacesActivity;
-import com.msp.mspshoubraapp.ui.MenuFragment;
+
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -49,16 +48,16 @@ public class CoworkingSpacesRecyclerviewAdapter extends RecyclerView.Adapter<Cow
         final CoworkingSpacesListItem currItem = dataList.get(position);
 
         holder.titleTextView.setText(currItem.getTitle());
-        holder.addressTextView.setText(currItem.getAddress());
-        holder.telephoneTextView.setText(currItem.getTelephone());
-        Picasso.with(currActivity).load(currItem.getImg()).into(holder.imageView);
+        //holder.addressTextView.setText(currItem.getAddress());
+        //holder.telephoneTextView.setText(currItem.getTelephone());
+        Picasso.get().load(currItem.getImg()).into(holder.imageView);
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //open CoworkingSpacesActivity.class
             }
         });
-
+        holder.imageView.setImageResource(R.drawable.majal_logo);
     }
 
     @Override
@@ -72,8 +71,8 @@ public class CoworkingSpacesRecyclerviewAdapter extends RecyclerView.Adapter<Cow
         public ViewHolder(View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.coworking_title_textview);
-            addressTextView = itemView.findViewById(R.id.coworking_address_textview);
-            telephoneTextView = itemView.findViewById(R.id.coworking_telephone_textView);
+            //addressTextView = itemView.findViewById(R.id.coworking_address_textview);
+            //telephoneTextView = itemView.findViewById(R.id.coworking_telephone_textView);
             imageView = itemView.findViewById(R.id.coworking_logo);
             itemView.setOnClickListener(this);
         }

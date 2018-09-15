@@ -1,6 +1,7 @@
 package com.msp.mspshoubraapp.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
@@ -396,7 +397,7 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     }
 
     public void enterFullScreen(int pos, final ArrayList<Integer> imageList) {
-        final int[] index = {pos};
+        /*final int[] index = {pos};
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         LayoutInflater inflater = activity.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.image_full_screen_dialog, null);
@@ -437,7 +438,9 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             }
         });
 
-        builder.create().show();
+        builder.create().show();*/
+
+
     }
     @Override
     public int getItemCount() {

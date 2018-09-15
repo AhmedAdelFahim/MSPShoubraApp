@@ -2,6 +2,7 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
@@ -16,15 +17,15 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="100dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/studentactivity_logo"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@color/black"
+            android:src="@drawable/ieee_logo"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/studentactivity_vertical_guideline"
+            app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,34 +35,28 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="MSP Tech Club"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
             app:fontFamily="@font/montserrat"
-            app:layout_constraintBottom_toTopOf="@+id/studentactivity_horizontal_guideline"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/studentactivity_vertical_guideline"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/studentactivity_vertical_guideline"
+            android:id="@+id/guideline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.36491227" />
+            app:layout_constraintGuide_percent="0.36" />
 
 
-        <android.support.constraint.Guideline
-            android:id="@+id/studentactivity_horizontal_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="90dp" />
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>

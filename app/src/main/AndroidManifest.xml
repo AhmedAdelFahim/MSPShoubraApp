@@ -38,7 +38,6 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".ui.HomeActivity"
-            android:label="@string/news_feed"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,11 +54,28 @@
             android:label="@string/title_activity_lec_table"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".ui.CoworkingSpacesActivityDetails"
+            android:label="@string/coworkingspaces" />
+        <activity
+            android:name=".ui.StudentActivitiesActivityDetails"
+            android:label="@string/studentactivities" />
+        <activity
             android:name=".ui.CoworkingSpacesActivity"
-            android:label="@string/coworkingspaces"/>
-
-        <activity android:name=".ui.StudentActivitiesActivity"
-            android:label="@string/studentactivities"/>
+            android:label="@string/title_activity_coworking_spaces"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.StudentActivitiesActivity"
+            android:label="@string/title_activity_student_activities"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.SubjectsActivity"
+            android:label="@string/title_activity_subjects"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.MenuActivity" />
+        <activity
+            android:name=".ui.FoodActivity"
+            android:label="@string/title_activity_food"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

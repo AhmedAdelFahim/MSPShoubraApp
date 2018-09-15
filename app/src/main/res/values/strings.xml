@@ -25,4 +25,7 @@
     <string name="coworkingspaces">Co-Working Spaces</string>
     <string name="studentactivities">Student Activities</string>
     <string name="subjects">Subjects</string>
+    <string name="title_activity_coworking_spaces">CoworkingSpacesActivity</string>
+    <string name="title_activity_student_activities">StudentActivitiesActivity</string>
+    <string name="title_activity_subjects">SubjectsActivity</string>
 </resources>

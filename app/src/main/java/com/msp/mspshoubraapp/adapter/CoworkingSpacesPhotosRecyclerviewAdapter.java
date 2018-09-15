@@ -46,7 +46,7 @@ public class CoworkingSpacesPhotosRecyclerviewAdapter
     public void onBindViewHolder(@NonNull CoworkingSpacesPhotosRecyclerviewAdapter.ViewHolder holder, final int position) {
         final CoworkingSpacesPhotosListItem currItem = photosList.get(position);
 
-        Picasso.with(currActivity).load(currItem.getImg()).into(holder.imageView);
+        Picasso.get().load(currItem.getImg()).into(holder.imageView);
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
