@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -195,6 +196,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 //                                    if(!locList.contains(cL)){
 //                                        locList.add(cL);
 //                                    }
+                                    if(!locList.equals(null))
                                     mMap.addPolyline((new PolylineOptions()).add(cL).addAll(locList)
                                             .width(10)
                                             .color(Color.RED)
