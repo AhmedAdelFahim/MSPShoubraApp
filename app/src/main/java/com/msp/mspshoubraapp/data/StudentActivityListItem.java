@@ -1,3 +1,4 @@
+/*
 package com.msp.mspshoubraapp.data;
 
 public class StudentActivityListItem {
@@ -18,3 +19,4 @@ public class StudentActivityListItem {
 
     public String getImg() { return img; }
 }
+*/

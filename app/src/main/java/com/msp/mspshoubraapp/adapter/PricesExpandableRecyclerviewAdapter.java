@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.data.MenuListItem;
+import com.msp.mspshoubraapp.db.CoworkingSpacePriceEntity;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
@@ -41,9 +42,9 @@ public class PricesExpandableRecyclerviewAdapter extends
 
     @Override
     public void onBindChildViewHolder(PricesViewHolder holder, int flatPosition, ExpandableGroup group, int childIndex) {
-        MenuListItem menuListItem = (MenuListItem) group.getItems().get(childIndex);
-        holder.setPrice(menuListItem.getValue());
-        holder.setDuration(menuListItem.getTitle());
+        CoworkingSpacePriceEntity priceEntity = (CoworkingSpacePriceEntity) group.getItems().get(childIndex);
+        holder.setPrice(priceEntity.getItemPrice());
+        holder.setDuration(priceEntity.getItemName());
     }
 
     @Override

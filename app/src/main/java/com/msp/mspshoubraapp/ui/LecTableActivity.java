@@ -3,6 +3,7 @@ package com.msp.mspshoubraapp.ui;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,6 +24,7 @@ import android.widget.Spinner;
 
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.adapter.FragmentAdapter;
+import com.msp.mspshoubraapp.networking.FetchDataFromApi;
 
 import java.util.ArrayList;
 
@@ -34,7 +36,8 @@ public class LecTableActivity extends AppCompatActivity
     private TabLayout tabLayout;
     private Toolbar toolbar;
     private DrawerLayout drawer;
-    NavigationView navigationView;
+    private NavigationView navigationView;
+    private String groupNum = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,40 +54,18 @@ public class LecTableActivity extends AppCompatActivity
         //String title = getIntent().getStringExtra("title");
         //getSupportActionBar().setTitle(title);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FetchDataFromApi.loadLecturesTable(this, false);
+        SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
+        groupNum = sharedPreferences.getString(getResources().getString(R.string.group_num), "");
+        if (groupNum.equals("")) {
+            //FetchDataFromApi.loadLecturesTable(this,false);
+            chooseGroupDialog();
+        }
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(LecTableActivity.this);
-                View alertDialogView = getLayoutInflater().inflate(R.layout.change_group_dialog, null);
-
-                Spinner spinnerGroup = alertDialogView.findViewById(R.id.spinner_group);
-                Button ok = alertDialogView.findViewById(R.id.change_group_btn);
-
-                ArrayList<Integer> groups = new ArrayList<>();
-
-
-                for (int i = 1; i <= 6; i++) {
-
-                    groups.add(i);
-
-
-                }
-
-                ArrayAdapter<Integer> groupAdapter = new ArrayAdapter<Integer>(LecTableActivity.this, android.R.layout.simple_spinner_item, groups);
-                groupAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerGroup.setAdapter(groupAdapter);
-
-                ok.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                });
-
-                alertDialog.setView(alertDialogView);
-                alertDialog.create().show();
+                chooseGroupDialog();
             }
         });
 
@@ -108,6 +89,42 @@ public class LecTableActivity extends AppCompatActivity
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
     }
 
+    private void chooseGroupDialog() {
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(LecTableActivity.this);
+        View alertDialogView = getLayoutInflater().inflate(R.layout.change_group_dialog, null);
+        alertDialog.setView(alertDialogView);
+        final AlertDialog alert = alertDialog.create();
+        final Spinner spinnerGroup = alertDialogView.findViewById(R.id.spinner_group);
+        Button ok = alertDialogView.findViewById(R.id.change_group_btn);
+        ArrayList<Integer> groups = new ArrayList<>();
+        for (int i = 1; i <= 6; i++) {
+            groups.add(i);
+        }
+        ArrayAdapter<Integer> groupAdapter = new ArrayAdapter<Integer>(LecTableActivity.this, android.R.layout.simple_spinner_item, groups);
+        groupAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerGroup.setAdapter(groupAdapter);
+
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                groupNum = "Group" + spinnerGroup.getSelectedItem();
+                SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(getResources().getString(R.string.group_num), groupNum);
+                editor.apply();
+
+                alert.dismiss();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+                //LecTableActivity.this.recreate();
+            }
+        });
+
+        alert.show();
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -117,30 +134,6 @@ public class LecTableActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-/*
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.lec_table, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -186,4 +179,6 @@ public class LecTableActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

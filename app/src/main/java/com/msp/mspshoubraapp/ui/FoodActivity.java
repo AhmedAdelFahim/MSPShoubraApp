@@ -1,33 +1,35 @@
 package com.msp.mspshoubraapp.ui;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.adapter.FoodRecyclerviewAdapter;
-import com.msp.mspshoubraapp.data.FoodListItem;
+import com.msp.mspshoubraapp.db.RestaurantEntity;
+import com.msp.mspshoubraapp.networking.FetchDataFromApi;
+import com.msp.mspshoubraapp.viewmodel.RestaurantViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FoodActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView recyclerView;
     private FoodRecyclerviewAdapter adapter;
-    private ArrayList<FoodListItem> itemList = new ArrayList<>();
+    private ArrayList<RestaurantEntity> itemList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class FoodActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        FetchDataFromApi.loadRestaurants(this, false);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -46,12 +49,14 @@ public class FoodActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        itemList.add(new FoodListItem("Maxicno", "0101234567", "Haret Mongi, Al Hanafi, El-Sayeda Zainab", "https://scontent-cai1-1.xx.fbcdn.net/v/t1.0-9/31265219_1311493952328670_8886136977208901632_n.jpg", 30.0589, 31.2215, "max"));
+        //itemList.add(new FoodListItem("Maxicno", "0101234567", "Haret Mongi, Al Hanafi, El-Sayeda Zainab", "https://scontent-cai1-1.xx.fbcdn.net/v/t1.0-9/31265219_1311493952328670_8886136977208901632_n.jpg", 30.0589, 31.2215, "max"));
         recyclerView = findViewById(R.id.foodCustomRecycleview);
         adapter = new FoodRecyclerviewAdapter(this, itemList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
+
+        setupViewModel();
     }
 
     @Override
@@ -117,5 +122,16 @@ public class FoodActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void setupViewModel() {
+        RestaurantViewModel viewModel = ViewModelProviders.of(this).get(RestaurantViewModel.class);
+        viewModel.getAllRestaurants().observe(this, new Observer<List<RestaurantEntity>>() {
+            @Override
+            public void onChanged(@Nullable List<RestaurantEntity> restaurantEntities) {
+                itemList = (ArrayList<RestaurantEntity>) restaurantEntities;
+                adapter.setRestaurant(restaurantEntities);
+            }
+        });
     }
 }

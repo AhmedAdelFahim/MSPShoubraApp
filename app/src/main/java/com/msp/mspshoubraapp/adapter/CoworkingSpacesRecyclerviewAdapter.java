@@ -16,19 +16,21 @@ import android.widget.TextView;
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.data.CoworkingSpacesListItem;
 
+import com.msp.mspshoubraapp.db.CoworkingSpaceEntity;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.List;
 
 public class CoworkingSpacesRecyclerviewAdapter extends RecyclerView.Adapter<CoworkingSpacesRecyclerviewAdapter.ViewHolder> {
 
     private final Context currActivity;
-    private final List<CoworkingSpacesListItem> dataList;
+    private List<CoworkingSpaceEntity> dataList;
     private final LayoutInflater inflater;
     final private listItemClickListener itemClickListener;
 
     public CoworkingSpacesRecyclerviewAdapter
-            (Context currActivity, List<CoworkingSpacesListItem> dataList,
+            (Context currActivity, List<CoworkingSpaceEntity> dataList,
              listItemClickListener itemClickListener) {
         this.currActivity = currActivity;
         this.dataList = dataList;
@@ -45,23 +47,30 @@ public class CoworkingSpacesRecyclerviewAdapter extends RecyclerView.Adapter<Cow
 
     @Override
     public void onBindViewHolder(@NonNull CoworkingSpacesRecyclerviewAdapter.ViewHolder holder, int position) {
-        final CoworkingSpacesListItem currItem = dataList.get(position);
+        final CoworkingSpaceEntity currItem = dataList.get(position);
 
-        holder.titleTextView.setText(currItem.getTitle());
+        holder.titleTextView.setText(currItem.getName());
         //holder.addressTextView.setText(currItem.getAddress());
         //holder.telephoneTextView.setText(currItem.getTelephone());
-        Picasso.get().load(currItem.getImg()).into(holder.imageView);
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //open CoworkingSpacesActivity.class
-            }
-        });
-        holder.imageView.setImageResource(R.drawable.majal_logo);
+        Picasso.get().load(new File(currItem.getImgLogo())).into(holder.imageView);
+        //holder.imageView.setImageResource(R.drawable.majal_logo);
     }
 
     @Override
-    public int getItemCount() { return dataList.size(); }
+    public int getItemCount() {
+        if (dataList == null) {
+            return 0;
+        }
+        return dataList.size();
+    }
+
+    public void setCoworkingSpaces(List<CoworkingSpaceEntity> coworkingSpaceEntities) {
+        if (coworkingSpaceEntities == null) {
+            return;
+        }
+        this.dataList = coworkingSpaceEntities;
+        notifyDataSetChanged();
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView titleTextView;

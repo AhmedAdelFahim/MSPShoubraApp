@@ -1,5 +1,6 @@
 package com.msp.mspshoubraapp.ui;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,9 +12,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.msp.mspshoubraapp.adapter.NewsFeedRecyclerViewAdapter;
 import com.msp.mspshoubraapp.data.NewsItem;
 import com.msp.mspshoubraapp.R;
+import com.msp.mspshoubraapp.data.PostData;
+import com.msp.mspshoubraapp.networking.BuildData;
+import com.msp.mspshoubraapp.networking.VolleySingleton;
+
+import org.json.JSONObject;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -26,10 +36,10 @@ import java.util.List;
 public class NewsFragment extends Fragment {
 
     RecyclerView recyclerView;
-    RecyclerView.Adapter adapter;
+    NewsFeedRecyclerViewAdapter adapter;
 
-    List<NewsItem> newsItems;
-    ArrayList<Integer> imageList;
+    List<PostData> newsItems;
+    private ProgressDialog progressDialog;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,111 +49,33 @@ public class NewsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.news_recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         newsItems = new ArrayList<>();
-        imageList = new ArrayList<>();
-        imageList.add(R.drawable.ieee_cusb);
-        //imageList.add(R.drawable.red);
-       /* imageList.add(R.drawable.anonymous_half);
-        imageList.add(R.drawable.ic_jerry);
-        imageList.add(R.drawable.article);
-        imageList.add(R.drawable.doc);*/
-        NewsItem newsItem = new NewsItem("أحسن واحد يشتغل على الArduino و يعمل Robot يقدر يحل ال the Rubik cube.\n" +
-                "\n" +
-                "اختراعك هيكون المركز الأول في منافسة الElectronics في يوم الهندسة المصري 2017\n" +
-                "\n" +
-                "صاحب أكبر شركة Web Development؟ \n" +
-                "\n" +
-                "هتكون وزير الاتصالات لسنة 2022.... وصلت لنوبل ؟؟\n" +
-                "\n" +
-                "مستقبلنا مليان فرص كتير ومن خلال ال Participants' recruitment ل IEEE CUSB '17 هنقدملك workshops محتواها قيم جدا متقسمين على أربع مجالات من خلالهم هتقدر تتخصص و تبتكر أكتر في المجال اللي بتحب تدرس فيه و تقدر تHunt what's beyond \n" +
-                "\n" +
-                ":Our workshops are\n" +
-                "\n" +
-                "Embedded Systems* \n" +
-                "AVRDunio- \n" +
-                "Duino Geeks-\n" +
-                "Pi-Window- \n" +
-                "Sheeld1-\n" +
-                "\n" +
-                "Electronics*\n" +
-                "\n" +
-                "Logic wizards-\n" +
-                "Digital Ninjas- \n" +
-                "Analog arts v1.1- \n" +
-                "\n" +
-                "Power*\n" +
-                "\n" +
-                "GAINereation- \n" +
-                "DistribYOUtion- \n" +
-                "Control Freaks- \n" +
-                "\n" +
-                "Computer*\n" +
-                "\n" +
-                "Xamaroid: Mobile Development- \n" +
-                "Webbometer: Web development- \n" +
-                "\n" +
-                "دلوقتي التقديم مفتوح من خلال ال Online form:\n" +
-                "https://goo.gl/YD345P \n" +
-                "\n" +
-                "و لو عايز تقرأ أكتر عن تفاصيل كل workshop تقدر تدخل على الlink \n" +
-                ": goo.gl/2xhHDK\n" +
-                "Event Link: https://www.facebook.com/events/310759875949323/", imageList);
-        newsItems.add(newsItem);
-
-        imageList = new ArrayList<>();
-
-        imageList.add(R.drawable.red);
-        imageList.add(R.drawable.anonymous_half);
-        imageList.add(R.drawable.ic_jerry);
-        imageList.add(R.drawable.article);
-        imageList.add(R.drawable.doc);
-
-        newsItem = new NewsItem("السلام عليكم\nازيكم \nتيست تيست تيست", imageList);
-        newsItems.add(newsItem);
-
-       /* NewsItem newsItem = new NewsItem("السلام عليكم\nازيكم \nتيست تيست تيست", imageList);
-        newsItems.add(newsItem);
-
-
-        imageList = new ArrayList<>();
-        imageList.add(R.drawable.doc);*/
-        /*imageList.add(R.drawable.doc);
-
-        newsItem = new NewsItem("السلام عليكم\nازيكم \nتيست تيست تيست", imageList);
-       // newsItems.add(newsItem);
-        imageList.add(R.drawable.doc);
-        imageList.add(R.drawable.doc);
-
-        newsItem = new NewsItem("السلام عليكم\nازيكم \nتيست تيست تيست", imageList);
-       // newsItems.add(newsItem);
-        imageList.add(R.drawable.doc);
-        imageList.add(R.drawable.doc);
-        imageList.add(R.drawable.doc);*/
-
-        // newsItem = new NewsItem("السلام عليكم\nازيكم \nتيست تيست تيست", imageList);
-        // newsItems.add(newsItem);
-
-        /*imageList.add(R.drawable.doc);
-        imageList.add(R.drawable.doc);
-        imageList.add(R.drawable.doc);
-        imageList.add(R.drawable.doc);
-        imageList.add(R.drawable.doc);
-*/
-        for (int i = 0; i < 20; i++) {
-            imageList = new ArrayList<>();
-            for (int j = 0; j < i; ++j) {
-                imageList.add(R.drawable.doc);
-            }
-            //Log.d("QWEERTYUUIOP","BIND "+imageList.size());
-            newsItem = new NewsItem("السلام عليكم\nازيكم \nتيست تيست تيست", imageList);
-            newsItems.add(newsItem);
-            //imageList.remove(4-i);
-        }
         adapter = new NewsFeedRecyclerViewAdapter(newsItems, getActivity());
-
         recyclerView.setAdapter(adapter);
-
+        getPosts();
         return view;
+    }
+
+
+    private void getPosts() {
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage(getActivity().getResources().getString(R.string.wait));
+        progressDialog.show();
+        final String URL_NEWSFEED = "https://msp-dashboard-35144.firebaseio.com/newsFeed.json";
+        JsonObjectRequest postsJsonObject = new JsonObjectRequest(Request.Method.GET, URL_NEWSFEED, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                adapter.setNewsFeed(BuildData.extractNewsFeedJson(response, getActivity(), false));
+                progressDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                //Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        VolleySingleton.getInstance(getActivity()).addToRequestQueue(postsJsonObject);
     }
 }

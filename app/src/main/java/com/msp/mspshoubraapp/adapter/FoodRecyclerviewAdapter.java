@@ -1,12 +1,8 @@
 package com.msp.mspshoubraapp.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,19 +13,20 @@ import android.widget.TextView;
 
 
 import com.msp.mspshoubraapp.R;
-import com.msp.mspshoubraapp.data.FoodListItem;
+import com.msp.mspshoubraapp.db.RestaurantEntity;
 import com.msp.mspshoubraapp.ui.HomeActivity;
 import com.msp.mspshoubraapp.ui.MenuActivity;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.List;
 
 public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclerviewAdapter.ViewHolder> {
-    private final Activity currActivity;
-    private final List<FoodListItem> dataList;
-    private final LayoutInflater inflater;
+    private Activity currActivity;
+    private List<RestaurantEntity> dataList;
+    private LayoutInflater inflater;
 
-    public FoodRecyclerviewAdapter(Activity currActivity, List<FoodListItem> dataList) {
+    public FoodRecyclerviewAdapter(Activity currActivity, List<RestaurantEntity> dataList) {
         this.currActivity = currActivity;
         this.dataList = dataList;
         this.inflater = LayoutInflater.from(currActivity);
@@ -44,16 +41,20 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final FoodListItem currItem = dataList.get(position);
-        holder.tilteTextview.setText(currItem.getTitle());
-        holder.telephoneTextview.setText(currItem.getTelephone());
+        final RestaurantEntity currItem = dataList.get(position);
+        holder.tilteTextview.setText(currItem.getName());
+        String phones = currItem.getPhone1();
+        if (currItem.getPhone2().trim().length() != 0) {
+            phones += " - " + currItem.getPhone2();
+        }
+        holder.telephoneTextview.setText(phones);
         holder.addressTextview.setText(currItem.getAddress());
-        Picasso.get().load(currItem.getImgURL()).into(holder.imageView);
+        Picasso.get().load(new File(currItem.getImgLogo() + "/" + currItem.getName())).into(holder.imageView);
         holder.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent menuIntent = new Intent(currActivity, MenuActivity.class);
-                menuIntent.putExtra("menu",currItem.getMenu());
+                menuIntent.putExtra("restaurantId", currItem.getId());
                 currActivity.startActivity(menuIntent);
 
             }
@@ -61,15 +62,12 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
         holder.mapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent mapIntent = new Intent(currActivity,MapsActivity.class);
-                mapIntent.putExtra("distLat",currItem.getLat());
-                mapIntent.putExtra("distLng",currItem.getLng());
-                currActivity.startActivity(mapIntent);*/
-                //loadFragment(new MapFragment(), "map");
                 currActivity.finish();
                 Intent homeIntent = new Intent(currActivity, HomeActivity.class);
                 homeIntent.putExtra("nextFregment", 1);
                 homeIntent.putExtra("previousActivity", 3);
+                homeIntent.putExtra("lat", currItem.getLat());
+                homeIntent.putExtra("lng", currItem.getLng());
                 currActivity.startActivity(homeIntent);
 
             }
@@ -78,7 +76,18 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
 
     @Override
     public int getItemCount() {
+        if (dataList == null) {
+            return 0;
+        }
         return dataList.size();
+    }
+
+    public void setRestaurant(List<RestaurantEntity> restaurantEntities) {
+        if (restaurantEntities == null) {
+            return;
+        }
+        this.dataList = restaurantEntities;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -98,26 +107,5 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
             menuBtn = itemView.findViewById(R.id.menu_btn);
         }
     }
-
-
-    /*private boolean loadFragment(Fragment fragment, String addToStack) {
-        if (fragment != null) {
-            FragmentManager fragmentManager = ((FragmentActivity) currActivity).getSupportFragmentManager();
-            if (addToStack.equals("")) {
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, fragment)
-                        .commit();
-                return true;
-            } else {
-                //fragmentManager.popBackStack("foodFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                // Add the new tab fragment
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, fragment, addToStack)
-                        .addToBackStack(addToStack + "Fragment")
-                        .commit();
-            }
-        }
-        return false;
-    }*/
 
 }

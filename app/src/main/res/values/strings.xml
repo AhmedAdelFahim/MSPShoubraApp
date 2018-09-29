@@ -28,4 +28,10 @@
     <string name="title_activity_coworking_spaces">CoworkingSpacesActivity</string>
     <string name="title_activity_student_activities">StudentActivitiesActivity</string>
     <string name="title_activity_subjects">SubjectsActivity</string>
+    <string name="wait">Please Wait</string>
+
+    <string name="msp_preferences">mspPreferences</string>
+    <string name="group_num">groupNum</string>
+
+
 </resources>

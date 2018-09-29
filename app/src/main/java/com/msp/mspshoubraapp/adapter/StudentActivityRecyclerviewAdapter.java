@@ -1,5 +1,6 @@
 package com.msp.mspshoubraapp.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,20 +11,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.msp.mspshoubraapp.R;
-import com.msp.mspshoubraapp.data.StudentActivityListItem;
+import com.msp.mspshoubraapp.db.StudentActivityEntity;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.List;
 
 public class StudentActivityRecyclerviewAdapter extends RecyclerView.Adapter<StudentActivityRecyclerviewAdapter.ViewHolder> {
 
-    private final Context currActivity;
-    private final List<StudentActivityListItem> dataList;
+    private final Activity currActivity;
+    private List<StudentActivityEntity> dataList;
     private final LayoutInflater inflater;
     final private listItemClickListener itemClickListener;
 
-    public StudentActivityRecyclerviewAdapter(Context currActivity,
-                                              List<StudentActivityListItem> dataList,
+    public StudentActivityRecyclerviewAdapter(Activity currActivity,
+                                              List<StudentActivityEntity> dataList,
                                               listItemClickListener itemClickListener) {
         this.currActivity = currActivity;
         this.dataList = dataList;
@@ -40,23 +42,29 @@ public class StudentActivityRecyclerviewAdapter extends RecyclerView.Adapter<Stu
 
     @Override
     public void onBindViewHolder(@NonNull StudentActivityRecyclerviewAdapter.ViewHolder holder, int position) {
-        final StudentActivityListItem currItem = dataList.get(position);
+        final StudentActivityEntity currItem = dataList.get(position);
 
-        holder.titleTextView.setText(currItem.getTitle());
+        holder.titleTextView.setText(currItem.getName());
         //Picasso.get().load(currItem.getImg()).into(holder.imageView);
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //open StudentActivitiesActivity.class
-
-
-            }
-        });
-        holder.imageView.setImageResource(R.drawable.ieee_logo);
+        Picasso.get().load(new File(currItem.getImgLogo() + "/" + currItem.getName())).into(holder.imageView);
+        //holder.imageView.setImageResource(R.drawable.ieee_logo);
     }
 
     @Override
-    public int getItemCount() { return dataList.size(); }
+    public int getItemCount() {
+        if (dataList == null) {
+            return 0;
+        }
+        return dataList.size();
+    }
+
+    public void setStudentActivity(List<StudentActivityEntity> studentActivityEntities) {
+        if (studentActivityEntities == null) {
+            return;
+        }
+        this.dataList = studentActivityEntities;
+        notifyDataSetChanged();
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView titleTextView;

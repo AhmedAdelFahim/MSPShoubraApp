@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 import com.msp.mspshoubraapp.ui.DayFragment;
 
@@ -26,12 +27,14 @@ public class FragmentAdapter extends FragmentPagerAdapter {
                 bundle.putString("day", "Sun");
                 fragment = new DayFragment();
                 fragment.setArguments(bundle);
+                Log.d("QWERTY", "sun");
                 return fragment;
             case 1:
                 bundle = new Bundle();
                 bundle.putString("day", "Mon");
                 fragment = new DayFragment();
                 fragment.setArguments(bundle);
+                Log.d("QWERTY", "mon");
                 return fragment;
             case 2:
                 //Log.d("ASDFG","11111111");
@@ -39,18 +42,21 @@ public class FragmentAdapter extends FragmentPagerAdapter {
                 bundle.putString("day", "Tue");
                 fragment = new DayFragment();
                 fragment.setArguments(bundle);
+                Log.d("QWERTY", "Tue");
                 return fragment;
             case 3:
                 bundle = new Bundle();
                 bundle.putString("day", "Wed");
                 fragment = new DayFragment();
                 fragment.setArguments(bundle);
+                Log.d("QWERTY", "wed");
                 return fragment;
             case 4:
                 bundle = new Bundle();
                 bundle.putString("day", "Thu");
                 fragment = new DayFragment();
                 fragment.setArguments(bundle);
+                Log.d("QWERTY", "Thu");
                 return fragment;
             default:
                 return null;

@@ -10,15 +10,17 @@ import android.widget.TextView;
 
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.data.IntervalData;
+import com.msp.mspshoubraapp.db.SectionsEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class IntervalRecyclerViewAdapter extends RecyclerView.Adapter<IntervalRecyclerViewAdapter.Holder> {
 
-    private List<IntervalData> intervalDataList;
+    private List<SectionsEntity> intervalDataList;
     private Activity activity;
 
-    public IntervalRecyclerViewAdapter(List<IntervalData> intervalDataList, Activity activity) {
+    public IntervalRecyclerViewAdapter(List<SectionsEntity> intervalDataList, Activity activity) {
         this.intervalDataList = intervalDataList;
         this.activity = activity;
     }
@@ -33,18 +35,28 @@ public class IntervalRecyclerViewAdapter extends RecyclerView.Adapter<IntervalRe
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        IntervalData intervalData = intervalDataList.get(position);
+        SectionsEntity intervalData = intervalDataList.get(position);
 
-        holder.sectionNum.setText(intervalData.getSectionNum());
+        holder.sectionNum.setText(Integer.toString(intervalData.getSecNum()));
         holder.subjectName.setText(intervalData.getSubjectName());
         holder.instructor.setText(intervalData.getInstructor());
-
         holder.place.setText(intervalData.getPlace());
     }
 
     @Override
     public int getItemCount() {
+        if (intervalDataList == null) {
+            return 0;
+        }
         return intervalDataList.size();
+    }
+
+    public void setSections(ArrayList<SectionsEntity> sectionsEntities) {
+        if (sectionsEntities == null) {
+            return;
+        }
+        this.intervalDataList = sectionsEntities;
+        notifyDataSetChanged();
     }
 
     public class Holder extends RecyclerView.ViewHolder {

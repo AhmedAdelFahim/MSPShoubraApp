@@ -11,5 +11,7 @@ public class ExpandableRecyclerViewItem extends ExpandableGroup {
     public ExpandableRecyclerViewItem(String title, List items){
         super(title, items);
         this.title = title;
+
+
     }
 }

@@ -10,12 +10,17 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.msp.mspshoubraapp.AppExecutors;
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.adapter.CommitteesExpandableRecyclerviewAdapter;
-import com.msp.mspshoubraapp.data.CommitteesListItem;
 import com.msp.mspshoubraapp.data.ExpandableRecyclerViewItem;
+import com.msp.mspshoubraapp.db.AppDatabase;
+import com.msp.mspshoubraapp.db.CommitteeEntity;
+import com.msp.mspshoubraapp.db.StudentActivityEntity;
+import com.squareup.picasso.Picasso;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +32,9 @@ public class StudentActivitiesActivityDetails extends AppCompatActivity {
     RecyclerView committees;
     ExpandableRecyclerViewAdapter adapter;
     List<ExpandableRecyclerViewItem> items;
-    List<CommitteesListItem> committeesListItems;
-
+    List<CommitteeEntity> committeesListItems;
+    StudentActivityEntity studentActivityEntity;
+    private AppDatabase appDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,9 @@ public class StudentActivitiesActivityDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_studentactivity_details);
 
+        Intent intent = getIntent();
+        getSupportActionBar().setTitle("Student Activities");
+        studentActivityEntity = intent.getExtras().getParcelable("studentActivity");
         ActionBar actionBar = getSupportActionBar();
 
         if (actionBar != null) {
@@ -44,18 +53,39 @@ public class StudentActivitiesActivityDetails extends AppCompatActivity {
 
         logoImageView = findViewById(R.id.studentactivity_internal_logo);
         titleTextView = findViewById(R.id.studentactivity_internal_title);
-        description = findViewById(R.id.committee_description_textview);
+        description = findViewById(R.id.studentactivity_description);
 
-        Intent intent = getIntent();
-        getSupportActionBar().setTitle("Student Activities");
+        titleTextView.setText(studentActivityEntity.getName());
+        description.setText(studentActivityEntity.getDescription());
+        Picasso.get().load(new File(studentActivityEntity.getImgLogo() + "/" + studentActivityEntity.getName())).into(logoImageView);
 
+        committeesListItems = new ArrayList<>();
         committees = findViewById(R.id.committeesRV);
         committees.setLayoutManager(new LinearLayoutManager(this));
-
         items = new ArrayList<>();
-        committeesListItems = new ArrayList<>();
+        /*items.add(new ExpandableRecyclerViewItem("Committees", committeesListItems));
+        adapter = new CommitteesExpandableRecyclerviewAdapter(items);
+        committees.setAdapter(adapter);*/
 
-        committeesListItems.add(new CommitteesListItem("Computer Committee", "Computer technology is so built into our lives that it's part of the surround of every artist\" -Steven Levy-\uD83D\uDCBB\n" +
+        appDatabase = AppDatabase.getInstance(this);
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                committeesListItems = appDatabase.committeesDao().loadAllCommittees(studentActivityEntity.getId());
+                items.add(new ExpandableRecyclerViewItem("Committees", committeesListItems));
+                adapter = new CommitteesExpandableRecyclerviewAdapter(items);
+                committees.setAdapter(adapter);
+            }
+        });
+        /*committees = findViewById(R.id.committeesRV);
+        committees.setLayoutManager(new LinearLayoutManager(this));
+        items = new ArrayList<>();
+        items.add(new ExpandableRecyclerViewItem("Committees", committeesListItems));
+        adapter = new CommitteesExpandableRecyclerviewAdapter(items);
+        committees.setAdapter(adapter);*/
+        //committeesListItems = new ArrayList<>();
+
+        /*committeesListItems.add(new CommitteesListItem("Computer Committee", "Computer technology is so built into our lives that it's part of the surround of every artist\" -Steven Levy-\uD83D\uDCBB\n" +
                 "\n" +
                 "نركز شوية بقى في الأساس بتاعنا الجزء الtechnical اللي متأكدين إنه هيفيد كل طالب في حياته العملية مش بس الدراسية.\n" +
                 "\n" +
@@ -105,12 +135,9 @@ public class StudentActivitiesActivityDetails extends AppCompatActivity {
                 "كلنا عارفين إن الخبرة اللي أنت بتاخدها من الstudent activities بتبقى مطلوبة جدا في سوق العمل والsoft skillsاللي انت بتكتسبها بتكون أهم من الجزء الtechnicalكمان\n" +
                 "\n" +
                 "إيه رأيك لو بقيت أنت أصلا trainer لل skills دي وانت الي بتعمل ال content و بتدرب باقي ال teams عليها؟ ساعتها أنت الخبرة بتاعتك هتبقى أضعاف\uD83D\uDC4C\n" +
-                "Coaching is the universal language of change and learning"));
+                "Coaching is the universal language of change and learning"));*/
 
-        items.add(new ExpandableRecyclerViewItem("Committees", committeesListItems));
 
-        adapter = new CommitteesExpandableRecyclerviewAdapter(items);
-        committees.setAdapter(adapter);
 
     }
 

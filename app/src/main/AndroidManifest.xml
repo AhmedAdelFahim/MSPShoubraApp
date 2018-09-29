@@ -75,6 +75,9 @@
         <activity
             android:name=".ui.FoodActivity"
             android:label="@string/title_activity_food"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.ImageFullScreenActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -1,3 +1,4 @@
+/*
 package com.msp.mspshoubraapp.data;
 
 public class FoodListItem {
@@ -87,3 +88,4 @@ public class FoodListItem {
         return imgURL;
     }
 }
+*/

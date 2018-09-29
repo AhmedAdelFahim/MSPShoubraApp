@@ -13,26 +13,24 @@ import android.widget.ImageView;
 import com.jsibbold.zoomage.ZoomageView;
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.data.CoworkingSpacesPhotosListItem;
+import com.msp.mspshoubraapp.db.CoworkingSpaceImageEntity;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CoworkingSpacesPhotosRecyclerviewAdapter
         extends RecyclerView.Adapter<CoworkingSpacesPhotosRecyclerviewAdapter.ViewHolder> {
-
-    private final Context currActivity;
-    private final List<CoworkingSpacesPhotosListItem> photosList;
+    private List<CoworkingSpaceImageEntity> photosList;
     private final LayoutInflater inflater;
     private Activity activity;
 
-    public CoworkingSpacesPhotosRecyclerviewAdapter(Context currActivity,
-                                                    List<CoworkingSpacesPhotosListItem> photosList,
+    public CoworkingSpacesPhotosRecyclerviewAdapter(List<CoworkingSpaceImageEntity> photosList,
                                                     Activity activity) {
-        this.currActivity = currActivity;
         this.photosList = photosList;
-        this.inflater = LayoutInflater.from(currActivity);
         this.activity = activity;
+        this.inflater = LayoutInflater.from(activity);
     }
 
     @NonNull
@@ -44,13 +42,13 @@ public class CoworkingSpacesPhotosRecyclerviewAdapter
 
     @Override
     public void onBindViewHolder(@NonNull CoworkingSpacesPhotosRecyclerviewAdapter.ViewHolder holder, final int position) {
-        final CoworkingSpacesPhotosListItem currItem = photosList.get(position);
+        final CoworkingSpaceImageEntity currItem = photosList.get(position);
 
-        Picasso.get().load(currItem.getImg()).into(holder.imageView);
+        Picasso.get().load(new File(currItem.getImage())).into(holder.imageView);
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enterFullScreen(position, photosList);
+                //enterFullScreen(position, photosList);
             }
         });
 
@@ -59,6 +57,14 @@ public class CoworkingSpacesPhotosRecyclerviewAdapter
 
     @Override
     public int getItemCount() { return photosList.size(); }
+
+    public void setImages(ArrayList<CoworkingSpaceImageEntity> imageList) {
+        if (imageList == null) {
+            return;
+        }
+        this.photosList = imageList;
+        notifyDataSetChanged();
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -71,7 +77,7 @@ public class CoworkingSpacesPhotosRecyclerviewAdapter
     }
 
 
-    public void enterFullScreen(int pos, final List<CoworkingSpacesPhotosListItem> imageList) {
+    /*public void enterFullScreen(int pos, final List<CoworkingSpacesPhotosListItem> imageList) {
         final int[] index = {pos};
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         LayoutInflater inflater = activity.getLayoutInflater();
@@ -114,5 +120,5 @@ public class CoworkingSpacesPhotosRecyclerviewAdapter
         });
 
         builder.create().show();
-    }
+    }*/
 }

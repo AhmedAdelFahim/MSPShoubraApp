@@ -6,12 +6,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.msp.mspshoubraapp.R;
-import com.msp.mspshoubraapp.data.CommitteesListItem;
+import com.msp.mspshoubraapp.db.CommitteeEntity;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommitteesExpandableRecyclerviewAdapter extends
@@ -41,7 +42,7 @@ public class CommitteesExpandableRecyclerviewAdapter extends
 
     @Override
     public void onBindChildViewHolder(DescriptionViewHolder holder, int flatPosition, ExpandableGroup group, int childIndex) {
-        CommitteesListItem committeesListItem = (CommitteesListItem) group.getItems().get(childIndex);
+        CommitteeEntity committeesListItem = (CommitteeEntity) group.getItems().get(childIndex);
 
         holder.setTitle(committeesListItem.getCommitteeName());
         holder.setDescription(committeesListItem.getCommitteeDescription());
@@ -52,9 +53,18 @@ public class CommitteesExpandableRecyclerviewAdapter extends
         holder.setViewHolderTitle(group.getTitle());
     }
 
+    /*public void setCommittees(ArrayList<CommitteeEntity> committeeEntities)
+    {
+        if (committeeEntities == null) {
+            return;
+        }
+        this.dataList = studentActivityEntities;
+        notifyDataSetChanged();
+    }*/
     public class ParentViewHolder extends GroupViewHolder {
 
         TextView viewHolderTitle;
+
         public ParentViewHolder(View itemView){
             super(itemView);
             viewHolderTitle = itemView.findViewById(R.id.ERV_title);

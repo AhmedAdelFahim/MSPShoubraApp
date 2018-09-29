@@ -1,11 +1,15 @@
 package com.msp.mspshoubraapp.ui;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,9 +22,12 @@ import android.view.MenuItem;
 
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.adapter.StudentActivityRecyclerviewAdapter;
-import com.msp.mspshoubraapp.data.StudentActivityListItem;
+import com.msp.mspshoubraapp.db.StudentActivityEntity;
+import com.msp.mspshoubraapp.networking.FetchDataFromApi;
+import com.msp.mspshoubraapp.viewmodel.StudentActivityViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StudentActivitiesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -28,7 +35,7 @@ public class StudentActivitiesActivity extends AppCompatActivity
 
     private RecyclerView recyclerView;
     private StudentActivityRecyclerviewAdapter adapter;
-    private ArrayList<StudentActivityListItem> itemList = new ArrayList<>();
+    private ArrayList<StudentActivityEntity> itemList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +53,16 @@ public class StudentActivitiesActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        itemList.add(new StudentActivityListItem("IEEE Cairo University Student Branch", "https://scontent-cai1-1.xx.fbcdn.net/v/t1.0-9/12348129_935001243231666_5803219402411515065_n.jpg?_nc_cat=0&oh=5a6e134bfe4cd24596afad0e657fe7ab&oe=5C30762C"));
+        FetchDataFromApi.loadStudentActivities(this, false);
+
+
+        //itemList.add(new StudentActivityListItem("IEEE Cairo University Student Branch", "https://scontent-cai1-1.xx.fbcdn.net/v/t1.0-9/12348129_935001243231666_5803219402411515065_n.jpg?_nc_cat=0&oh=5a6e134bfe4cd24596afad0e657fe7ab&oe=5C30762C"));
         recyclerView = findViewById(R.id.studentactivitiesCustomRecycleview);
         adapter = new StudentActivityRecyclerviewAdapter(this, itemList, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
+        setupViewModel();
     }
 
     @Override
@@ -121,7 +132,19 @@ public class StudentActivitiesActivity extends AppCompatActivity
     @Override
     public void onListItemClick(int clickedItemIndex) {
         Intent intent = new Intent(this, StudentActivitiesActivityDetails.class);
-
+        //Log.d("QWERTYU",itemList.get(clickedItemIndex).getName());
+        intent.putExtra("studentActivity", itemList.get(clickedItemIndex));
         startActivity(intent);
+    }
+
+    private void setupViewModel() {
+        StudentActivityViewModel viewModel = ViewModelProviders.of(this).get(StudentActivityViewModel.class);
+        viewModel.getAllStudentActivities().observe(this, new Observer<List<StudentActivityEntity>>() {
+            @Override
+            public void onChanged(@Nullable List<StudentActivityEntity> studentActivityEntities) {
+                itemList = (ArrayList<StudentActivityEntity>) studentActivityEntities;
+                adapter.setStudentActivity(studentActivityEntities);
+            }
+        });
     }
 }

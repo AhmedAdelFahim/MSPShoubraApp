@@ -1,3 +1,4 @@
+/*
 package com.msp.mspshoubraapp.data;
 
 public class CommitteesListItem {
@@ -18,3 +19,4 @@ public class CommitteesListItem {
 
     public String getCommitteeDescription() { return description; }
 }
+*/

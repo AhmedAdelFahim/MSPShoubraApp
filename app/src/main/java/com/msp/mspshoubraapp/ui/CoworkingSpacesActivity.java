@@ -1,7 +1,10 @@
 package com.msp.mspshoubraapp.ui;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +22,11 @@ import android.view.MenuItem;
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.adapter.CoworkingSpacesRecyclerviewAdapter;
 import com.msp.mspshoubraapp.data.CoworkingSpacesListItem;
+import com.msp.mspshoubraapp.db.CoworkingSpaceEntity;
+import com.msp.mspshoubraapp.db.StudentActivityEntity;
+import com.msp.mspshoubraapp.networking.FetchDataFromApi;
+import com.msp.mspshoubraapp.viewmodel.CoworkingSpaceViewModel;
+import com.msp.mspshoubraapp.viewmodel.StudentActivityViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +36,7 @@ public class CoworkingSpacesActivity extends AppCompatActivity
 
     private RecyclerView recyclerView;
     private CoworkingSpacesRecyclerviewAdapter adapter;
-    private List<CoworkingSpacesListItem> itemList = new ArrayList<>();
+    private List<CoworkingSpaceEntity> itemList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +55,15 @@ public class CoworkingSpacesActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-        itemList.add(new CoworkingSpacesListItem("Majal - مجال", "Ad Duqqi, Al Jizah, Egypt 12311", "\n" +
-                "0109 007 1083", "https://www.facebook.com/MajalSpace/photos/a.480808755413907/614125965415518/?type=1&theater"));
+        FetchDataFromApi.loadcoworkingSpaces(this, false);
+        /*itemList.add(new CoworkingSpacesListItem("Majal - مجال", "Ad Duqqi, Al Jizah, Egypt 12311", "\n" +
+                "0109 007 1083", "https://www.facebook.com/MajalSpace/photos/a.480808755413907/614125965415518/?type=1&theater"));*/
         recyclerView = findViewById(R.id.coworkingSpacesCustomRecycleview);
         adapter = new CoworkingSpacesRecyclerviewAdapter(this, itemList, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
+        setupViewModel();
     }
 
     @Override
@@ -67,27 +76,7 @@ public class CoworkingSpacesActivity extends AppCompatActivity
         }
     }
 
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.coworking_spaces, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -144,7 +133,19 @@ public class CoworkingSpacesActivity extends AppCompatActivity
     @Override
     public void onListItemClick(int clickedItemIndex) {
         Intent intent = new Intent(this, CoworkingSpacesActivityDetails.class);
-
+        intent.putExtra("coworkingSpaces", itemList.get(clickedItemIndex));
         startActivity(intent);
     }
+
+    private void setupViewModel() {
+        CoworkingSpaceViewModel viewModel = ViewModelProviders.of(this).get(CoworkingSpaceViewModel.class);
+        viewModel.getCoworkingSpaces().observe(this, new Observer<List<CoworkingSpaceEntity>>() {
+            @Override
+            public void onChanged(@Nullable List<CoworkingSpaceEntity> coworkingSpaceEntities) {
+                itemList = coworkingSpaceEntities;
+                adapter.setCoworkingSpaces(coworkingSpaceEntities);
+            }
+        });
+    }
+
 }
