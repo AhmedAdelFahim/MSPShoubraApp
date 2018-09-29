@@ -115,6 +115,8 @@ public class CoworkingSpacesActivityDetails extends AppCompatActivity {
                 Intent homeIntent = new Intent(CoworkingSpacesActivityDetails.this, HomeActivity.class);
                 homeIntent.putExtra("nextFregment", 1);
                 homeIntent.putExtra("previousActivity", 4);
+                homeIntent.putExtra("lat", coworkingSpaceEntity.getLat());
+                homeIntent.putExtra("lng", coworkingSpaceEntity.getLng());
                 startActivity(homeIntent);
             }
         });

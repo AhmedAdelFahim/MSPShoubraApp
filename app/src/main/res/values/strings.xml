@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MSP Shoubra App</string>
+    <string name="app_name">MSP Assistant</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -16,7 +16,7 @@
     <string name="news_feed">News Feed</string>
     <string name="map">Map</string>
     <string name="food">Food</string>
-    <string name="table">Table</string>
+    <string name="table">Today Table</string>
     <string name="title_activity_tools">ToolsActivity</string>
     <string name="title_activity_gallery">GalleryActivity</string>
     <string name="tools">Tools</string>

@@ -21,9 +21,11 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.adapter.FragmentAdapter;
+import com.msp.mspshoubraapp.networking.ConnectivityStatus;
 import com.msp.mspshoubraapp.networking.FetchDataFromApi;
 
 import java.util.ArrayList;
@@ -55,12 +57,17 @@ public class LecTableActivity extends AppCompatActivity
         //getSupportActionBar().setTitle(title);
         setSupportActionBar(toolbar);
         SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
-        if (sharedPreferences.getBoolean(getResources().getString(R.string.coworkingSpace), true)) {
-            FetchDataFromApi.loadLecturesTable(this, false);
+        if (sharedPreferences.getBoolean(getResources().getString(R.string.lecturesTable), true)) {
+            if (ConnectivityStatus.isConnected(this)) {
+                FetchDataFromApi.loadLecturesTable(this, false);
+            } else {
+                Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+
         }
 
 
-        sharedPreferences = getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
+        //sharedPreferences = getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
         groupNum = sharedPreferences.getString(getResources().getString(R.string.group_num), "");
         if (groupNum.equals("")) {
             //FetchDataFromApi.loadLecturesTable(this,false);
@@ -165,16 +172,16 @@ public class LecTableActivity extends AppCompatActivity
                 intent.putExtra("nextFregment", 5);
                 startActivity(intent);
                 break;
-            case R.id.nav_subjects:
+            /*case R.id.nav_subjects:
                 intent = new Intent(this, HomeActivity.class);
                 intent.putExtra("nextFregment", 6);
                 startActivity(intent);
-                break;
-            case R.id.nav_tools:
+                break;*/
+           /* case R.id.nav_tools:
                 intent = new Intent(this, GalleryActivity.class);
                 intent.putExtra("title", "Tools");
                 startActivity(intent);
-                break;
+                break;*/
             case R.id.nav_lec_table:
                 /*intent = new Intent(this, LecTableActivity.class);
                 intent.putExtra("title", "Lecture");

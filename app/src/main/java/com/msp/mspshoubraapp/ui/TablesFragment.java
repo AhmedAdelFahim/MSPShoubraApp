@@ -20,11 +20,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.adapter.LectureRecyclerViewAdapter;
 import com.msp.mspshoubraapp.db.AppDatabase;
 import com.msp.mspshoubraapp.db.DayLecturesEntity;
+import com.msp.mspshoubraapp.networking.ConnectivityStatus;
+import com.msp.mspshoubraapp.networking.FetchDataFromApi;
 import com.msp.mspshoubraapp.viewmodel.DayFragmentViewModel;
 import com.msp.mspshoubraapp.viewmodel.DayFragmentViewModelFactory;
 
@@ -50,27 +54,45 @@ public class TablesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_day, container, false);
+        View view = inflater.inflate(R.layout.fragment_tables, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_day);
+        ImageView emoji = view.findViewById(R.id.sleep_emoji);
+        TextView noLecText = view.findViewById(R.id.no_lecture);
         dayName = getArguments().getString("day");
-        dayName = "Sun";
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
-        groupNum = sharedPreferences.getString(getResources().getString(R.string.group_num), "");
-        if (groupNum.equals("")) {
-            //FetchDataFromApi.loadLecturesTable(this,false);
-            chooseGroupDialog();
+        //Toast.makeText(getActivity(), dayName, Toast.LENGTH_SHORT).show();
+        if (dayName.equals("Fri") || dayName.equals("Sat")) {
+            recyclerView.setVisibility(View.GONE);
+            emoji.setVisibility(View.VISIBLE);
+            noLecText.setVisibility(View.VISIBLE);
         } else {
-            setupViewModel();
-        }
-        appDatabase = AppDatabase.getInstance(getActivity());
-        factory = new DayFragmentViewModelFactory(appDatabase, dayName, groupNum);
-        viewModel = ViewModelProviders.of(this, factory).get(DayFragmentViewModel.class);
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
+            if (sharedPreferences.getBoolean(getResources().getString(R.string.lecturesTable), true)) {
+                if (ConnectivityStatus.isConnected(getActivity())) {
+                    FetchDataFromApi.loadLecturesTable(getActivity(), false);
+                } else {
+                    Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+                }
+            }
+            //SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
+            groupNum = sharedPreferences.getString(getResources().getString(R.string.group_num), "");
+            if (groupNum.equals("")) {
+                //FetchDataFromApi.loadLecturesTable(this,false);
+                chooseGroupDialog();
+            } else {
+                setupViewModel();
+            }
+            appDatabase = AppDatabase.getInstance(getActivity());
+            factory = new DayFragmentViewModelFactory(appDatabase, dayName, groupNum);
+            viewModel = ViewModelProviders.of(this, factory).get(DayFragmentViewModel.class);
 
-        adapter = new LectureRecyclerViewAdapter(lecturesEntities, getActivity());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(layoutManager);
+            adapter = new LectureRecyclerViewAdapter(lecturesEntities, getActivity());
+            recyclerView.setAdapter(adapter);
+            recyclerView.setHasFixedSize(true);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+            recyclerView.setLayoutManager(layoutManager);
+        }
+        //dayName = "Sun";
+
 
         return view;
     }

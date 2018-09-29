@@ -204,7 +204,7 @@ public class BuildData {
                     }
                 });
             } else {
-                Toast.makeText(context, "" + contextType, Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, "" + contextType, Toast.LENGTH_LONG).show();
                 pushNotification(key, context);
             }
 

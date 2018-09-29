@@ -95,12 +95,12 @@ public class SubjectsActivity extends AppCompatActivity
                 //intent.putExtra("title", "Tools");
                 //startActivity(intent);
                 break;
-            case R.id.nav_tools:
+           /* case R.id.nav_tools:
                 intent = new Intent(this, GalleryActivity.class);
                 intent.putExtra("title", "Tools");
                 //startActivity(intent);
                 //currFragment=4;
-                break;
+                break;*/
             case R.id.nav_lec_table:
                 intent = new Intent(this, LecTableActivity.class);
                 intent.putExtra("title", "Lecture Table");

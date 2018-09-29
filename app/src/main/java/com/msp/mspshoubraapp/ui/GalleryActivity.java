@@ -111,11 +111,11 @@ public class GalleryActivity extends AppCompatActivity
                 startActivity(intent);
 
                 break;
-            case R.id.nav_tools:
+            /*case R.id.nav_tools:
 //                Intent intent = new Intent(this, GalleryActivity.class);
 //                intent.putExtra("title", "Gallery");
 //                startActivity(intent);
-                break;
+                break;*/
             case R.id.nav_lec_table:
                 intent = new Intent(this, LecTableActivity.class);
                 intent.putExtra("title", "Lecture");
@@ -131,11 +131,11 @@ public class GalleryActivity extends AppCompatActivity
                 intent.putExtra("nextFregment",5);
                 startActivity(intent);
                 break;
-            case R.id.nav_subjects:
+            /*case R.id.nav_subjects:
                 intent = new Intent(this, HomeActivity.class);
                 intent.putExtra("nextFregment",6);
                 startActivity(intent);
-                break;
+                break;*/
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

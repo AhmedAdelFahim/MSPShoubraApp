@@ -45,7 +45,7 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
         holder.tilteTextview.setText(currItem.getName());
         String phones = currItem.getPhone1();
         if (currItem.getPhone2().trim().length() != 0) {
-            phones += " - " + currItem.getPhone2();
+            phones += "\n" + currItem.getPhone2();
         }
         holder.telephoneTextview.setText(phones);
         holder.addressTextview.setText(currItem.getAddress());

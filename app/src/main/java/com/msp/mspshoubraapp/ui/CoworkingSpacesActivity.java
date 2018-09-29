@@ -19,11 +19,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.adapter.CoworkingSpacesRecyclerviewAdapter;
 import com.msp.mspshoubraapp.db.CoworkingSpaceEntity;
 import com.msp.mspshoubraapp.db.StudentActivityEntity;
+import com.msp.mspshoubraapp.networking.ConnectivityStatus;
 import com.msp.mspshoubraapp.networking.FetchDataFromApi;
 import com.msp.mspshoubraapp.viewmodel.CoworkingSpaceViewModel;
 import com.msp.mspshoubraapp.viewmodel.StudentActivityViewModel;
@@ -57,7 +59,12 @@ public class CoworkingSpacesActivity extends AppCompatActivity
 
         SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
         if (sharedPreferences.getBoolean(getResources().getString(R.string.coworkingSpace), true)) {
-            FetchDataFromApi.loadcoworkingSpaces(this, false);
+            if (ConnectivityStatus.isConnected(this)) {
+                FetchDataFromApi.loadcoworkingSpaces(this, false);
+            } else {
+                Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+
         }
 
         recyclerView = findViewById(R.id.coworkingSpacesCustomRecycleview);
@@ -92,12 +99,12 @@ public class CoworkingSpacesActivity extends AppCompatActivity
                 //intent.putExtra("title", "Tools");
                 //startActivity(intent);
                 break;
-            case R.id.nav_tools:
+            /*case R.id.nav_tools:
                 intent = new Intent(this, GalleryActivity.class);
                 intent.putExtra("title", "Tools");
                 //startActivity(intent);
                 //currFragment=4;
-                break;
+                break;*/
             case R.id.nav_lec_table:
                 intent = new Intent(this, LecTableActivity.class);
                 intent.putExtra("title", "Lecture Table");
@@ -117,11 +124,11 @@ public class CoworkingSpacesActivity extends AppCompatActivity
                 //intent.putExtra("title", "Tools");
                 //startActivity(intent);
                 break;
-            case R.id.nav_subjects:
+            /*case R.id.nav_subjects:
                 intent = new Intent(this, SubjectsActivity.class);
                 //intent.putExtra("title", "Tools");
                 //startActivity(intent);
-                break;
+                break;*/
         }
 
         if (intent != null) {

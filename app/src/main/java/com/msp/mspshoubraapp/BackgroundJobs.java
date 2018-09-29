@@ -3,6 +3,8 @@ package com.msp.mspshoubraapp;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.msp.mspshoubraapp.networking.FetchDataFromApi;
 
@@ -12,6 +14,8 @@ public class BackgroundJobs extends BroadcastReceiver {
         int id = intent.getIntExtra("id", -1);
 
         if (id == Constants.NEWSFEED_BACKGROUND_ID) {
+            //Log.d("ZXCVBN","AAA");
+            //Toast.makeText(context,"AAA",Toast.LENGTH_LONG).show();
             FetchDataFromApi.loadPosts(context, true);
         } else if (id == Constants.LECTURES_TABLE_BACKGROUND_ID) {
             FetchDataFromApi.loadLecturesTable(context, true);

@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -19,6 +20,7 @@ import com.msp.mspshoubraapp.adapter.NewsFeedRecyclerViewAdapter;
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.data.PostData;
 import com.msp.mspshoubraapp.networking.BuildData;
+import com.msp.mspshoubraapp.networking.ConnectivityStatus;
 import com.msp.mspshoubraapp.networking.VolleySingleton;
 
 import org.json.JSONObject;
@@ -49,7 +51,12 @@ public class NewsFragment extends Fragment {
         newsItems = new ArrayList<>();
         adapter = new NewsFeedRecyclerViewAdapter(newsItems, getActivity());
         recyclerView.setAdapter(adapter);
-        getPosts();
+        if (ConnectivityStatus.isConnected(getActivity())) {
+            getPosts();
+        } else {
+            Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+        //getPosts();
         return view;
     }
 

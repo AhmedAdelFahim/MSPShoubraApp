@@ -15,10 +15,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.adapter.FoodRecyclerviewAdapter;
 import com.msp.mspshoubraapp.db.RestaurantEntity;
+import com.msp.mspshoubraapp.networking.ConnectivityStatus;
 import com.msp.mspshoubraapp.networking.FetchDataFromApi;
 import com.msp.mspshoubraapp.viewmodel.RestaurantViewModel;
 
@@ -41,7 +43,12 @@ public class FoodActivity extends AppCompatActivity
 
         SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
         if (sharedPreferences.getBoolean(getResources().getString(R.string.restaurant), true)) {
-            FetchDataFromApi.loadRestaurants(this, false);
+            if (ConnectivityStatus.isConnected(this)) {
+                FetchDataFromApi.loadRestaurants(this, false);
+            } else {
+                Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+
         }
         //FetchDataFromApi.loadRestaurants(this, false);
 
@@ -87,12 +94,12 @@ public class FoodActivity extends AppCompatActivity
                 //intent.putExtra("title", "Tools");
                 //startActivity(intent);
                 break;*/
-            case R.id.nav_tools:
+           /* case R.id.nav_tools:
                 intent = new Intent(this, GalleryActivity.class);
                 intent.putExtra("title", "Tools");
                 //startActivity(intent);
                 //currFragment=4;
-                break;
+                break;*/
             case R.id.nav_lec_table:
                 intent = new Intent(this, LecTableActivity.class);
                 intent.putExtra("title", "Lecture Table");
@@ -112,11 +119,11 @@ public class FoodActivity extends AppCompatActivity
                 //intent.putExtra("title", "Tools");
                 //startActivity(intent);
                 break;
-            case R.id.nav_subjects:
+            /*case R.id.nav_subjects:
                 intent = new Intent(this, SubjectsActivity.class);
                 //intent.putExtra("title", "Tools");
                 //startActivity(intent);
-                break;
+                break;*/
         }
 
         if (intent != null) {

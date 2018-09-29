@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "57431443353",
+    "firebase_url": "https://msp-assistant.firebaseio.com",
+    "project_id": "msp-assistant",
+    "storage_bucket": "msp-assistant.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:57431443353:android:db6fb64b1dc56854",
+        "android_client_info": {
+          "package_name": "com.msp.mspshoubraapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "57431443353-ug6vr78nouhd4iclgmakp2l1ojhob1ds.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.msp.mspshoubraapp",
+            "certificate_hash": "6a5c5e9364ea576fd7e14c2a6dd2fb8a8a3328a0"
+          }
+        },
+        {
+          "client_id": "57431443353-vhj8tmj8nm2nadso0gjo96t8hhprrtsm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNyq67KBBhCnaL4JFBb1R50DJ42mnG4-g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "57431443353-vhj8tmj8nm2nadso0gjo96t8hhprrtsm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
