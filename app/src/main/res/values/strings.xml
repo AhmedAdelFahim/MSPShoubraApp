@@ -32,6 +32,10 @@
 
     <string name="msp_preferences">mspPreferences</string>
     <string name="group_num">groupNum</string>
+    <string name="student_activity">studentActivity</string>
+    <string name="restaurant">restaurant</string>
+    <string name="coworkingSpace">coworkingSpace</string>
+    <string name="lecturesTable">lecturesTable</string>
 
 
 </resources>

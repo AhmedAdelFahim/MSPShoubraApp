@@ -2,19 +2,15 @@ package com.msp.mspshoubraapp.adapter;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.msp.mspshoubraapp.AppExecutors;
 import com.msp.mspshoubraapp.R;
-import com.msp.mspshoubraapp.data.LectureData;
-import com.msp.mspshoubraapp.data.NewsItem;
 import com.msp.mspshoubraapp.db.AppDatabase;
 import com.msp.mspshoubraapp.db.DayLecturesEntity;
 import com.msp.mspshoubraapp.db.SectionsEntity;

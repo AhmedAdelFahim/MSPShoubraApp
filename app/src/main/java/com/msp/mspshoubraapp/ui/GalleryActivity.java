@@ -45,11 +45,6 @@ public class GalleryActivity extends AppCompatActivity
         forward = findViewById(R.id.forward);
         img = findViewById(R.id.img);
 
-        array = new int[4];
-        array[0] = R.drawable.doc;
-        array[1] = R.drawable.ic_tools;
-        array[2] = R.drawable.ic_icon_food;
-        array[3] = R.drawable.ic_icon_map;
 
         forward.setOnClickListener(new View.OnClickListener() {
             @Override

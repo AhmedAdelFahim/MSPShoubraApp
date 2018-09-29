@@ -76,8 +76,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/gallery_view_v_guideline"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/anonymous_half" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <android.support.constraint.Guideline
                 android:id="@+id/gallery_view_v_guideline"
@@ -105,8 +104,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/gallery_view_h_guideline"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/gallery_view_v_guideline"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_jerry" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/img3"
@@ -121,8 +119,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/gallery_view_v_guideline"
-                app:layout_constraintTop_toTopOf="@+id/gallery_view_h_guideline"
-                app:srcCompat="@drawable/red" />
+                app:layout_constraintTop_toTopOf="@+id/gallery_view_h_guideline" />
 
             <TextView
                 android:id="@+id/num_of_images"
@@ -150,8 +147,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/doc" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView

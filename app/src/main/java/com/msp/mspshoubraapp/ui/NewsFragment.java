@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.msp.mspshoubraapp.adapter.NewsFeedRecyclerViewAdapter;
-import com.msp.mspshoubraapp.data.NewsItem;
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.data.PostData;
 import com.msp.mspshoubraapp.networking.BuildData;
@@ -25,7 +23,6 @@ import com.msp.mspshoubraapp.networking.VolleySingleton;
 
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

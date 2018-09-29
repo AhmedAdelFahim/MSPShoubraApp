@@ -9,13 +9,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.msp.mspshoubraapp.R;
-import com.msp.mspshoubraapp.data.IntervalData;
 import com.msp.mspshoubraapp.db.SectionsEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class IntervalRecyclerViewAdapter extends RecyclerView.Adapter<IntervalRecyclerViewAdapter.Holder> {
+public class IntervalRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<SectionsEntity> intervalDataList;
     private Activity activity;
@@ -25,22 +24,46 @@ public class IntervalRecyclerViewAdapter extends RecyclerView.Adapter<IntervalRe
         this.activity = activity;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return intervalDataList.get(position).getSecNum();
+    }
+
     @NonNull
     @Override
-    public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_recyclerview_interval, parent, false);
-        return new Holder(view);
+        if (viewType == 0) {
+            return new LectureHolder(view);
+        } else {
+            return new SectionHolder(view);
+        }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Holder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         SectionsEntity intervalData = intervalDataList.get(position);
 
-        holder.sectionNum.setText(Integer.toString(intervalData.getSecNum()));
-        holder.subjectName.setText(intervalData.getSubjectName());
-        holder.instructor.setText(intervalData.getInstructor());
-        holder.place.setText(intervalData.getPlace());
+        int periodType = intervalData.getSecNum();
+
+        if (holder.getItemViewType() == 0) {
+            LectureHolder lectureHolder = (LectureHolder) holder;
+            //holder.sectionNum.setText(Integer.toString(periodType));
+            lectureHolder.subjectName.setText(intervalData.getSubjectName());
+            lectureHolder.instructor.setText(intervalData.getInstructor());
+            lectureHolder.place.setText(intervalData.getPlace());
+            lectureHolder.periodType.setText("Lecture");
+
+        } else {
+            SectionHolder sectionHolder = (SectionHolder) holder;
+            sectionHolder.sectionNum.setText(Integer.toString(periodType));
+            sectionHolder.subjectName.setText(intervalData.getSubjectName());
+            sectionHolder.instructor.setText(intervalData.getInstructor());
+            sectionHolder.place.setText(intervalData.getPlace());
+            sectionHolder.periodType.setText("Section");
+        }
+
     }
 
     @Override
@@ -59,17 +82,36 @@ public class IntervalRecyclerViewAdapter extends RecyclerView.Adapter<IntervalRe
         notifyDataSetChanged();
     }
 
-    public class Holder extends RecyclerView.ViewHolder {
-        private TextView sectionNum, subjectName, instructor, place;
+    public class SectionHolder extends RecyclerView.ViewHolder {
+        private TextView sectionNum, subjectName, instructor, place, periodType;
 
 
-        public Holder(View itemView) {
+        public SectionHolder(View itemView) {
             super(itemView);
 
             sectionNum = itemView.findViewById(R.id.sec_num);
             subjectName = itemView.findViewById(R.id.subject_name);
             instructor = itemView.findViewById(R.id.instructor);
             place = itemView.findViewById(R.id.place);
+            periodType = itemView.findViewById(R.id.period_type);
+
+        }
+    }
+
+    public class LectureHolder extends RecyclerView.ViewHolder {
+        private TextView sectionNum, subjectName, instructor, place, periodType;
+
+
+        public LectureHolder(View itemView) {
+            super(itemView);
+
+            sectionNum = itemView.findViewById(R.id.sec_num);
+            subjectName = itemView.findViewById(R.id.subject_name);
+            instructor = itemView.findViewById(R.id.instructor);
+            place = itemView.findViewById(R.id.place);
+            periodType = itemView.findViewById(R.id.period_type);
+
+            sectionNum.setVisibility(View.GONE);
 
         }
     }

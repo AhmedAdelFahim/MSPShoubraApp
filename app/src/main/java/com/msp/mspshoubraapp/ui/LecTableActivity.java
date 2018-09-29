@@ -54,12 +54,19 @@ public class LecTableActivity extends AppCompatActivity
         //String title = getIntent().getStringExtra("title");
         //getSupportActionBar().setTitle(title);
         setSupportActionBar(toolbar);
-        FetchDataFromApi.loadLecturesTable(this, false);
         SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
+        if (sharedPreferences.getBoolean(getResources().getString(R.string.coworkingSpace), true)) {
+            FetchDataFromApi.loadLecturesTable(this, false);
+        }
+
+
+        sharedPreferences = getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
         groupNum = sharedPreferences.getString(getResources().getString(R.string.group_num), "");
         if (groupNum.equals("")) {
             //FetchDataFromApi.loadLecturesTable(this,false);
             chooseGroupDialog();
+        } else {
+            getSupportActionBar().setTitle("Lecture Table " + groupNum);
         }
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -113,12 +120,12 @@ public class LecTableActivity extends AppCompatActivity
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(getResources().getString(R.string.group_num), groupNum);
                 editor.apply();
-
+                getSupportActionBar().setTitle("Lecture Table " + groupNum);
                 alert.dismiss();
                 Intent intent = getIntent();
                 finish();
                 startActivity(intent);
-                //LecTableActivity.this.recreate();
+
             }
         });
 

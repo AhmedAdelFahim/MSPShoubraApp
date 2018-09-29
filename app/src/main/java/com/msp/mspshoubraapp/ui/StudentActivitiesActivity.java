@@ -3,6 +3,7 @@ package com.msp.mspshoubraapp.ui;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -53,10 +54,12 @@ public class StudentActivitiesActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        FetchDataFromApi.loadStudentActivities(this, false);
+        SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
+        if (sharedPreferences.getBoolean(getResources().getString(R.string.student_activity), true)) {
+            FetchDataFromApi.loadStudentActivities(this, false);
+        }
 
 
-        //itemList.add(new StudentActivityListItem("IEEE Cairo University Student Branch", "https://scontent-cai1-1.xx.fbcdn.net/v/t1.0-9/12348129_935001243231666_5803219402411515065_n.jpg?_nc_cat=0&oh=5a6e134bfe4cd24596afad0e657fe7ab&oe=5C30762C"));
         recyclerView = findViewById(R.id.studentactivitiesCustomRecycleview);
         adapter = new StudentActivityRecyclerviewAdapter(this, itemList, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -132,7 +135,6 @@ public class StudentActivitiesActivity extends AppCompatActivity
     @Override
     public void onListItemClick(int clickedItemIndex) {
         Intent intent = new Intent(this, StudentActivitiesActivityDetails.class);
-        //Log.d("QWERTYU",itemList.get(clickedItemIndex).getName());
         intent.putExtra("studentActivity", itemList.get(clickedItemIndex));
         startActivity(intent);
     }

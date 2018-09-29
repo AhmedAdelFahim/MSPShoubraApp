@@ -42,21 +42,18 @@ public class FragmentAdapter extends FragmentPagerAdapter {
                 bundle.putString("day", "Tue");
                 fragment = new DayFragment();
                 fragment.setArguments(bundle);
-                Log.d("QWERTY", "Tue");
                 return fragment;
             case 3:
                 bundle = new Bundle();
                 bundle.putString("day", "Wed");
                 fragment = new DayFragment();
                 fragment.setArguments(bundle);
-                Log.d("QWERTY", "wed");
                 return fragment;
             case 4:
                 bundle = new Bundle();
                 bundle.putString("day", "Thu");
                 fragment = new DayFragment();
                 fragment.setArguments(bundle);
-                Log.d("QWERTY", "Thu");
                 return fragment;
             default:
                 return null;

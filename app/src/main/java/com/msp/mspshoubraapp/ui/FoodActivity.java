@@ -3,6 +3,7 @@ package com.msp.mspshoubraapp.ui;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,7 +39,11 @@ public class FoodActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FetchDataFromApi.loadRestaurants(this, false);
+        SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
+        if (sharedPreferences.getBoolean(getResources().getString(R.string.restaurant), true)) {
+            FetchDataFromApi.loadRestaurants(this, false);
+        }
+        //FetchDataFromApi.loadRestaurants(this, false);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

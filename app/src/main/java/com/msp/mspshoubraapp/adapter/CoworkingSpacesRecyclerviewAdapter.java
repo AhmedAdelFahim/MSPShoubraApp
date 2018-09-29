@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.msp.mspshoubraapp.R;
-import com.msp.mspshoubraapp.data.CoworkingSpacesListItem;
 
 import com.msp.mspshoubraapp.db.CoworkingSpaceEntity;
 import com.squareup.picasso.Picasso;

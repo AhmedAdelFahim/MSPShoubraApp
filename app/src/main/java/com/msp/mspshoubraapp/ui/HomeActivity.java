@@ -6,17 +6,20 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.msp.mspshoubraapp.R;
-import com.msp.mspshoubraapp.TablesFragment;
+import com.msp.mspshoubraapp.SetBackgroundJobs;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -28,9 +31,13 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
 
 
-        //Fresco.initialize(this);
+        SetBackgroundJobs.updateNewsFeed(this);
+        SetBackgroundJobs.updateCoworkingSpaces(this);
+        SetBackgroundJobs.updateLectureTable(this);
+        SetBackgroundJobs.updateRestaurants(this);
+        SetBackgroundJobs.updateStudentActivity(this);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
-        //toolbar.setTitleTextAppearance(this,R.id.tvTitle);
         setSupportActionBar(toolbar);
 
 
@@ -64,7 +71,6 @@ public class HomeActivity extends AppCompatActivity
                         if(currFragment!=0){
                             fragment = new NewsFragment();
                             getSupportActionBar().setTitle("News Feed");
-                            //Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
                             currFragment=0;
                         }
                         break;
@@ -73,28 +79,25 @@ public class HomeActivity extends AppCompatActivity
                         if(currFragment!=1) {
                             fragment = new MapFragment();
                             getSupportActionBar().setTitle("Map");
-                            //Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
                             currFragment=1;
                         }
                         break;
 
                     case R.id.navigation_tables:
                         if(currFragment!=2) {
+                            Calendar calendar = Calendar.getInstance();
+                            Date date = calendar.getTime();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("day", new SimpleDateFormat("EE", Locale.ENGLISH).format(date.getTime()));
                             fragment = new TablesFragment();
-                            getSupportActionBar().setTitle("Table");
-                            //Log.d("QWERTYUI", getSupportFragmentManager().getBackStackEntryCount() + "");
+                            getSupportActionBar().setTitle("Today Table");
+                            fragment.setArguments(bundle);
                             currFragment=2;
                         }
                         break;
 
 
                 }
-
-                /*FragmentManager fragmentManager = getSupportFragmentManager();
-                if (fragmentManager.getBackStackEntryCount() >= 1) {
-                    fragmentManager.popBackStack("foodFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    fragmentManager.popBackStack("menuFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                }*/
                 return loadFragment(fragment);
             }
         });

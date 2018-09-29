@@ -19,8 +19,7 @@
         app:layout_constraintHeight_percent="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.9"
-        tools:srcCompat="@drawable/doc" />
+        app:layout_constraintWidth_percent="0.9" />
 
     <ImageView
         android:id="@+id/back"

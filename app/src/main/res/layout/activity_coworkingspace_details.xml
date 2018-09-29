@@ -15,7 +15,7 @@
             android:layout_width="100dp"
             android:layout_height="150dp"
             android:layout_marginTop="16dp"
-            android:src="@drawable/majal_logo"
+
             app:layout_constraintEnd_toStartOf="@+id/coworking_vertical_guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +29,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/montserrat"
-            android:text="Majal - مجال"
+            tools:text="Majal - مجال"
             android:textColor="@color/black"
             android:textSize="@dimen/text_normal"
             android:textStyle="bold"
@@ -64,7 +64,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Al Saed, Menyat as Serg, As Sahel"
+            tools:text="Al Saed, Menyat as Serg, As Sahel"
             android:textSize="12sp"
             app:fontFamily="@font/montserrat"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="01012345678"
+            tools:text="01012345678"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@+id/coworking_address_textview"
             app:layout_constraintTop_toBottomOf="@+id/coworking_address_textview" />

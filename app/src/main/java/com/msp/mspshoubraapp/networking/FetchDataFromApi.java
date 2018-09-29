@@ -3,6 +3,7 @@ package com.msp.mspshoubraapp.networking;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -31,6 +32,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class FetchDataFromApi {
 
     private static final String URL_STUDENT_ACTIVITY = "https://msp-dashboard-35144.firebaseio.com/studentActivity.json";
@@ -51,7 +54,13 @@ public class FetchDataFromApi {
             @Override
             public void onResponse(JSONObject response) {
                 BuildData.extractStudentActivitiesJson(response, context);
-                if (!contextType) progressDialog.dismiss();
+                if (!contextType) {
+                    progressDialog.dismiss();
+                    SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean(context.getResources().getString(R.string.student_activity), false);
+                    editor.apply();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -73,23 +82,29 @@ public class FetchDataFromApi {
             progressDialog.show();
         }
 
-        JsonObjectRequest studentActivitiesJsonObject = new JsonObjectRequest(Request.Method.GET, URL_RESTAURANT, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest restaurantsJsonObject = new JsonObjectRequest(Request.Method.GET, URL_RESTAURANT, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 BuildData.extractRestaurantsJson(response, context);
-                if (!contextType) progressDialog.dismiss();
+
+                if (!contextType) {
+                    progressDialog.dismiss();
+                    SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean(context.getResources().getString(R.string.restaurant), false);
+                    editor.apply();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (!contextType) {
                     progressDialog.dismiss();
-                    //Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
 
-        VolleySingleton.getInstance(context).addToRequestQueue(studentActivitiesJsonObject);
+        VolleySingleton.getInstance(context).addToRequestQueue(restaurantsJsonObject);
     }
 
     public static void loadPosts(final Context context, final boolean contextType) {
@@ -131,7 +146,13 @@ public class FetchDataFromApi {
             @Override
             public void onResponse(JSONObject response) {
                 BuildData.extractCoworkingSpaceJson(response, context, contextType);
-                if (!contextType) progressDialog.dismiss();
+                if (!contextType) {
+                    progressDialog.dismiss();
+                    SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean(context.getResources().getString(R.string.coworkingSpace), false);
+                    editor.apply();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -159,7 +180,13 @@ public class FetchDataFromApi {
             @Override
             public void onResponse(JSONObject response) {
                 BuildData.extractLecturesTableJson(response, context, contextType);
-                if (!contextType) progressDialog.dismiss();
+                if (!contextType) {
+                    progressDialog.dismiss();
+                    SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean(context.getResources().getString(R.string.lecturesTable), false);
+                    editor.apply();
+                }
             }
         }, new Response.ErrorListener() {
             @Override

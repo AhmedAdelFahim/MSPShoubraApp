@@ -16,7 +16,6 @@ import com.msp.mspshoubraapp.AppExecutors;
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.adapter.CoworkingSpacesPhotosRecyclerviewAdapter;
 import com.msp.mspshoubraapp.adapter.PricesExpandableRecyclerviewAdapter;
-import com.msp.mspshoubraapp.data.CoworkingSpacesPhotosListItem;
 import com.msp.mspshoubraapp.data.ExpandableRecyclerViewItem;
 import com.msp.mspshoubraapp.data.MenuListItem;
 import com.msp.mspshoubraapp.db.AppDatabase;

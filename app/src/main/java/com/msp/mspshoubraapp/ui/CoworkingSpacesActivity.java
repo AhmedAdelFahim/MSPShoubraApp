@@ -3,6 +3,7 @@ package com.msp.mspshoubraapp.ui;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -21,7 +22,6 @@ import android.view.MenuItem;
 
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.adapter.CoworkingSpacesRecyclerviewAdapter;
-import com.msp.mspshoubraapp.data.CoworkingSpacesListItem;
 import com.msp.mspshoubraapp.db.CoworkingSpaceEntity;
 import com.msp.mspshoubraapp.db.StudentActivityEntity;
 import com.msp.mspshoubraapp.networking.FetchDataFromApi;
@@ -55,9 +55,11 @@ public class CoworkingSpacesActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        FetchDataFromApi.loadcoworkingSpaces(this, false);
-        /*itemList.add(new CoworkingSpacesListItem("Majal - مجال", "Ad Duqqi, Al Jizah, Egypt 12311", "\n" +
-                "0109 007 1083", "https://www.facebook.com/MajalSpace/photos/a.480808755413907/614125965415518/?type=1&theater"));*/
+        SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
+        if (sharedPreferences.getBoolean(getResources().getString(R.string.coworkingSpace), true)) {
+            FetchDataFromApi.loadcoworkingSpaces(this, false);
+        }
+
         recyclerView = findViewById(R.id.coworkingSpacesCustomRecycleview);
         adapter = new CoworkingSpacesRecyclerviewAdapter(this, itemList, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

@@ -1,13 +1,24 @@
 package com.msp.mspshoubraapp.networking;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
+import android.os.Build;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.msp.mspshoubraapp.AppExecutors;
+import com.msp.mspshoubraapp.Constants;
+import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.data.PostData;
 import com.msp.mspshoubraapp.db.AppDatabase;
 import com.msp.mspshoubraapp.db.CommitteeEntity;
@@ -21,6 +32,7 @@ import com.msp.mspshoubraapp.db.RestaurantEntity;
 import com.msp.mspshoubraapp.db.RestaurantMenuEntity;
 import com.msp.mspshoubraapp.db.SectionsEntity;
 import com.msp.mspshoubraapp.db.StudentActivityEntity;
+import com.msp.mspshoubraapp.ui.HomeActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -179,16 +191,6 @@ public class BuildData {
     public static ArrayList<PostData> extractNewsFeedJson(JSONObject response, Context context, boolean contextType) {
 
         appDatabase = AppDatabase.getInstance(context);
-       /* if(!contextType)
-        {
-            AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                @Override
-                public void run() {
-                    appDatabase.postsIdDao().deleteAllIds();
-
-                }
-            });
-        }*/
         ArrayList<PostData> postDataList = new ArrayList<>();
         Iterator<String> iter = response.keys();
         while (iter.hasNext()) {
@@ -202,7 +204,8 @@ public class BuildData {
                     }
                 });
             } else {
-                pushNotification(key);
+                Toast.makeText(context, "" + contextType, Toast.LENGTH_LONG).show();
+                pushNotification(key, context);
             }
 
             try {
@@ -411,9 +414,6 @@ public class BuildData {
 
     }
 
-    private static void pushNotification(String key) {
-    }
-
     public static String saveToInternalStorage(Bitmap bitmapImage, Context context, String name, String folderName) {
         //Log.e("QWERTY ", "AAAAA");
 
@@ -441,5 +441,57 @@ public class BuildData {
         return directory.getAbsolutePath();
     }
 
+    private static void pushNotification(final String key, final Context context) {
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<PostsIdEntity> postsIdEntities = (ArrayList<PostsIdEntity>) appDatabase.postsIdDao().findPost(key);
+                if (postsIdEntities.isEmpty()) {
+                    long id = appDatabase.postsIdDao().insertPostId(new PostsIdEntity(key));
+                    buildNotification(context, id);
+                }
+            }
+        });
+    }
 
+    private static void buildNotification(Context context, long id) {
+
+        createNotificationChannel(context);
+        NotificationCompat.Builder builder =
+                new NotificationCompat.Builder(context)
+                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                        .setVibrate(new long[]{500, 600})
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setContentTitle(context.getResources().getString(R.string.app_name))
+                        .setContentText("New Post Has Arrived")
+                        .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
+                                R.mipmap.ic_launcher));
+
+        Intent notificationIntent = new Intent(context, HomeActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, (int) id, notificationIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(contentIntent);
+
+        // Add as notification
+        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.notify((int) id, builder.build());
+
+    }
+
+    private static void createNotificationChannel(Context context) {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            /*CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);*/
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+
+            NotificationChannel channel = new NotificationChannel(Constants.CHANNEL_ID, "MSP APP", importance);
+            //channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
 }

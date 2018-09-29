@@ -19,4 +19,7 @@ public interface PostsIdDao {
     @Query("DELETE FROM postsId")
     void deleteAllIds();
 
+    @Query("SELECT * FROM postsId WHERE postId = :postId")
+    List<PostsIdEntity> findPost(String postId);
+
 }
