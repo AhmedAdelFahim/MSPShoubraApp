@@ -50,15 +50,22 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         currFragment = getIntent().getIntExtra("nextFregment", 0);
+        final Bundle mapBundle=new Bundle();
+        mapBundle.putDouble("lat",getIntent().getDoubleExtra("lat",30.0996));
+        mapBundle.putDouble("lng",getIntent().getDoubleExtra("lng",31.2486));
         if (getIntent().hasExtra("previousActivity")) {
             previousActivity = getIntent().getIntExtra("previousActivity", 0);
         }
 
         if (currFragment == 0) {
-            loadFragment(new NewsFragment());
+            Fragment fragment = new NewsFragment();
+            loadFragment(fragment);
         } else if (currFragment == 1) {
-            loadFragment(new MapFragment());
+            Fragment fragment =new MapFragment();
+            fragment.setArguments(mapBundle);
+            loadFragment(fragment);
         }
+
 
         BottomNavigationView navigation = findViewById(R.id.bottom_nav);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -78,6 +85,7 @@ public class HomeActivity extends AppCompatActivity
                     case R.id.navigation_map:
                         if(currFragment!=1) {
                             fragment = new MapFragment();
+                            fragment.setArguments(mapBundle);
                             getSupportActionBar().setTitle("Map");
                             currFragment=1;
                         }
