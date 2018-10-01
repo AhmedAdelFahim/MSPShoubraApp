@@ -105,12 +105,14 @@ public class FoodActivity extends AppCompatActivity
                 intent.putExtra("title", "Lecture Table");
                 //startActivity(intent);
                 //currFragment=4;
+                finish();
                 break;
 
             case R.id.nav_coworkingspaces:
                 intent = new Intent(this, CoworkingSpacesActivity.class);
                 //intent.putExtra("title", "Tools");
                 //startActivity(intent);
+                finish();
 
                 break;
 
@@ -118,6 +120,7 @@ public class FoodActivity extends AppCompatActivity
                 intent = new Intent(this, StudentActivitiesActivity.class);
                 //intent.putExtra("title", "Tools");
                 //startActivity(intent);
+                finish();
                 break;
             /*case R.id.nav_subjects:
                 intent = new Intent(this, SubjectsActivity.class);

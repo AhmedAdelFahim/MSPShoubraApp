@@ -1,5 +1,6 @@
 package com.msp.mspshoubraapp.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -45,6 +46,7 @@ public class CoworkingSpacesActivityDetails extends AppCompatActivity {
     private CoworkingSpaceEntity coworkingSpaceEntity;
     private AppDatabase appDatabase;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -69,8 +71,8 @@ public class CoworkingSpacesActivityDetails extends AppCompatActivity {
         address = findViewById(R.id.coworking_address_textview);
         phone = findViewById(R.id.coworking_telephone_textView);
 
-        Intent intent = getIntent();
-        getSupportActionBar().setTitle("Co-Working Spaces");
+        //Intent intent = getIntent();
+        getSupportActionBar().setTitle(coworkingSpaceEntity.getName());
 
         titleTextView.setText(coworkingSpaceEntity.getName());
         address.setText(coworkingSpaceEntity.getAddress());

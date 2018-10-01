@@ -7,15 +7,22 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_food_acticity">FoodActicity</string>
-    <string name="title_activity_food">FoodActivity</string>
-    <string name="title_activity_menu">MenuActivity</string>
+
+
+    <string name="title_activity_food">Restaurants</string>
+    <string name="title_activity_menu">Menu</string>
+    <string name="title_activity_student_activity">Student Activities</string>
+    <string name="title_activity_student_activity_details">Student Activity</string>
+    <string name="title_activity_coworking_spaces">Co-working Spaces</string>
+    <string name="title_activity_coworking_space_details">Co-working Space</string>
+
+
     <string name="title_activity_home">HomeActivity</string>
 
     <string name="title_home">Home</string>
     <string name="news_feed">News Feed</string>
     <string name="map">Map</string>
-    <string name="food">Food</string>
+    <string name="restaurants">Restaurants</string>
     <string name="table">Today Table</string>
     <string name="title_activity_tools">ToolsActivity</string>
     <string name="title_activity_gallery">GalleryActivity</string>
@@ -25,9 +32,8 @@
     <string name="coworkingspaces">Co-Working Spaces</string>
     <string name="studentactivities">Student Activities</string>
     <string name="subjects">Subjects</string>
-    <string name="title_activity_coworking_spaces">CoworkingSpacesActivity</string>
-    <string name="title_activity_student_activities">StudentActivitiesActivity</string>
     <string name="title_activity_subjects">SubjectsActivity</string>
+
     <string name="wait">Please Wait</string>
 
     <string name="msp_preferences">mspPreferences</string>

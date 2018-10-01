@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.msp.mspshoubraapp.AppExecutors;
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.adapter.LectureRecyclerViewAdapter;
 import com.msp.mspshoubraapp.db.AppDatabase;
@@ -49,66 +50,72 @@ public class TablesFragment extends Fragment {
     private AppDatabase appDatabase;
     private ArrayList<DayLecturesEntity> lecturesEntities;
     private LectureRecyclerViewAdapter adapter;
+    private RecyclerView recyclerView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_tables, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerview_day);
+        recyclerView = view.findViewById(R.id.recyclerview_day);
         ImageView emoji = view.findViewById(R.id.sleep_emoji);
         TextView noLecText = view.findViewById(R.id.no_lecture);
         dayName = getArguments().getString("day");
-        //Toast.makeText(getActivity(), dayName, Toast.LENGTH_SHORT).show();
-        if (dayName.equals("Fri") || dayName.equals("Sat")) {
-            recyclerView.setVisibility(View.GONE);
-            emoji.setVisibility(View.VISIBLE);
-            noLecText.setVisibility(View.VISIBLE);
-        } else {
-            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
-            if (sharedPreferences.getBoolean(getResources().getString(R.string.lecturesTable), true)) {
-                if (ConnectivityStatus.isConnected(getActivity())) {
-                    FetchDataFromApi.loadLecturesTable(getActivity(), false);
-                } else {
-                    Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_SHORT).show();
-                }
-            }
-            //SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
-            groupNum = sharedPreferences.getString(getResources().getString(R.string.group_num), "");
-            if (groupNum.equals("")) {
-                //FetchDataFromApi.loadLecturesTable(this,false);
-                chooseGroupDialog();
+        if (dayName != null) {
+            if (dayName.equals("Fri") || dayName.equals("Sat")) {
+                recyclerView.setVisibility(View.GONE);
+                emoji.setVisibility(View.VISIBLE);
+                noLecText.setVisibility(View.VISIBLE);
             } else {
-                setupViewModel();
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
+                if (sharedPreferences.getBoolean(getResources().getString(R.string.lecturesTable), true)) {
+                    if (ConnectivityStatus.isConnected(getActivity())) {
+                        FetchDataFromApi.loadLecturesTable(getActivity(), false);
+                    } else {
+                        Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+                        return view;
+                    }
+                }
+                //SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
+                appDatabase = AppDatabase.getInstance(getActivity());
+                //factory = new DayFragmentViewModelFactory(appDatabase, dayName, groupNum);
+                //viewModel = ViewModelProviders.of(this, factory).get(DayFragmentViewModel.class);
+                recyclerView.setHasFixedSize(true);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+                recyclerView.setLayoutManager(layoutManager);
+
+                groupNum = sharedPreferences.getString(getResources().getString(R.string.group_num), "");
+                if (groupNum.equals("")) {
+                    chooseGroupDialog();
+                } else {
+                    //setupViewModel();
+                    loadTodayTable(recyclerView);
+                }
+
+
             }
-            appDatabase = AppDatabase.getInstance(getActivity());
-            factory = new DayFragmentViewModelFactory(appDatabase, dayName, groupNum);
-            viewModel = ViewModelProviders.of(this, factory).get(DayFragmentViewModel.class);
-
-            adapter = new LectureRecyclerViewAdapter(lecturesEntities, getActivity());
-            recyclerView.setAdapter(adapter);
-            recyclerView.setHasFixedSize(true);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-            recyclerView.setLayoutManager(layoutManager);
+            //dayName = "Sun";
         }
-        //dayName = "Sun";
-
 
         return view;
     }
 
-
-    private void setupViewModel() {
-
-        viewModel.getLecturesList().observe(this, new Observer<List<DayLecturesEntity>>() {
+    private void loadTodayTable(final RecyclerView recyclerView) {
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
-            public void onChanged(@Nullable List<DayLecturesEntity> dayLecturesEntities) {
-                adapter.setLectures(dayLecturesEntities);
+            public void run() {
+                lecturesEntities = (ArrayList<DayLecturesEntity>) appDatabase.lecturesTableDao().loadAllLecturesList(groupNum, dayName);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter = new LectureRecyclerViewAdapter(lecturesEntities, getActivity());
+                        recyclerView.setAdapter(adapter);
+                    }
+                });
             }
         });
-
-
     }
+
 
     private void chooseGroupDialog() {
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
@@ -134,7 +141,8 @@ public class TablesFragment extends Fragment {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(getResources().getString(R.string.group_num), groupNum);
                 editor.apply();
-                setupViewModel();
+                //setupViewModel();
+                loadTodayTable(recyclerView);
                 alert.dismiss();
 
             }

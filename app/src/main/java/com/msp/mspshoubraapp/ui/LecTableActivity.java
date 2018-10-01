@@ -159,17 +159,20 @@ public class LecTableActivity extends AppCompatActivity
             case R.id.nav_food:
                 intent = new Intent(this, HomeActivity.class);
                 intent.putExtra("nextFregment", 3);
+                finish();
                 startActivity(intent);
 
                 break;
             case R.id.nav_coworkingspaces:
                 intent = new Intent(this, HomeActivity.class);
                 intent.putExtra("nextFregment", 4);
+                finish();
                 startActivity(intent);
                 break;
             case R.id.nav_studentactivities:
                 intent = new Intent(this, HomeActivity.class);
                 intent.putExtra("nextFregment", 5);
+                finish();
                 startActivity(intent);
                 break;
             /*case R.id.nav_subjects:

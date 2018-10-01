@@ -97,7 +97,7 @@ public class BuildData {
                                     JSONObject obj = (JSONObject) jsonArray.get(i);
                                     String committeeName = obj.getString("committeeName");
                                     String committeeDescription = obj.getString("committeeDescription");
-                                    Log.d("ASDFGHJKL", name + " " + committeeName);
+                                    //Log.d("ASDFGHJKL", name + " " + committeeName);
                                     appDatabase.committeesDao().insertCommittee(new CommitteeEntity(key, committeeName, committeeDescription));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -205,6 +205,8 @@ public class BuildData {
                 });
             } else {
                 //Toast.makeText(context, "" + contextType, Toast.LENGTH_LONG).show();
+                //Log.d("ZXCVBN","AAA");
+                //oast.makeText(context,"AAA",Toast.LENGTH_LONG).show();
                 pushNotification(key, context);
             }
 
@@ -446,7 +448,10 @@ public class BuildData {
             @Override
             public void run() {
                 ArrayList<PostsIdEntity> postsIdEntities = (ArrayList<PostsIdEntity>) appDatabase.postsIdDao().findPost(key);
+                //Log.d("ZXCVBN",key+" "+postsIdEntities.size()+" "+postsIdEntities.isEmpty());
                 if (postsIdEntities.isEmpty()) {
+                    //Log.d("ZXCVBN","BBB");
+                    //Toast.makeText(context,"BBB",Toast.LENGTH_LONG).show();
                     long id = appDatabase.postsIdDao().insertPostId(new PostsIdEntity(key));
                     buildNotification(context, id);
                 }

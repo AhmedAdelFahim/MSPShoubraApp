@@ -59,6 +59,7 @@ public class HomeActivity extends AppCompatActivity
 
         if (currFragment == 0) {
             Fragment fragment = new NewsFragment();
+            getSupportActionBar().setTitle("News Feed");
             loadFragment(fragment);
         } else if (currFragment == 1) {
             Fragment fragment =new MapFragment();

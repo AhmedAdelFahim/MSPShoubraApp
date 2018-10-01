@@ -14,8 +14,6 @@ public class BackgroundJobs extends BroadcastReceiver {
         int id = intent.getIntExtra("id", -1);
 
         if (id == Constants.NEWSFEED_BACKGROUND_ID) {
-            //Log.d("ZXCVBN","AAA");
-            //Toast.makeText(context,"AAA",Toast.LENGTH_LONG).show();
             FetchDataFromApi.loadPosts(context, true);
         } else if (id == Constants.LECTURES_TABLE_BACKGROUND_ID) {
             FetchDataFromApi.loadLecturesTable(context, true);
