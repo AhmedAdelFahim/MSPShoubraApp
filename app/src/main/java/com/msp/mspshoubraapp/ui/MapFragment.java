@@ -130,8 +130,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
 
-
-
     private static ArrayList<LatLng> buildData(JSONObject jsonObject) {
         ArrayList<LatLng> latLngs = new ArrayList<>();
 
@@ -191,12 +189,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                 public void onResponse(JSONObject response) {
                                     ArrayList<LatLng> locList = buildData(response);
 
-                                    Log.d("QWERTY", locList.size() + "");
-                                    Log.d("QWERTYj", !locList.contains(cL)+" bool");
+//                                    Log.d("QWERTY", locList.size() + "");
+  //                                  Log.d("QWERTYj", !locList.contains(cL)+" bool");
 //                                    if(!locList.contains(cL)){
 //                                        locList.add(cL);
 //                                    }
-                                    if(!locList.equals(null))
+                                    if(locList!=(null))
                                     mMap.addPolyline((new PolylineOptions()).add(cL).addAll(locList)
                                             .width(10)
                                             .color(Color.RED)
