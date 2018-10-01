@@ -30,13 +30,12 @@ public class MenuActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
 
         final String restaurantId = getIntent().getStringExtra("restaurantId");
+        String restaurantName = getIntent().getStringExtra("restaurantName");
+        getSupportActionBar().setTitle(restaurantName + " Menu");
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-
-        /*itemList.add(new MenuListItem("Btates", "8"));
-        itemList.add(new MenuListItem("kreb", "21"));*/
         recyclerView = findViewById(R.id.menuCustomRecycleview);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);

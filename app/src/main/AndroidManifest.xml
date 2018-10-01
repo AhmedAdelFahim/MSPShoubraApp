@@ -37,9 +37,6 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
-        <activity
             android:name=".ui.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -48,6 +45,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.GalleryActivity"
             android:label="@string/title_activity_gallery"
@@ -58,17 +56,17 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.CoworkingSpacesActivityDetails"
-            android:label="@string/coworkingspaces" />
+            android:label="@string/title_activity_coworking_space_details" />
         <activity
             android:name=".ui.StudentActivitiesActivityDetails"
-            android:label="@string/studentactivities" />
+            android:label="@string/title_activity_student_activity_details" />
         <activity
             android:name=".ui.CoworkingSpacesActivity"
             android:label="@string/title_activity_coworking_spaces"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.StudentActivitiesActivity"
-            android:label="@string/title_activity_student_activities"
+            android:label="@string/student_activity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.SubjectsActivity"
@@ -79,6 +77,8 @@
             android:name=".ui.FoodActivity"
             android:label="@string/title_activity_food"
             android:theme="@style/AppTheme.NoActionBar" />
+
+
         <activity
             android:name=".ui.ImageFullScreenActivity"
             android:theme="@style/AppTheme.NoActionBar" />

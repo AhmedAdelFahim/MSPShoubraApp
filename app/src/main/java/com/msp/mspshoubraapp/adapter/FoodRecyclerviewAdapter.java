@@ -55,6 +55,7 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
             public void onClick(View v) {
                 Intent menuIntent = new Intent(currActivity, MenuActivity.class);
                 menuIntent.putExtra("restaurantId", currItem.getId());
+                menuIntent.putExtra("restaurantName", currItem.getName());
                 currActivity.startActivity(menuIntent);
 
             }

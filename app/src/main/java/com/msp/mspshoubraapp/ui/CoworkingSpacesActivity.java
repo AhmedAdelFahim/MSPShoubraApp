@@ -98,6 +98,7 @@ public class CoworkingSpacesActivity extends AppCompatActivity
                 intent = new Intent(this, FoodActivity.class);
                 //intent.putExtra("title", "Tools");
                 //startActivity(intent);
+                finish();
                 break;
             /*case R.id.nav_tools:
                 intent = new Intent(this, GalleryActivity.class);
@@ -110,6 +111,7 @@ public class CoworkingSpacesActivity extends AppCompatActivity
                 intent.putExtra("title", "Lecture Table");
                 //startActivity(intent);
                 //currFragment=4;
+                finish();
                 break;
 
             /*case R.id.nav_coworkingspaces:
@@ -123,6 +125,7 @@ public class CoworkingSpacesActivity extends AppCompatActivity
                 intent = new Intent(this, StudentActivitiesActivity.class);
                 //intent.putExtra("title", "Tools");
                 //startActivity(intent);
+                finish();
                 break;
             /*case R.id.nav_subjects:
                 intent = new Intent(this, SubjectsActivity.class);

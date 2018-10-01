@@ -137,7 +137,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         try {
             String status = jsonObject.getString("status");
-            Log.d("QWERTY", status + "");
+            //Log.d("QWERTY", status + "");
             if (!status.equals("OK")) {
                 return null;
             }
@@ -172,14 +172,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
          * cases when a location is not available.
          */
         try {
-            Log.d("QWERTYU",mLocationPermissionGranted+" "+mLocationPermissionGranted2);
+            //Log.d("QWERTYU",mLocationPermissionGranted+" "+mLocationPermissionGranted2);
             if (mLocationPermissionGranted&&mLocationPermissionGranted2) {
                 Task<Location> locationResult = mFusedLocationProviderClient.getLastLocation();
                 locationResult.addOnCompleteListener(getActivity(), new OnCompleteListener<Location>() {
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
                         if (task.isSuccessful()) {
-                            Log.d("QWERTYU", task.getResult().getLatitude() + "  " + task.getResult().getLongitude());
+                            //Log.d("QWERTYU", task.getResult().getLatitude() + "  " + task.getResult().getLongitude());
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
                             cL = new LatLng(mLastKnownLocation.getLatitude(),
@@ -191,12 +191,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                 public void onResponse(JSONObject response) {
                                     ArrayList<LatLng> locList = buildData(response);
 
-                                    Log.d("QWERTY", locList.size() + "");
-                                    Log.d("QWERTYj", !locList.contains(cL)+" bool");
+                                    //Log.d("QWERTY", locList.size() + "");
+                                    //Log.d("QWERTYj", !locList.contains(cL)+" bool");
 //                                    if(!locList.contains(cL)){
 //                                        locList.add(cL);
 //                                    }
-                                    if(!locList.equals(null))
+                                    if (locList != null)
                                     mMap.addPolyline((new PolylineOptions()).add(cL).addAll(locList)
                                             .width(10)
                                             .color(Color.RED)
@@ -216,8 +216,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                     cL, DEFAULT_ZOOM));
                         } else {
-                            Log.d("QWERTYU", "Current location is null. Using defaults.");
-                            Log.e("QWERTYU", "Exception: %s", task.getException());
+                            //Log.d("QWERTYU", "Current location is null. Using defaults.");
+                            //Log.e("QWERTYU", "Exception: %s", task.getException());
                             mMap.moveCamera(CameraUpdateFactory
                                     .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
                             mMap.getUiSettings().setMyLocationButtonEnabled(false);

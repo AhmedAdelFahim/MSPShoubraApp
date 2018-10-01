@@ -29,6 +29,15 @@ public interface LecturesTableDao {
             "groupDays.groupNum = :groupNum ORDER BY dayLectures.lectureNum ASC")
     LiveData<List<DayLecturesEntity>> loadAllLectures(String groupNum, String day);
 
+    @Query("SELECT dayLectures.id," +
+            "dayLectures.groupId," +
+            "dayLectures.lectureNum," +
+            "dayLectures.startTime," +
+            "dayLectures.endTime FROM dayLectures,groupDays WHERE groupDays.id = dayLectures.groupId AND " +
+            "groupDays.day = :day AND " +
+            "groupDays.groupNum = :groupNum ORDER BY dayLectures.lectureNum ASC")
+    List<DayLecturesEntity> loadAllLecturesList(String groupNum, String day);
+
     @Query("SELECT sections.id," +
             "sections.dayId," +
             "sections.secNum," +
