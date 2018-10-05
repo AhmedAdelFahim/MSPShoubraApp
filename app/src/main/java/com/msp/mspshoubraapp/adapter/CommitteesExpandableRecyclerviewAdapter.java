@@ -19,7 +19,7 @@ public class CommitteesExpandableRecyclerviewAdapter extends
         ExpandableRecyclerViewAdapter<CommitteesExpandableRecyclerviewAdapter.ParentViewHolder,
                 CommitteesExpandableRecyclerviewAdapter.DescriptionViewHolder> {
 
-    public CommitteesExpandableRecyclerviewAdapter(List<?extends ExpandableGroup> groups){
+    public CommitteesExpandableRecyclerviewAdapter(List<? extends ExpandableGroup> groups) {
         super(groups);
     }
 
@@ -27,7 +27,7 @@ public class CommitteesExpandableRecyclerviewAdapter extends
     @Override
     public ParentViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.expandable_recyclerview_item,parent,false);
+                .inflate(R.layout.expandable_recyclerview_item, parent, false);
 
         return new ParentViewHolder(view);
     }
@@ -35,7 +35,7 @@ public class CommitteesExpandableRecyclerviewAdapter extends
     @Override
     public DescriptionViewHolder onCreateChildViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.committees_list_item,parent,false);
+                .inflate(R.layout.committees_list_item, parent, false);
 
         return new DescriptionViewHolder(view);
     }
@@ -65,12 +65,14 @@ public class CommitteesExpandableRecyclerviewAdapter extends
 
         TextView viewHolderTitle;
 
-        public ParentViewHolder(View itemView){
+        public ParentViewHolder(View itemView) {
             super(itemView);
             viewHolderTitle = itemView.findViewById(R.id.ERV_title);
         }
 
-        public void setViewHolderTitle(String viewHolderTitle) { this.viewHolderTitle.setText(viewHolderTitle); }
+        public void setViewHolderTitle(String viewHolderTitle) {
+            this.viewHolderTitle.setText(viewHolderTitle);
+        }
     }
 
 
@@ -78,14 +80,19 @@ public class CommitteesExpandableRecyclerviewAdapter extends
 
         private TextView title;
         private TextView description;
-        public DescriptionViewHolder(View itemView){
+
+        public DescriptionViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.committee_name);
             description = itemView.findViewById(R.id.committee_description_textview);
         }
 
-        public void setTitle(String title) { this.title.setText(title); }
+        public void setTitle(String title) {
+            this.title.setText(title);
+        }
 
-        public void setDescription(String description) { this.description.setText(description); }
+        public void setDescription(String description) {
+            this.description.setText(description);
+        }
     }
 }

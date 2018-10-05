@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
@@ -16,6 +17,7 @@ import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.db.RestaurantEntity;
 import com.msp.mspshoubraapp.ui.HomeActivity;
 import com.msp.mspshoubraapp.ui.MenuActivity;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -35,12 +37,12 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
     @NonNull
     @Override
     public FoodRecyclerviewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = inflater.inflate(R.layout.food_list_item,parent,false);
+        View itemView = inflater.inflate(R.layout.food_list_item, parent, false);
         return new ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final RestaurantEntity currItem = dataList.get(position);
         holder.tilteTextview.setText(currItem.getName());
         String phones = currItem.getPhone1();
@@ -49,7 +51,24 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
         }
         holder.telephoneTextview.setText(phones);
         holder.addressTextview.setText(currItem.getAddress());
-        Picasso.get().load(new File(currItem.getImgLogo() + "/" + currItem.getName())).into(holder.imageView);
+        //Picasso.get().load(new File(currItem.getImgLogo() + "/" + currItem.getName())).into(holder.imageView);
+        Picasso
+                .get()
+                .load(new File(currItem.getImgLogo() + "/" + currItem.getName()))
+                //.placeholder(R.drawable.ic_landscape_black_24dp)
+                .error(R.drawable.ic_error_black_24dp)
+                //.into(holder.imageView);
+                .into(holder.imageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        holder.progressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+
+                    }
+                });
         holder.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,13 +110,15 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tilteTextview;
         TextView addressTextview;
         TextView telephoneTextview;
         ImageView imageView;
         ImageButton mapBtn;
         ImageButton menuBtn;
+        ProgressBar progressBar;
+
         public ViewHolder(View itemView) {
             super(itemView);
             tilteTextview = itemView.findViewById(R.id.title_textview);
@@ -106,6 +127,7 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
             imageView = itemView.findViewById(R.id.restaurant_logo);
             mapBtn = itemView.findViewById(R.id.map_btn);
             menuBtn = itemView.findViewById(R.id.menu_btn);
+            progressBar = itemView.findViewById(R.id.food_progressBar);
         }
     }
 

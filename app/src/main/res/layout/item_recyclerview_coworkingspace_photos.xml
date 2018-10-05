@@ -3,11 +3,18 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <ProgressBar
+        android:id="@+id/csp_progressBar"
         android:layout_width="300dp"
         android:layout_height="match_parent"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp" />
+
+    <ImageView
         android:id="@+id/recyclerview_item_coworkingspace_photo"
-        android:layout_marginEnd="8dp" />
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp" />
 
 </LinearLayout>

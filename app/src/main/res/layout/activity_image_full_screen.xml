@@ -7,6 +7,17 @@
     android:background="@color/black"
     tools:context=".ui.ImageFullScreenActivity">
 
+    <ProgressBar
+        android:id="@+id/FS_progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/forward_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.jsibbold.zoomage.ZoomageView
         android:id="@+id/image_full_screen"
         android:layout_width="match_parent"

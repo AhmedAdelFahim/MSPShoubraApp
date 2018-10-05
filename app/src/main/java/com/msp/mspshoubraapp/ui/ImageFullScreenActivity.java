@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.jsibbold.zoomage.ZoomageView;
 import com.msp.mspshoubraapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import com.squareup.picasso.Callback;
 
 public class ImageFullScreenActivity extends AppCompatActivity {
 
@@ -27,8 +30,24 @@ public class ImageFullScreenActivity extends AppCompatActivity {
         imgs = getIntent().getStringArrayListExtra("images");
         pos = getIntent().getExtras().getInt("pos");
 
+        final ProgressBar progressBar = findViewById(R.id.FS_progressBar);
+
         final ZoomageView imageView = findViewById(R.id.image_full_screen);
-        Picasso.get().load(imgs.get(pos)).into(imageView);
+        //Picasso.get().load(imgs.get(pos)).into(imageView);
+        Picasso
+                .get()
+                .load(imgs.get(pos))
+                .into(imageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        progressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+
+                    }
+                });
 
 
         ImageView backBtn = findViewById(R.id.back_btn);
@@ -37,7 +56,13 @@ public class ImageFullScreenActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (pos > 0)
                     pos--;
-                Picasso.get().load(imgs.get(pos)).into(imageView);
+                //Picasso.get().load(imgs.get(pos)).into(imageView);
+                Picasso
+                        .get()
+                        .load(imgs.get(pos))
+                        .placeholder(R.drawable.ic_landscape_black_24dp)
+                        .error(R.drawable.ic_error_black_24dp)
+                        .into(imageView);
                 imageView.setZoomable(true);
                 imageView.setAnimateOnReset(true);
                 imageView.setAutoCenter(true);
@@ -53,7 +78,12 @@ public class ImageFullScreenActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (pos < imgs.size() - 1)
                     pos++;
-                Picasso.get().load(imgs.get(pos)).into(imageView);
+                Picasso
+                        .get()
+                        .load(imgs.get(pos))
+                        .placeholder(R.drawable.ic_landscape_black_24dp)
+                        .error(R.drawable.ic_error_black_24dp)
+                        .into(imageView);
                 imageView.setZoomable(true);
                 imageView.setAnimateOnReset(true);
                 imageView.setAutoCenter(true);

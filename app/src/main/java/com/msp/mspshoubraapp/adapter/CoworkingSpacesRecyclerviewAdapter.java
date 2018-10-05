@@ -11,11 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.msp.mspshoubraapp.R;
 
 import com.msp.mspshoubraapp.db.CoworkingSpaceEntity;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -40,18 +42,35 @@ public class CoworkingSpacesRecyclerviewAdapter extends RecyclerView.Adapter<Cow
     @NonNull
     @Override
     public CoworkingSpacesRecyclerviewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = inflater.inflate(R.layout.coworkingspaces_list_item,parent,false);
+        View itemView = inflater.inflate(R.layout.coworkingspaces_list_item, parent, false);
         return new ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CoworkingSpacesRecyclerviewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final CoworkingSpacesRecyclerviewAdapter.ViewHolder holder, int position) {
         final CoworkingSpaceEntity currItem = dataList.get(position);
 
         holder.titleTextView.setText(currItem.getName());
         //holder.addressTextView.setText(currItem.getAddress());
         //holder.telephoneTextView.setText(currItem.getTelephone());
-        Picasso.get().load(new File(currItem.getImgLogo())).into(holder.imageView);
+        //Picasso.get().load(new File(currItem.getImgLogo())).into(holder.imageView);
+        Picasso
+                .get()
+                .load(new File(currItem.getImgLogo()))
+                //.placeholder(R.drawable.ic_landscape_black_24dp)
+                .error(R.drawable.ic_error_black_24dp)
+                //.into(holder.imageView);
+                .into(holder.imageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        holder.progressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+
+                    }
+                });
         //holder.imageView.setImageResource(R.drawable.majal_logo);
     }
 
@@ -71,17 +90,20 @@ public class CoworkingSpacesRecyclerviewAdapter extends RecyclerView.Adapter<Cow
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView titleTextView;
         TextView addressTextView;
         TextView telephoneTextView;
         ImageView imageView;
+        ProgressBar progressBar;
+
         public ViewHolder(View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.coworking_title_textview);
             //addressTextView = itemView.findViewById(R.id.coworking_address_textview);
             //telephoneTextView = itemView.findViewById(R.id.coworking_telephone_textView);
             imageView = itemView.findViewById(R.id.coworking_logo);
+            progressBar = itemView.findViewById(R.id.cs_progressBar);
             itemView.setOnClickListener(this);
         }
 
@@ -92,7 +114,7 @@ public class CoworkingSpacesRecyclerviewAdapter extends RecyclerView.Adapter<Cow
         }
     }
 
-    public interface listItemClickListener{
+    public interface listItemClickListener {
         void onListItemClick(int clickedItemIndex);
     }
 }

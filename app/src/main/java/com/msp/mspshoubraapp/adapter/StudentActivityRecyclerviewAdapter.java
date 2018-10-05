@@ -8,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.db.StudentActivityEntity;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -36,17 +38,34 @@ public class StudentActivityRecyclerviewAdapter extends RecyclerView.Adapter<Stu
     @NonNull
     @Override
     public StudentActivityRecyclerviewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = inflater.inflate(R.layout.studentactivities_list_item,parent,false);
+        View itemView = inflater.inflate(R.layout.studentactivities_list_item, parent, false);
         return new ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StudentActivityRecyclerviewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final StudentActivityRecyclerviewAdapter.ViewHolder holder, int position) {
         final StudentActivityEntity currItem = dataList.get(position);
 
         holder.titleTextView.setText(currItem.getName());
         //Picasso.get().load(currItem.getImg()).into(holder.imageView);
-        Picasso.get().load(new File(currItem.getImgLogo() + "/" + currItem.getName())).into(holder.imageView);
+        //Picasso.get().load(new File(currItem.getImgLogo() + "/" + currItem.getName())).into(holder.imageView);
+        Picasso
+                .get()
+                .load(new File(currItem.getImgLogo() + "/" + currItem.getName()))
+                //.placeholder(R.drawable.ic_landscape_black_24dp)
+                .error(R.drawable.ic_error_black_24dp)
+                //.into(holder.imageView);
+                .into(holder.imageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        holder.progressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+
+                    }
+                });
         //holder.imageView.setImageResource(R.drawable.ieee_logo);
     }
 
@@ -66,13 +85,16 @@ public class StudentActivityRecyclerviewAdapter extends RecyclerView.Adapter<Stu
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView titleTextView;
         ImageView imageView;
+        ProgressBar progressBar;
+
         public ViewHolder(View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.studentactivity_title_textview);
             imageView = itemView.findViewById(R.id.studentactivity_logo);
+            progressBar = itemView.findViewById(R.id.sa_progressBar);
             itemView.setOnClickListener(this);
         }
 
@@ -83,7 +105,7 @@ public class StudentActivityRecyclerviewAdapter extends RecyclerView.Adapter<Stu
         }
     }
 
-    public interface listItemClickListener{
+    public interface listItemClickListener {
         void onListItemClick(int clickedItemIndex);
     }
 

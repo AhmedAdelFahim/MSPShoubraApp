@@ -10,6 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
+        <ProgressBar
+            android:id="@+id/csd_progressBar"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/coworking_vertical_guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/coworkingspace_internal_logo"
             android:layout_width="100dp"
@@ -29,13 +40,13 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/montserrat"
-            tools:text="Majal - مجال"
             android:textColor="@color/black"
             android:textSize="@dimen/text_normal"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/coworking_vertical_guideline"
-            app:layout_constraintTop_toTopOf="@+id/coworkingspace_internal_logo" />
+            app:layout_constraintTop_toTopOf="@+id/coworkingspace_internal_logo"
+            tools:text="Majal - مجال" />
 
         <ImageView
             android:id="@+id/coworking_address_imageView"
@@ -64,22 +75,22 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            tools:text="Al Saed, Menyat as Serg, As Sahel"
             android:textSize="12sp"
             app:fontFamily="@font/montserrat"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/coworking_address_imageView"
-            app:layout_constraintTop_toBottomOf="@+id/coworkingspace_internal_title" />
+            app:layout_constraintTop_toBottomOf="@+id/coworkingspace_internal_title"
+            tools:text="Al Saed, Menyat as Serg, As Sahel" />
 
         <TextView
             android:id="@+id/coworking_telephone_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            tools:text="01012345678"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@+id/coworking_address_textview"
-            app:layout_constraintTop_toBottomOf="@+id/coworking_address_textview" />
+            app:layout_constraintTop_toBottomOf="@+id/coworking_address_textview"
+            tools:text="01012345678" />
 
         <android.support.constraint.Guideline
             android:id="@+id/coworking_vertical_guideline"

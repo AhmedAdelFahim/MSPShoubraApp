@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.msp.mspshoubraapp.R;
@@ -19,6 +20,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.squareup.picasso.Callback;
 
 /**
  * Created by Laila Al Ashkar on 8/14/2018.
@@ -161,7 +164,23 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     }
                 }
             });
-            Picasso.get().load(images.get(0)).into(holder1.img1);
+            //Picasso.get().load(images.get(0)).into(holder1.img1);
+            Picasso
+                    .get()
+                    .load(images.get(0))
+                    .error(R.drawable.ic_error_black_24dp)
+                    //.into(holder1.img1);
+                    .into(holder1.img1, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder1.img1ProgressBar.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                        }
+                    });
             holder1.img1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -220,8 +239,44 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             });
             //holder2.img1.setImageResource(images.get(0));
             //holder2.img2.setImageResource(images.get(1));
-            Picasso.get().load(images.get(0)).into(holder2.img1);
-            Picasso.get().load(images.get(1)).into(holder2.img2);
+            //Picasso.get().load(images.get(0)).into(holder2.img1);
+            Picasso
+                    .get()
+                    .load(images.get(0))
+                    //.placeholder(R.drawable.loading)
+                    .error(R.drawable.ic_error_black_24dp)
+                    //.into(holder2.img1);
+                    .into(holder2.img1, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder2.img1ProgressBar.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                        }
+                    });
+
+
+            //Picasso.get().load(images.get(1)).into(holder2.img2);
+            Picasso
+                    .get()
+                    .load(images.get(1))
+                    //.placeholder(R.drawable.loading)
+                    .error(R.drawable.ic_error_black_24dp)
+                    //.into(holder2.img2);
+                    .into(holder2.img2, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder2.img2ProgressBar.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                        }
+                    });
             holder2.img1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -284,9 +339,60 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     }
                 }
             });
-            Picasso.get().load(images.get(0)).into(holder3.img1);
-            Picasso.get().load(images.get(1)).into(holder3.img2);
-            Picasso.get().load(images.get(2)).into(holder3.img3);
+            //Picasso.get().load(images.get(0)).into(holder3.img1);
+            Picasso
+                    .get()
+                    .load(images.get(0))
+                    //   .placeholder(R.drawable.loading)
+                    .error(R.drawable.ic_error_black_24dp)
+                    // .into(holder3.img1);
+                    .into(holder3.img1, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder3.img1ProgressBar.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                        }
+                    });
+            //Picasso.get().load(images.get(1)).into(holder3.img2);
+            Picasso
+                    .get()
+                    .load(images.get(1))
+                    //.placeholder(R.drawable.loading)
+                    .error(R.drawable.ic_error_black_24dp)
+                    //.into(holder3.img2);
+                    .into(holder3.img2, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder3.img2ProgressBar.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                        }
+                    });
+            //Picasso.get().load(images.get(2)).into(holder3.img3);
+            Picasso
+                    .get()
+                    .load(images.get(2))
+                    //.placeholder(R.drawable.loading)
+                    .error(R.drawable.ic_error_black_24dp)
+                    // .into(holder3.img3);
+                    .into(holder3.img3, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder3.img3ProgressBar.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                        }
+                    });
             holder3.img1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -355,9 +461,60 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 }
             });
 
-            Picasso.get().load(images.get(0)).into(holder4.img1);
-            Picasso.get().load(images.get(1)).into(holder4.img2);
-            Picasso.get().load(images.get(2)).into(holder4.img3);
+            //Picasso.get().load(images.get(0)).into(holder4.img1);
+            Picasso
+                    .get()
+                    .load(images.get(0))
+                    // .placeholder(R.drawable.loading)
+                    .error(R.drawable.ic_error_black_24dp)
+                    //.into(holder4.img1);
+                    .into(holder4.img1, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder4.img1ProgressBar.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                        }
+                    });
+            //Picasso.get().load(images.get(1)).into(holder4.img2);
+            Picasso
+                    .get()
+                    .load(images.get(1))
+                    //.placeholder(R.drawable.loading)
+                    .error(R.drawable.ic_error_black_24dp)
+                    //.into(holder4.img2);
+                    .into(holder4.img2, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder4.img2ProgressBar.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                        }
+                    });
+            //Picasso.get().load(images.get(2)).into(holder4.img3);
+            Picasso
+                    .get()
+                    .load(images.get(2))
+                    //.placeholder(R.drawable.loading)
+                    .error(R.drawable.ic_error_black_24dp)
+                    //.into(holder4.img3);
+                    .into(holder4.img3, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder4.img3ProgressBar.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                        }
+                    });
             holder4.numOfImage.setText("+" + (images.size() - 3));
 
             holder4.img1.setOnClickListener(new View.OnClickListener() {
@@ -432,6 +589,7 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
 
     }
+
     @Override
     public int getItemCount() {
         return newsItemList.size();
@@ -450,6 +608,8 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
         private TextView news_title, seeMoreTxt, timePosted;
         private ImageView up, down, seeMoreImg;
+        private ProgressBar img1ProgressBar, img2ProgressBar, img3ProgressBar;
+
         public Holder(View itemView) {
             super(itemView);
             news_title = itemView.findViewById(R.id.recyclerview_item_txt);
@@ -458,6 +618,10 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             seeMoreImg = itemView.findViewById(R.id.see_more_img);
             seeMoreTxt = itemView.findViewById(R.id.see_more_txt);
             timePosted = itemView.findViewById(R.id.time_post);
+
+            img1ProgressBar = itemView.findViewById(R.id.img1_progressBar);
+            img2ProgressBar = itemView.findViewById(R.id.img2_progressBar);
+            img3ProgressBar = itemView.findViewById(R.id.img3_progressBar);
         }
     }
 
@@ -467,6 +631,7 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         private ImageView img1, seeMoreImg;
         private ConstraintLayout galleryView;
         private android.support.constraint.Guideline vLine;
+        private ProgressBar img1ProgressBar, img2ProgressBar, img3ProgressBar;
 
         public HolderWithOneImage(View itemView) {
             super(itemView);
@@ -481,6 +646,10 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             seeMoreTxt = itemView.findViewById(R.id.see_more_txt);
             timePosted = itemView.findViewById(R.id.time_post);
 
+            img1ProgressBar = itemView.findViewById(R.id.img1_progressBar);
+            img2ProgressBar = itemView.findViewById(R.id.img2_progressBar);
+            img3ProgressBar = itemView.findViewById(R.id.img3_progressBar);
+
             galleryView.setVisibility(View.VISIBLE);
             vLine.setGuidelinePercent(1);
 
@@ -494,6 +663,7 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         private ImageView img1, img2, seeMoreImg;
         private ConstraintLayout galleryView;
         private android.support.constraint.Guideline hLine;
+        private ProgressBar img1ProgressBar, img2ProgressBar, img3ProgressBar;
 
         public HolderWithTwoImage(View itemView) {
             super(itemView);
@@ -508,6 +678,10 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             seeMoreTxt = itemView.findViewById(R.id.see_more_txt);
             timePosted = itemView.findViewById(R.id.time_post);
 
+            img1ProgressBar = itemView.findViewById(R.id.img1_progressBar);
+            img2ProgressBar = itemView.findViewById(R.id.img2_progressBar);
+            img3ProgressBar = itemView.findViewById(R.id.img3_progressBar);
+
             galleryView.setVisibility(View.VISIBLE);
             hLine.setGuidelinePercent(1);
 
@@ -520,6 +694,7 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         private TextView news_title, seeMoreTxt, timePosted;
         private ImageView img1, img2, img3, seeMoreImg;
         private ConstraintLayout galleryView;
+        private ProgressBar img1ProgressBar, img2ProgressBar, img3ProgressBar;
 
 
         public HolderWithThreeImage(View itemView) {
@@ -534,6 +709,10 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             seeMoreTxt = itemView.findViewById(R.id.see_more_txt);
             timePosted = itemView.findViewById(R.id.time_post);
 
+            img1ProgressBar = itemView.findViewById(R.id.img1_progressBar);
+            img2ProgressBar = itemView.findViewById(R.id.img2_progressBar);
+            img3ProgressBar = itemView.findViewById(R.id.img3_progressBar);
+
             galleryView.setVisibility(View.VISIBLE);
 
             //hLine.setGuidelinePercent(1);
@@ -547,6 +726,7 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         private TextView news_title, seeMoreTxt, numOfImage, timePosted;
         private ImageView img1, img2, img3, seeMoreImg;
         private ConstraintLayout galleryView;
+        private ProgressBar img1ProgressBar, img2ProgressBar, img3ProgressBar;
 
         public HolderWithMoreThanThreeImage(View itemView) {
             super(itemView);
@@ -560,6 +740,10 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             seeMoreImg = itemView.findViewById(R.id.see_more_img);
             seeMoreTxt = itemView.findViewById(R.id.see_more_txt);
             timePosted = itemView.findViewById(R.id.time_post);
+
+            img1ProgressBar = itemView.findViewById(R.id.img1_progressBar);
+            img2ProgressBar = itemView.findViewById(R.id.img2_progressBar);
+            img3ProgressBar = itemView.findViewById(R.id.img3_progressBar);
 
             galleryView.setVisibility(View.VISIBLE);
             numOfImage.setVisibility(View.VISIBLE);

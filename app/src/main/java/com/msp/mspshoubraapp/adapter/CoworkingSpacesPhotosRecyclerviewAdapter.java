@@ -9,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.jsibbold.zoomage.ZoomageView;
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.db.CoworkingSpaceImageEntity;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -40,10 +42,27 @@ public class CoworkingSpacesPhotosRecyclerviewAdapter
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CoworkingSpacesPhotosRecyclerviewAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final CoworkingSpacesPhotosRecyclerviewAdapter.ViewHolder holder, final int position) {
         final CoworkingSpaceImageEntity currItem = photosList.get(position);
 
-        Picasso.get().load(new File(currItem.getImage())).into(holder.imageView);
+        //Picasso.get().load(new File(currItem.getImage())).into(holder.imageView);
+        Picasso
+                .get()
+                .load(new File(currItem.getImage()))
+                //.placeholder(R.drawable.ic_landscape_black_24dp)
+                .error(R.drawable.ic_error_black_24dp)
+                //.into(holder.imageView);
+                .into(holder.imageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        holder.progressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+
+                    }
+                });
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,10 +89,12 @@ public class CoworkingSpacesPhotosRecyclerviewAdapter
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
+        ProgressBar progressBar;
 
         public ViewHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.recyclerview_item_coworkingspace_photo);
+            progressBar = itemView.findViewById(R.id.csp_progressBar);
         }
     }
 

@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.msp.mspshoubraapp.AppExecutors;
@@ -17,6 +19,7 @@ import com.msp.mspshoubraapp.data.ExpandableRecyclerViewItem;
 import com.msp.mspshoubraapp.db.AppDatabase;
 import com.msp.mspshoubraapp.db.CommitteeEntity;
 import com.msp.mspshoubraapp.db.StudentActivityEntity;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 
@@ -35,6 +38,7 @@ public class StudentActivitiesActivityDetails extends AppCompatActivity {
     List<CommitteeEntity> committeesListItems;
     StudentActivityEntity studentActivityEntity;
     private AppDatabase appDatabase;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +60,28 @@ public class StudentActivitiesActivityDetails extends AppCompatActivity {
         logoImageView = findViewById(R.id.studentactivity_internal_logo);
         titleTextView = findViewById(R.id.studentactivity_internal_title);
         description = findViewById(R.id.studentactivity_description);
+        progressBar = findViewById(R.id.sad_progressBar);
 
         titleTextView.setText(studentActivityEntity.getName());
         description.setText(studentActivityEntity.getDescription());
-        Picasso.get().load(new File(studentActivityEntity.getImgLogo() + "/" + studentActivityEntity.getName())).into(logoImageView);
+        //Picasso.get().load(new File(studentActivityEntity.getImgLogo() + "/" + studentActivityEntity.getName())).into(logoImageView);
+        Picasso
+                .get()
+                .load(new File(studentActivityEntity.getImgLogo() + "/" + studentActivityEntity.getName()))
+                //.placeholder(R.drawable.ic_landscape_black_24dp)
+                .error(R.drawable.ic_error_black_24dp)
+                //.into(logoImageView);
+                .into(logoImageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        progressBar.setVisibility(View.GONE);
+                    }
 
+                    @Override
+                    public void onError(Exception e) {
+
+                    }
+                });
         committeesListItems = new ArrayList<>();
         committees = findViewById(R.id.committeesRV);
         committees.setLayoutManager(new LinearLayoutManager(this));

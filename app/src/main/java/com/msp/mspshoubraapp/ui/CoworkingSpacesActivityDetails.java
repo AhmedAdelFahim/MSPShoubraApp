@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.msp.mspshoubraapp.AppExecutors;
@@ -23,6 +24,7 @@ import com.msp.mspshoubraapp.db.AppDatabase;
 import com.msp.mspshoubraapp.db.CoworkingSpaceEntity;
 import com.msp.mspshoubraapp.db.CoworkingSpaceImageEntity;
 import com.msp.mspshoubraapp.db.CoworkingSpacePriceEntity;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 
@@ -42,6 +44,7 @@ public class CoworkingSpacesActivityDetails extends AppCompatActivity {
     CoworkingSpacesPhotosRecyclerviewAdapter photosAdapter;
     private ArrayList<CoworkingSpaceImageEntity> imageList;
     ImageButton mapBtn;
+    ProgressBar progressBar;
 
     private CoworkingSpaceEntity coworkingSpaceEntity;
     private AppDatabase appDatabase;
@@ -70,6 +73,7 @@ public class CoworkingSpacesActivityDetails extends AppCompatActivity {
         mapBtn = findViewById(R.id.map_btn);
         address = findViewById(R.id.coworking_address_textview);
         phone = findViewById(R.id.coworking_telephone_textView);
+        progressBar.findViewById(R.id.csd_progressBar);
 
         //Intent intent = getIntent();
         getSupportActionBar().setTitle(coworkingSpaceEntity.getName());
@@ -82,7 +86,24 @@ public class CoworkingSpacesActivityDetails extends AppCompatActivity {
         } else {
             phone.setText(coworkingSpaceEntity.getPhone1() + "\n" + phone2);
         }
-        Picasso.get().load(new File(coworkingSpaceEntity.getImgLogo())).into(logoImageView);
+        //Picasso.get().load(new File(coworkingSpaceEntity.getImgLogo())).into(logoImageView);
+        Picasso
+                .get()
+                .load(new File(coworkingSpaceEntity.getImgLogo()))
+                //.placeholder(R.drawable.ic_landscape_black_24dp)
+                .error(R.drawable.ic_error_black_24dp)
+                //.into(logoImageView);
+                .into(logoImageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        progressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+
+                    }
+                });
 
         imageList = new ArrayList<>();
         photosRecyclerView.setHasFixedSize(true);
