@@ -1,5 +1,6 @@
 package com.msp.mspshoubraapp.ui;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -187,6 +188,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                             url = getDirectionsUrl(cL, dist);
 
                             JsonObjectRequest roadPointsJsonObject = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                                @SuppressLint("ShowToast")
                                 @Override
                                 public void onResponse(JSONObject response) {
                                     ArrayList<LatLng> locList = buildData(response);
@@ -196,12 +198,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 //                                    if(!locList.contains(cL)){
 //                                        locList.add(cL);
 //                                    }
-                                    if (locList != null)
-                                    mMap.addPolyline((new PolylineOptions()).add(cL).addAll(locList)
-                                            .width(10)
-                                            .color(Color.RED)
-                                            .geodesic(true));
-                                    mMap.setMyLocationEnabled(true);
+                                    if (locList != null) {
+                                        mMap.addPolyline((new PolylineOptions()).add(cL).addAll(locList)
+                                                .width(10)
+                                                .color(Color.RED)
+                                                .geodesic(true));
+                                        mMap.setMyLocationEnabled(true);
+                                    }else{
+                                        Toast.makeText(getActivity(),"Error please try again later",Toast.LENGTH_LONG);
+                                    }
                                 }
                             }, new Response.ErrorListener() {
                                 @Override
