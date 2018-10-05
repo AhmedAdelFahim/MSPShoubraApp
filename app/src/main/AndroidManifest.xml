@@ -17,7 +17,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
 
@@ -66,7 +66,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.StudentActivitiesActivity"
-            android:label="@string/student_activity"
+            android:label="@string/title_activity_student_activity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.SubjectsActivity"

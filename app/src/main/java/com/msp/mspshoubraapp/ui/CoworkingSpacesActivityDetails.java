@@ -73,7 +73,7 @@ public class CoworkingSpacesActivityDetails extends AppCompatActivity {
         mapBtn = findViewById(R.id.map_btn);
         address = findViewById(R.id.coworking_address_textview);
         phone = findViewById(R.id.coworking_telephone_textView);
-        progressBar.findViewById(R.id.csd_progressBar);
+        progressBar = findViewById(R.id.csd_progressBar);
 
         //Intent intent = getIntent();
         getSupportActionBar().setTitle(coworkingSpaceEntity.getName());

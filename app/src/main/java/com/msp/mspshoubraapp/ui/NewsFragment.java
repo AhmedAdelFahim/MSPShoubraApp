@@ -16,6 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.msp.mspshoubraapp.Constants;
 import com.msp.mspshoubraapp.adapter.NewsFeedRecyclerViewAdapter;
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.data.PostData;
@@ -65,8 +66,7 @@ public class NewsFragment extends Fragment {
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage(getActivity().getResources().getString(R.string.wait));
         progressDialog.show();
-        final String URL_NEWSFEED = "https://msp-dashboard-35144.firebaseio.com/newsFeed.json";
-        JsonObjectRequest postsJsonObject = new JsonObjectRequest(Request.Method.GET, URL_NEWSFEED, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest postsJsonObject = new JsonObjectRequest(Request.Method.GET, Constants.URL_NEWSFEED, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 adapter.setNewsFeed(BuildData.extractNewsFeedJson(response, getActivity(), false));
