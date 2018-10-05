@@ -37,6 +37,7 @@ public class ImageFullScreenActivity extends AppCompatActivity {
         Picasso
                 .get()
                 .load(imgs.get(pos))
+                .error(R.drawable.ic_error_black_24dp)
                 .into(imageView, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -60,9 +61,20 @@ public class ImageFullScreenActivity extends AppCompatActivity {
                 Picasso
                         .get()
                         .load(imgs.get(pos))
-                        .placeholder(R.drawable.ic_landscape_black_24dp)
+                        //.placeholder(R.drawable.ic_landscape_black_24dp)
                         .error(R.drawable.ic_error_black_24dp)
-                        .into(imageView);
+                        // .into(imageView);
+                        .into(imageView, new Callback() {
+                            @Override
+                            public void onSuccess() {
+                                progressBar.setVisibility(View.GONE);
+                            }
+
+                            @Override
+                            public void onError(Exception e) {
+
+                            }
+                        });
                 imageView.setZoomable(true);
                 imageView.setAnimateOnReset(true);
                 imageView.setAutoCenter(true);
@@ -81,9 +93,20 @@ public class ImageFullScreenActivity extends AppCompatActivity {
                 Picasso
                         .get()
                         .load(imgs.get(pos))
-                        .placeholder(R.drawable.ic_landscape_black_24dp)
+                        //.placeholder(R.drawable.ic_landscape_black_24dp)
                         .error(R.drawable.ic_error_black_24dp)
-                        .into(imageView);
+                        //.into(imageView);
+                        .into(imageView, new Callback() {
+                            @Override
+                            public void onSuccess() {
+                                progressBar.setVisibility(View.GONE);
+                            }
+
+                            @Override
+                            public void onError(Exception e) {
+
+                            }
+                        });
                 imageView.setZoomable(true);
                 imageView.setAnimateOnReset(true);
                 imageView.setAutoCenter(true);

@@ -45,8 +45,6 @@ import static android.content.Context.MODE_PRIVATE;
 public class TablesFragment extends Fragment {
 
     private String dayName, groupNum;
-    private DayFragmentViewModel viewModel;
-    private DayFragmentViewModelFactory factory;
     private AppDatabase appDatabase;
     private ArrayList<DayLecturesEntity> lecturesEntities;
     private LectureRecyclerViewAdapter adapter;
@@ -61,13 +59,14 @@ public class TablesFragment extends Fragment {
         ImageView emoji = view.findViewById(R.id.sleep_emoji);
         TextView noLecText = view.findViewById(R.id.no_lecture);
         dayName = getArguments().getString("day");
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
+        appDatabase = AppDatabase.getInstance(getActivity());
         if (dayName != null) {
             if (dayName.equals("Fri") || dayName.equals("Sat")) {
                 recyclerView.setVisibility(View.GONE);
                 emoji.setVisibility(View.VISIBLE);
                 noLecText.setVisibility(View.VISIBLE);
             } else {
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
                 if (sharedPreferences.getBoolean(getResources().getString(R.string.lecturesTable), true)) {
                     if (ConnectivityStatus.isConnected(getActivity())) {
                         FetchDataFromApi.loadLecturesTable(getActivity(), false);
@@ -77,7 +76,6 @@ public class TablesFragment extends Fragment {
                     }
                 }
                 //SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
-                appDatabase = AppDatabase.getInstance(getActivity());
                 //factory = new DayFragmentViewModelFactory(appDatabase, dayName, groupNum);
                 //viewModel = ViewModelProviders.of(this, factory).get(DayFragmentViewModel.class);
                 recyclerView.setHasFixedSize(true);
