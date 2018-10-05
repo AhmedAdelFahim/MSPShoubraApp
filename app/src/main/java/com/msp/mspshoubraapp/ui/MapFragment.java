@@ -50,9 +50,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-/**
- * Created by Laila Al Ashkar on 8/14/2018.
- */
+
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
