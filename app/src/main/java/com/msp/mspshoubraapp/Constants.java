@@ -18,4 +18,9 @@ public class Constants {
     public static final String URL_NEWSFEED = "https://msp-dashboard-35144.firebaseio.com/newsFeed.json";
     public static final String URL_COWORKINGSPACE = "https://msp-dashboard-35144.firebaseio.com/coworkingspace.json";
     public static final String URL_LECTURESTABLE = "https://msp-dashboard-35144.firebaseio.com/lectures/groups.json";
+    public static final String URL_CHEMISTRY = "https://drive.google.com/open?id=16PoOLRZmbG0gtIdiSDpxJ-_Cp2ruLUNe";
+    public static final String URL_ENGLISH = "https://drive.google.com/open?id=1Xi0qsB3BEHGNqSEcjkQevl6zlLkJMNju";
+    public static final String URL_PHYSICS = "https://drive.google.com/open?id=1SmihloIlAZWJmf9WtpXDBpGhsD2Hy0wF";
+    public static final String URL_STATICS = "https://drive.google.com/open?id=1A_uY4hrJtEj9s2MeuZVF_dQoPWoqRvUH";
+    public static final String URL_MATH = "https://drive.google.com/open?id=1gD4A19VWHktXrUqqP5ewA82BBBJ4rKM0";
 }

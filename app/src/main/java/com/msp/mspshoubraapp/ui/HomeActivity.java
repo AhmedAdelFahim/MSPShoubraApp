@@ -194,6 +194,11 @@ public class HomeActivity extends AppCompatActivity
                 //intent.putExtra("title", "Tools");
                 //startActivity(intent);
                 break;
+            case R.id.nav_materials:
+                intent = new Intent(this, MaterialsActivity.class);
+                //intent.putExtra("title", "Tools");
+                //startActivity(intent);
+                break;
             /*case R.id.nav_subjects:
                 intent = new Intent(this, SubjectsActivity.class);
                 //intent.putExtra("title", "Tools");
