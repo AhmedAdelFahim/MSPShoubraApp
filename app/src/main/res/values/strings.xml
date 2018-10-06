@@ -42,6 +42,14 @@
     <string name="restaurant">restaurant</string>
     <string name="coworkingSpace">coworkingSpace</string>
     <string name="lecturesTable">lecturesTable</string>
+    <string name="title_activity_materials">MaterialsActivity</string>
+    <string name="materials">Materials</string>
+
+    <string name="chemistry">Chemistry</string>
+    <string name="english">English</string>
+    <string name="physics">Physics</string>
+    <string name="math">Math</string>
+    <string name="statics">Statics</string>
 
 
 </resources>

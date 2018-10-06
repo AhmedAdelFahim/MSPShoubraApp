@@ -4,6 +4,18 @@
     tools:showIn="navigation_view">
 
     <group>
+
+        <item
+            android:id="@+id/nav_lec_table"
+            android:icon="@drawable/ic_baseline_table_chart_24px"
+            android:title="@string/lecture_table" />
+
+        <item
+            android:id="@+id/nav_materials"
+            android:icon="@drawable/ic_baseline_book_24px"
+            android:title="@string/materials" />
+
+
         <item
             android:id="@+id/nav_food"
             android:icon="@drawable/ic_icon_food"
@@ -16,10 +28,6 @@
                     android:title="@string/tools" />
         -->
 
-        <item
-            android:id="@+id/nav_lec_table"
-            android:icon="@drawable/ic_baseline_table_chart_24px"
-            android:title="@string/lecture_table" />
 
         <item
             android:id="@+id/nav_coworkingspaces"
@@ -35,6 +43,7 @@
             android:id="@+id/nav_subjects"
             android:icon="@drawable/notebook"
             android:title="@string/subjects"/>-->
+
 
     </group>
 

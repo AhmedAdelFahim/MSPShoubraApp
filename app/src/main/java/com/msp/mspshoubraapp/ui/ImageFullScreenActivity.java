@@ -57,6 +57,7 @@ public class ImageFullScreenActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (pos > 0)
                     pos--;
+                progressBar.setVisibility(View.VISIBLE);
                 //Picasso.get().load(imgs.get(pos)).into(imageView);
                 Picasso
                         .get()
@@ -90,6 +91,7 @@ public class ImageFullScreenActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (pos < imgs.size() - 1)
                     pos++;
+                progressBar.setVisibility(View.VISIBLE);
                 Picasso
                         .get()
                         .load(imgs.get(pos))
