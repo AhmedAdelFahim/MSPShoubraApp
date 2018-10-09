@@ -6,15 +6,6 @@
     android:layout_margin="8dp"
     android:padding="8dp">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/imgview"
-        app:srcCompat="@drawable/notebook32"
-        />
-
     <TextView
         android:id="@+id/subject_name"
         android:layout_width="wrap_content"
@@ -25,7 +16,6 @@
         android:text="Programming"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/text_normal"
-        app:layout_constraintStart_toEndOf="@+id/imgview"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView

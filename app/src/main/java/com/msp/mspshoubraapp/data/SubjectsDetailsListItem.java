@@ -3,20 +3,20 @@ package com.msp.mspshoubraapp.data;
 public class SubjectsDetailsListItem {
 
     private String section;
-    private String marks;
+    private int marks;
 
-    public SubjectsDetailsListItem(String section, String marks) {
+    public SubjectsDetailsListItem(String section, int marks) {
         this.section = section;
         this.marks = marks;
     }
 
     public String getSection() { return section; }
 
-    public String getMarks() { return marks; }
+    public int getMarks() { return marks; }
 
     public void setSection(String section) { this.section = section; }
 
-    public void setMarks(String marks) {
+    public void setMarks(int marks) {
         this.marks = marks;
     }
 }

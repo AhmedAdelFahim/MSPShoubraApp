@@ -53,19 +53,14 @@ public class SubjectsActivity extends AppCompatActivity
         subjectsRV.setLayoutManager(new LinearLayoutManager(this));
 
         subjectTitle = new ArrayList<>();
-        subjectsDetailsListItems = new ArrayList<>();
 
         subjectTitle.clear();
-        for (int i = 0; i < 13; i++) {
-            subjectsDetailsListItems.clear();
-            subjectsDetailsListItems.add(new SubjectsDetailsListItem("Midterm", "30"));
-            subjectsDetailsListItems.add(new SubjectsDetailsListItem("Oral", "10"));
-            subjectsDetailsListItems.add(new SubjectsDetailsListItem("Project", "20"));
-            subjectsDetailsListItems.add(new SubjectsDetailsListItem("Final", "90"));
-            subjectsDetailsListItems.add(new SubjectsDetailsListItem("Total", "150"));
-
-            subjectTitle.add(new SubjectsListItem("Maths", subjectsDetailsListItems));
-        }
+        addSubjects(30,15,15,0,0,0,90,"Maths");
+        addSubjects(30,10,0,0,0,20,115,"Physics");
+        addSubjects(30,0,0,0,0,30,90,"Chemistry");
+        addSubjects(40,60,0,0,0,0,100,"Eng. Drawing");
+        addSubjects(40,15,15,0,0,30,125,"Mechanics");
+        addSubjects(10,0,0,5,0,0,35,"Tech. Language");
 
         adapter = new SubjectsExpandableRecyclerviewAdapter(subjectTitle);
         subjectsRV.setAdapter(adapter);
@@ -92,14 +87,14 @@ public class SubjectsActivity extends AppCompatActivity
             case R.id.nav_food:
 
                 intent = new Intent(this, FoodActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
+                intent.putExtra("title", "Tools");
+                startActivity(intent);
                 break;
-           /* case R.id.nav_tools:
+            /*case R.id.nav_tools:
                 intent = new Intent(this, GalleryActivity.class);
                 intent.putExtra("title", "Tools");
-                //startActivity(intent);
-                //currFragment=4;
+                startActivity(intent);
+                currFragment=4;
                 break;*/
             case R.id.nav_lec_table:
                 intent = new Intent(this, LecTableActivity.class);
@@ -135,5 +130,29 @@ public class SubjectsActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void addSubjects(int midterm, int sectionAttendance,int quizes, int oral, int project,
+                            int labTest, int Final, String subjectName) {
+        subjectsDetailsListItems = new ArrayList<>();
+        int total = midterm + sectionAttendance + quizes + oral + project + labTest + Final;
+        if(midterm>0)
+            subjectsDetailsListItems.add(new SubjectsDetailsListItem("Midterm", midterm));
+        if(sectionAttendance>0)
+            subjectsDetailsListItems.add(new SubjectsDetailsListItem("Section Attendance", sectionAttendance));
+        if(quizes>0)
+            subjectsDetailsListItems.add(new SubjectsDetailsListItem("Quiz", quizes));
+        if(oral>0)
+            subjectsDetailsListItems.add(new SubjectsDetailsListItem("Oral", oral));
+        if(project>0)
+            subjectsDetailsListItems.add(new SubjectsDetailsListItem("Project", project));
+        if(labTest>0)
+            subjectsDetailsListItems.add(new SubjectsDetailsListItem("Lab test", labTest));
+        if(Final>0)
+            subjectsDetailsListItems.add(new SubjectsDetailsListItem("Final", Final));
+        subjectsDetailsListItems.add(new SubjectsDetailsListItem("Total", total));
+
+        subjectTitle.add(new SubjectsListItem(subjectName, subjectsDetailsListItems));
+
     }
 }

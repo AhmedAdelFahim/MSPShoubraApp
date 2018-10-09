@@ -78,6 +78,6 @@ public class SubjectsExpandableRecyclerviewAdapter extends
 
         public void setSectionName(String sectionName) { this.sectionName.setText(sectionName); }
 
-        public void setMarks(String marks) { this.marks.setText(marks); }
+        public void setMarks(int marks) { this.marks.setText(Integer.toString(marks)); }
     }
 }

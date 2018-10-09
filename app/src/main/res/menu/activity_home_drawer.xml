@@ -31,10 +31,10 @@
             android:icon="@drawable/ic_work_team"
             android:title="@string/studentactivities"/>
 
-        <!--<item
+        <item
             android:id="@+id/nav_subjects"
             android:icon="@drawable/notebook"
-            android:title="@string/subjects"/>-->
+            android:title="@string/subjects"/>
 
     </group>
 
