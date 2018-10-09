@@ -351,7 +351,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         // Output format
         String output = "json";
 
-        return "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters /*+ "&key=AIzaSyB6p2mWkU0gvPM5Q20iH5q6CtSSmr6MITw"*/;
+        return "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=AIzaSyBplPEvgyb2VgQkIGO2nsNi1UGFodFzgXI";
     }
 
 }

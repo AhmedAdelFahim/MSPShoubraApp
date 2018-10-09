@@ -45,7 +45,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.GalleryActivity"
             android:label="@string/title_activity_gallery"
@@ -77,8 +76,6 @@
             android:name=".ui.FoodActivity"
             android:label="@string/title_activity_food"
             android:theme="@style/AppTheme.NoActionBar" />
-
-
         <activity
             android:name=".ui.ImageFullScreenActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -90,7 +87,10 @@
             </intent-filter>
         </receiver>
 
-
+        <activity
+            android:name=".ui.MaterialsActivity"
+            android:label="@string/materials"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

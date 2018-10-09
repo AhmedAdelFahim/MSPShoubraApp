@@ -119,6 +119,12 @@ public class StudentActivitiesActivity extends AppCompatActivity
                 //startActivity(intent);
                 finish();
                 break;
+            case R.id.nav_materials:
+                intent = new Intent(this, MaterialsActivity.class);
+                //intent.putExtra("title", "Tools");
+                //startActivity(intent);
+                finish();
+                break;
 
             /*case R.id.nav_studentactivities:
                 intent = new Intent(this, StudentActivitiesActivity.class);
