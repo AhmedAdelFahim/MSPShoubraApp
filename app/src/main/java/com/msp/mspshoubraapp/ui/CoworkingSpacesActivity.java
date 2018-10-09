@@ -133,11 +133,11 @@ public class CoworkingSpacesActivity extends AppCompatActivity
                 //startActivity(intent);
                 finish();
                 break;
-            /*case R.id.nav_subjects:
+            case R.id.nav_subjects:
                 intent = new Intent(this, SubjectsActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
-                break;*/
+                intent.putExtra("title", "Tools");
+                startActivity(intent);
+                break;
         }
 
         if (intent != null) {

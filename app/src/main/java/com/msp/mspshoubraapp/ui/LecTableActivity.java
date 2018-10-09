@@ -181,11 +181,11 @@ public class LecTableActivity extends AppCompatActivity
                 startActivity(intent);
 
                 break;
-            /*case R.id.nav_subjects:
+            case R.id.nav_subjects:
                 intent = new Intent(this, HomeActivity.class);
                 intent.putExtra("nextFregment", 6);
                 startActivity(intent);
-                break;*/
+                break;
            /* case R.id.nav_tools:
                 intent = new Intent(this, GalleryActivity.class);
                 intent.putExtra("title", "Tools");
