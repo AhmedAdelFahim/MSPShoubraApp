@@ -135,8 +135,7 @@ public class CoworkingSpacesActivity extends AppCompatActivity
                 break;
             case R.id.nav_subjects:
                 intent = new Intent(this, SubjectsActivity.class);
-                intent.putExtra("title", "Tools");
-                startActivity(intent);
+                finish();
                 break;
         }
 

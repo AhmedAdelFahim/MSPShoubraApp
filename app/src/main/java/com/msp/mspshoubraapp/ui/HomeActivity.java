@@ -201,8 +201,6 @@ public class HomeActivity extends AppCompatActivity
                 break;
             case R.id.nav_subjects:
                 intent = new Intent(this, SubjectsActivity.class);
-                intent.putExtra("title", "Tools");
-                startActivity(intent);
                 break;
         }
 

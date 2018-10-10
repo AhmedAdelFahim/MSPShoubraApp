@@ -182,8 +182,8 @@ public class LecTableActivity extends AppCompatActivity
 
                 break;
             case R.id.nav_subjects:
-                intent = new Intent(this, HomeActivity.class);
-                intent.putExtra("nextFregment", 6);
+                intent = new Intent(this, SubjectsActivity.class);
+                finish();
                 startActivity(intent);
                 break;
            /* case R.id.nav_tools:

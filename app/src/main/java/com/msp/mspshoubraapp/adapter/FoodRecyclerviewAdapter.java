@@ -88,6 +88,7 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
                 homeIntent.putExtra("previousActivity", 3);
                 homeIntent.putExtra("lat", currItem.getLat());
                 homeIntent.putExtra("lng", currItem.getLng());
+                homeIntent.putExtra("mapType", true);
                 currActivity.startActivity(homeIntent);
 
             }
