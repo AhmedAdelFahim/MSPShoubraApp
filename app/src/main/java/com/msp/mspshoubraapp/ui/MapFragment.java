@@ -61,8 +61,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     ArrayList<LatLng> locList = new ArrayList<LatLng>();
     String url;
     // The entry points to the Places API.
-    private GeoDataClient mGeoDataClient;
-    private PlaceDetectionClient mPlaceDetectionClient;
+    //private GeoDataClient mGeoDataClient;
+    //private PlaceDetectionClient mPlaceDetectionClient;
 
     // The entry point to the Fused Location Provider.
     private FusedLocationProviderClient mFusedLocationProviderClient;
@@ -71,7 +71,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private static final int ACCESS_COARSE_LOCATION =2;
     private boolean mLocationPermissionGranted=false;
     private boolean mLocationPermissionGranted2=false;
-    private static final int DEFAULT_ZOOM = 15;
+    private static final int DEFAULT_ZOOM = 19;
 
 
     // The geographical location where the device is currently located. That is, the last-known
@@ -95,10 +95,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         mapView.onResume(); // needed to get the map to display immediately
         // Construct a GeoDataClient.
-        mGeoDataClient = Places.getGeoDataClient(getActivity(), null);
+        //mGeoDataClient = Places.getGeoDataClient(getActivity(), null);
 
         // Construct a PlaceDetectionClient.
-        mPlaceDetectionClient = Places.getPlaceDetectionClient(getActivity(), null);
+        //mPlaceDetectionClient = Places.getPlaceDetectionClient(getActivity(), null);
 
         // Construct a FusedLocationProviderClient.
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -132,6 +132,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
 
     private static ArrayList<LatLng> buildData(JSONObject jsonObject) {
+        Log.d("QWERTY", "HHHHH");
         ArrayList<LatLng> latLngs = new ArrayList<>();
 
         try {
@@ -170,15 +171,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
          * Get the best and most recent location of the device, which may be null in rare
          * cases when a location is not available.
          */
-        Log.d("getDeviceLocation", "HHHHH");
         try {
             //Log.d("QWERTYU",mLocationPermissionGranted+" "+mLocationPermissionGranted2);
-            if (mLocationPermissionGranted&&mLocationPermissionGranted2) {
+            if (mLocationPermissionGranted && mLocationPermissionGranted2) {
+                Log.d("getDeviceLocation", "HHHHH");
                 Task<Location> locationResult = mFusedLocationProviderClient.getLastLocation();
                 locationResult.addOnCompleteListener(getActivity(), new OnCompleteListener<Location>() {
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
-                        Log.d("getDeviceLocation", "BBB");
+                        //Log.d("getDeviceLocation", "BBB");
                         if (task.isSuccessful()) {
                             //Log.d("QWERTYU", task.getResult().getLatitude() + "  " + task.getResult().getLongitude());
                             // Set the map's camera position to the current location of the device.
@@ -187,12 +188,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                     mLastKnownLocation.getLongitude());
                             url = getDirectionsUrl(cL, dist);
 
-                            Log.d("QWERTY", url);
+                            //Log.d("QWERTY", url);
                             JsonObjectRequest roadPointsJsonObject = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                                 @SuppressLint("ShowToast")
                                 @Override
                                 public void onResponse(JSONObject response) {
-                                    Log.d("getDeviceLocation", response.toString() + "AAA");
+                                    Log.d("QWERTYUI", response.toString() + "AAA");
+                                    Toast.makeText(getActivity(), response.toString(), Toast.LENGTH_LONG).show();
                                     ArrayList<LatLng> locList = buildData(response);
 
                                     //Log.d("QWERTY", locList.size() + "");
@@ -214,7 +216,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
 
-                                    Log.d("getDeviceLocation", error.getMessage() + "AAA");
+                                    //Log.d("QWERTY", error.getMessage() + "AAA");
+                                    //Toast.makeText(getActivity(),error.getMessage(),Toast.LENGTH_LONG).show();
                                 }
                             }
                             );
@@ -225,7 +228,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                         } else {
                             //Log.d("QWERTYU", "Current location is null. Using defaults.");
                             //Log.e("QWERTYU", "Exception: %s", task.getException());
-                            Log.d("jsonMap", "EEEE");
+                            Log.d("QWERTY", "EEEE");
                             mMap.moveCamera(CameraUpdateFactory
                                     .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
                             mMap.getUiSettings().setMyLocationButtonEnabled(false);
@@ -340,7 +343,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private String getDirectionsUrl(LatLng origin, LatLng dest) {
-        Log.d("QWERTY", "ASDFG");
+        //Log.d("QWERTY", "ASDFG");
 
         Toast.makeText(getActivity(), "AAA", Toast.LENGTH_LONG).show();
         // Origin of route
@@ -357,9 +360,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         // Output format
         String output = "json";
-        
 
-        return "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=AIzaSyAwA_iaUXJX7iGv0aVPu0n-v5W1BgslueY";
+        //Log.d("QWERTY","https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=AIzaSyAwA_iaUXJX7iGv0aVPu0n-v5W1BgslueY");
+        //Toast.makeText(getActivity(),"https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=AIzaSyAwA_iaUXJX7iGv0aVPu0n-v5W1BgslueY",Toast.LENGTH_LONG).show();
+        return "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters /*+ "&key=AIzaSyAwA_iaUXJX7iGv0aVPu0n-v5W1BgslueY"*/;
     }
 
 }

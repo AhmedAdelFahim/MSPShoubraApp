@@ -158,7 +158,7 @@ public class MaterialsActivity extends AppCompatActivity
                 intent = new Intent(this, CoworkingSpacesActivity.class);
                 //intent.putExtra("title", "Tools");
                 //startActivity(intent);
-
+                finish();
                 break;
 
             case R.id.nav_studentactivities:
