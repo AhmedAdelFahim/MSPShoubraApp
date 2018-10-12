@@ -179,6 +179,10 @@ public class MaterialsActivity extends AppCompatActivity
                 //startActivity(intent);
                 finish();
                 break;
+            case R.id.nav_privacypolicy:
+                intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(Constants.URL_PRIVACYPOLICY));
+                break;
         }
 
         if (intent != null) {

@@ -130,7 +130,6 @@ public class SubjectsActivity extends AppCompatActivity
             case R.id.nav_privacypolicy:
                 intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(Constants.URL_PRIVACYPOLICY));
-                //startActivity(intent);
                 break;
         }
 
