@@ -4,7 +4,6 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -22,7 +21,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.msp.mspshoubraapp.Constants;
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.adapter.CoworkingSpacesRecyclerviewAdapter;
 import com.msp.mspshoubraapp.db.CoworkingSpaceEntity;
@@ -137,13 +135,7 @@ public class CoworkingSpacesActivity extends AppCompatActivity
                 break;
             case R.id.nav_subjects:
                 intent = new Intent(this, SubjectsActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
-                break;
-            case R.id.nav_privacypolicy:
-                intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(Constants.URL_PRIVACYPOLICY));
-                //startActivity(intent);
+                finish();
                 break;
         }
 

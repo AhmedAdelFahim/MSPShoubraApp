@@ -69,7 +69,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.SubjectsActivity"
-            android:label="@string/title_activity_subjects"
+            android:label="@string/subjects"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.MenuActivity" />
         <activity

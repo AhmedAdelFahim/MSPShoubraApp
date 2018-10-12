@@ -140,6 +140,7 @@ public class CoworkingSpacesActivityDetails extends AppCompatActivity {
                 homeIntent.putExtra("previousActivity", 4);
                 homeIntent.putExtra("lat", coworkingSpaceEntity.getLat());
                 homeIntent.putExtra("lng", coworkingSpaceEntity.getLng());
+                homeIntent.putExtra("mapType", true);
                 startActivity(homeIntent);
             }
         });

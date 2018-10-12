@@ -13,11 +13,12 @@ public class Constants {
     public static final long SIX_HOURS_IN_MILLISECONDS = 6 * 60 * 60 * 1000L;
     public static final long ONE_WEEK_IN_MILLISECONDS = 7 * 24 * 60 * 60 * 1000L;
 
-    public static final String URL_STUDENT_ACTIVITY = "https://msp-dashboard-35144.firebaseio.com/studentActivity.json";
-    public static final String URL_RESTAURANT = "https://msp-dashboard-35144.firebaseio.com/restaurant.json";
-    public static final String URL_NEWSFEED = "https://msp-dashboard-35144.firebaseio.com/newsFeed.json";
-    public static final String URL_COWORKINGSPACE = "https://msp-dashboard-35144.firebaseio.com/coworkingspace.json";
-    public static final String URL_LECTURESTABLE = "https://msp-dashboard-35144.firebaseio.com/lectures/groups.json";
+    public static final String URL_STUDENT_ACTIVITY = "https://msp-assistant-dashboard.firebaseio.com/studentActivity.json";
+    public static final String URL_RESTAURANT = "https://msp-assistant-dashboard.firebaseio.com/restaurant.json";
+    public static final String URL_NEWSFEED = "https://msp-assistant-dashboard.firebaseio.com/newsFeed.json";
+    public static final String URL_COWORKINGSPACE = "https://msp-assistant-dashboard.firebaseio.com/coworkingspace.json";
+    public static final String URL_LECTURESTABLE = "https://msp-assistant-dashboard.firebaseio.com/lectures/groups.json";
+
     public static final String URL_CHEMISTRY = "https://drive.google.com/open?id=16PoOLRZmbG0gtIdiSDpxJ-_Cp2ruLUNe";
     public static final String URL_ENGLISH = "https://drive.google.com/open?id=1Xi0qsB3BEHGNqSEcjkQevl6zlLkJMNju";
     public static final String URL_PHYSICS = "https://drive.google.com/open?id=1SmihloIlAZWJmf9WtpXDBpGhsD2Hy0wF";

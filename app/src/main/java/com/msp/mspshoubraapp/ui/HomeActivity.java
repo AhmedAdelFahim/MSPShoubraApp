@@ -1,7 +1,6 @@
 package com.msp.mspshoubraapp.ui;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -14,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.msp.mspshoubraapp.Constants;
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.SetBackgroundJobs;
 
@@ -203,13 +201,6 @@ public class HomeActivity extends AppCompatActivity
                 break;
             case R.id.nav_subjects:
                 intent = new Intent(this, SubjectsActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
-                break;
-            case R.id.nav_privacypolicy:
-                intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(Constants.URL_PRIVACYPOLICY));
-                //startActivity(intent);
                 break;
         }
 
