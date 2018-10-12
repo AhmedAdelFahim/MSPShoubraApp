@@ -175,8 +175,13 @@ public class MaterialsActivity extends AppCompatActivity
                 break;*/
             case R.id.nav_subjects:
                 intent = new Intent(this, SubjectsActivity.class);
-                intent.putExtra("title", "Tools");
-                startActivity(intent);
+                //intent.putExtra("title", "Tools");
+                //startActivity(intent);
+                break;
+            case R.id.nav_privacypolicy:
+                intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(Constants.URL_PRIVACYPOLICY));
+                //startActivity(intent);
                 break;
         }
 

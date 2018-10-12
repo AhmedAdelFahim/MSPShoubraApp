@@ -23,4 +23,5 @@ public class Constants {
     public static final String URL_PHYSICS = "https://drive.google.com/open?id=1SmihloIlAZWJmf9WtpXDBpGhsD2Hy0wF";
     public static final String URL_STATICS = "https://drive.google.com/open?id=1A_uY4hrJtEj9s2MeuZVF_dQoPWoqRvUH";
     public static final String URL_MATH = "https://drive.google.com/open?id=1gD4A19VWHktXrUqqP5ewA82BBBJ4rKM0";
+    public static final String URL_PRIVACYPOLICY = "https://sites.google.com/view/msp-technologies/home/msp-assistant-privacy-policy";
 }

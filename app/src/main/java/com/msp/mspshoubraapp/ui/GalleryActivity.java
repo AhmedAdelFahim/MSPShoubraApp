@@ -1,6 +1,7 @@
 package com.msp.mspshoubraapp.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.msp.mspshoubraapp.Constants;
 import com.msp.mspshoubraapp.R;
 
 public class GalleryActivity extends AppCompatActivity
@@ -134,6 +136,11 @@ public class GalleryActivity extends AppCompatActivity
             case R.id.nav_subjects:
                 intent = new Intent(this, HomeActivity.class);
                 intent.putExtra("nextFregment",6);
+                startActivity(intent);
+                break;
+            case R.id.nav_privacypolicy:
+                intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(Constants.URL_PRIVACYPOLICY));
                 startActivity(intent);
                 break;
         }

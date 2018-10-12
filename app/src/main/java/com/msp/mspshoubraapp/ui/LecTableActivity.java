@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,6 +24,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.msp.mspshoubraapp.Constants;
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.adapter.FragmentAdapter;
 import com.msp.mspshoubraapp.networking.ConnectivityStatus;
@@ -195,6 +197,11 @@ public class LecTableActivity extends AppCompatActivity
                 /*intent = new Intent(this, LecTableActivity.class);
                 intent.putExtra("title", "Lecture");
                 startActivity(intent);*/
+                break;
+            case R.id.nav_privacypolicy:
+                intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(Constants.URL_PRIVACYPOLICY));
+                startActivity(intent);
                 break;
         }
 

@@ -44,6 +44,11 @@
             android:icon="@drawable/notebook"
             android:title="@string/subjects"/>
 
+        <item
+            android:id="@+id/nav_privacypolicy"
+            android:icon="@drawable/ic_protected_profile"
+            android:title="@string/privacypolicy"/>
+
 
     </group>
 

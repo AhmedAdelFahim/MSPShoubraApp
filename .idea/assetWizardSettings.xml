@@ -19,9 +19,11 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_baseline_book_24px" />
+                            <entry key="height" value="512" />
+                            <entry key="outputName" value="ic_protected_profile" />
                             <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="/media/ahmed/7290CABC90CA85D7/MSP PRO/baseline-book-24px.svg" />
+                            <entry key="sourceFile" value="C:\Users\Laila Al Ashkar\Downloads\protected-profile.svg" />
+                            <entry key="width" value="512" />
                           </map>
                         </option>
                       </PersistentState>
