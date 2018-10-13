@@ -134,27 +134,6 @@ public class HomeActivity extends AppCompatActivity
         }
     }
 
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -168,15 +147,7 @@ public class HomeActivity extends AppCompatActivity
             case R.id.nav_food:
 
                 intent = new Intent(this, FoodActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
                 break;
-            /*case R.id.nav_tools:
-                intent = new Intent(this, GalleryActivity.class);
-                intent.putExtra("title", "Tools");
-                //startActivity(intent);
-                //currFragment=4;
-                break;*/
             case R.id.nav_lec_table:
                 intent = new Intent(this, LecTableActivity.class);
                 intent.putExtra("title", "Lecture Table");

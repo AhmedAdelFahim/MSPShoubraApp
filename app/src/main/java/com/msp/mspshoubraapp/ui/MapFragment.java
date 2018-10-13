@@ -132,7 +132,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
 
     private static ArrayList<LatLng> buildData(JSONObject jsonObject) {
-        Log.d("QWERTY", "HHHHH");
+        //Log.d("QWERTY", "HHHHH");
         ArrayList<LatLng> latLngs = new ArrayList<>();
 
         try {
@@ -174,7 +174,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         try {
             //Log.d("QWERTYU",mLocationPermissionGranted+" "+mLocationPermissionGranted2);
             if (mLocationPermissionGranted && mLocationPermissionGranted2) {
-                Log.d("getDeviceLocation", "HHHHH");
+                //Log.d("getDeviceLocation", "HHHHH");
                 Task<Location> locationResult = mFusedLocationProviderClient.getLastLocation();
                 locationResult.addOnCompleteListener(getActivity(), new OnCompleteListener<Location>() {
                     @Override
@@ -193,8 +193,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                 @SuppressLint("ShowToast")
                                 @Override
                                 public void onResponse(JSONObject response) {
-                                    Log.d("QWERTYUI", response.toString() + "AAA");
-                                    Toast.makeText(getActivity(), response.toString(), Toast.LENGTH_LONG).show();
+                                    //Log.d("QWERTYUI", response.toString() + "AAA");
+                                    //Toast.makeText(getActivity(), response.toString(), Toast.LENGTH_LONG).show();
                                     ArrayList<LatLng> locList = buildData(response);
 
                                     //Log.d("QWERTY", locList.size() + "");
@@ -228,7 +228,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                         } else {
                             //Log.d("QWERTYU", "Current location is null. Using defaults.");
                             //Log.e("QWERTYU", "Exception: %s", task.getException());
-                            Log.d("QWERTY", "EEEE");
+                            //Log.d("QWERTY", "EEEE");
                             mMap.moveCamera(CameraUpdateFactory
                                     .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
                             mMap.getUiSettings().setMyLocationButtonEnabled(false);
@@ -345,7 +345,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private String getDirectionsUrl(LatLng origin, LatLng dest) {
         //Log.d("QWERTY", "ASDFG");
 
-        Toast.makeText(getActivity(), "AAA", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity(), "AAA", Toast.LENGTH_LONG).show();
         // Origin of route
         String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
 
