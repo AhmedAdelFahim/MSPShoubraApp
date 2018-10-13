@@ -2,6 +2,7 @@ package com.msp.mspshoubraapp.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -135,13 +136,13 @@ public class CoworkingSpacesActivityDetails extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
                 finish();
-                Intent homeIntent = new Intent(CoworkingSpacesActivityDetails.this, HomeActivity.class);
-                homeIntent.putExtra("nextFregment", 1);
-                homeIntent.putExtra("previousActivity", 4);
-                homeIntent.putExtra("lat", coworkingSpaceEntity.getLat());
-                homeIntent.putExtra("lng", coworkingSpaceEntity.getLng());
-                homeIntent.putExtra("mapType", true);
-                startActivity(homeIntent);
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" +
+                        coworkingSpaceEntity.getLat()+
+                        ","+
+                        coworkingSpaceEntity.getLng()+
+                        "("+coworkingSpaceEntity.getName()+")"));
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
             }
         });
     }

@@ -52,9 +52,6 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         currFragment = getIntent().getIntExtra("nextFregment", 0);
-        final Bundle mapBundle=new Bundle();
-        mapBundle.putDouble("lat",getIntent().getDoubleExtra("lat",30.0996));
-        mapBundle.putDouble("lng",getIntent().getDoubleExtra("lng",31.2486));
         if (getIntent().hasExtra("previousActivity")) {
             previousActivity = getIntent().getIntExtra("previousActivity", 0);
         }
@@ -64,9 +61,9 @@ public class HomeActivity extends AppCompatActivity
             getSupportActionBar().setTitle("News Feed");
             loadFragment(fragment);
         } else if (currFragment == 1) {
-            Fragment fragment =new MapFragment();
-            fragment.setArguments(mapBundle);
-            loadFragment(fragment);
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW,Uri.parse("geo:0,0?q=30.0996,31.2486(Collage)"));
+            mapIntent.setPackage("com.google.android.apps.maps");
+            startActivity(mapIntent);
         }
 
 
@@ -87,10 +84,9 @@ public class HomeActivity extends AppCompatActivity
 
                     case R.id.navigation_map:
                         if(currFragment!=1) {
-                            fragment = new MapFragment();
-                            fragment.setArguments(mapBundle);
-                            getSupportActionBar().setTitle("Map");
-                            currFragment=1;
+                            Intent mapIntent = new Intent(Intent.ACTION_VIEW,Uri.parse("google.navigation:q=30.0996,31.2486"));
+                            mapIntent.setPackage("com.google.android.apps.maps");
+                            startActivity(mapIntent);
                         }
                         break;
 

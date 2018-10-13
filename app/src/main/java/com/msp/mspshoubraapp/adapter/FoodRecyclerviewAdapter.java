@@ -2,6 +2,7 @@ package com.msp.mspshoubraapp.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -83,14 +84,13 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
             @Override
             public void onClick(View v) {
                 currActivity.finish();
-                Intent homeIntent = new Intent(currActivity, HomeActivity.class);
-                homeIntent.putExtra("nextFregment", 1);
-                homeIntent.putExtra("previousActivity", 3);
-                homeIntent.putExtra("lat", currItem.getLat());
-                homeIntent.putExtra("lng", currItem.getLng());
-                homeIntent.putExtra("mapType", true);
-                currActivity.startActivity(homeIntent);
-
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" +
+                                                                                currItem.getLat()+
+                                                                                ","+
+                                                                                currItem.getLng()+
+                                                                                "("+currItem.getName()+")"));
+                mapIntent.setPackage("com.google.android.apps.maps");
+                currActivity.startActivity(mapIntent);
             }
         });
     }
