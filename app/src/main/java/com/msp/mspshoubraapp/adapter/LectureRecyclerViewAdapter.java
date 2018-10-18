@@ -26,12 +26,15 @@ public class LectureRecyclerViewAdapter extends RecyclerView.Adapter<LectureRecy
     private List<SectionsEntity> sectionsEntities;
     private Activity activity;
     private AppDatabase appDatabase;
+    private String groupNum, dayName;
 
-    public LectureRecyclerViewAdapter(List<DayLecturesEntity> lectureData, Activity activity) {
+    public LectureRecyclerViewAdapter(List<DayLecturesEntity> lectureData, Activity activity, String groupNum, String dayName) {
         this.lectureData = lectureData;
         this.activity = activity;
         sectionsEntities = new ArrayList<>();
         appDatabase = AppDatabase.getInstance(activity);
+        this.groupNum = groupNum;
+        this.dayName = dayName;
     }
 
     @NonNull
@@ -59,7 +62,7 @@ public class LectureRecyclerViewAdapter extends RecyclerView.Adapter<LectureRecy
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
             public void run() {
-                final ArrayList<SectionsEntity> sectionsEntities = (ArrayList<SectionsEntity>) appDatabase.lecturesTableDao().loadAllSections(lectureDataItem.getLectureNum());
+                final ArrayList<SectionsEntity> sectionsEntities = (ArrayList<SectionsEntity>) appDatabase.lecturesTableDao().loadAllSections(lectureDataItem.getLectureNum(), appDatabase.lecturesTableDao().getGroupId(groupNum, dayName));
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

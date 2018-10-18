@@ -90,13 +90,16 @@ public class StudentActivitiesActivityDetails extends AppCompatActivity {
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
             public void run() {
+
                 committeesListItems = appDatabase.committeesDao().loadAllCommittees(studentActivityEntity.getId());
-                items.add(new ExpandableRecyclerViewItem("Committees", committeesListItems));
-                adapter = new CommitteesExpandableRecyclerviewAdapter(items);
                 StudentActivitiesActivityDetails.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        committees.setAdapter(adapter);
+                        if (committeesListItems != null && !committeesListItems.isEmpty()) {
+                            items.add(new ExpandableRecyclerViewItem("Committees", committeesListItems));
+                            adapter = new CommitteesExpandableRecyclerviewAdapter(items);
+                            committees.setAdapter(adapter);
+                        }
                     }
                 });
             }

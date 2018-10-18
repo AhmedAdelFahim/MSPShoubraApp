@@ -40,12 +40,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_large"
+            android:textSize="@dimen/text_normal"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/circleImageView"
             app:layout_constraintStart_toStartOf="@+id/circleImageView"
             app:layout_constraintTop_toTopOf="@+id/circleImageView"
-            tools:text="1" />
+            tools:text="1,2" />
 
         <TextView
             android:id="@+id/subject_name"

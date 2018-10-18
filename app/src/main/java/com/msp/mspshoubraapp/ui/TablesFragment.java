@@ -106,7 +106,7 @@ public class TablesFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        adapter = new LectureRecyclerViewAdapter(lecturesEntities, getActivity());
+                        adapter = new LectureRecyclerViewAdapter(lecturesEntities, getActivity(), groupNum, dayName);
                         recyclerView.setAdapter(adapter);
                     }
                 });

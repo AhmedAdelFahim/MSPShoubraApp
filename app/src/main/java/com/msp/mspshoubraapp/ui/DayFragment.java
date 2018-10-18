@@ -47,7 +47,7 @@ public class DayFragment extends Fragment {
         factory = new DayFragmentViewModelFactory(appDatabase, dayName, groupNum);
         viewModel = ViewModelProviders.of(this, factory).get(DayFragmentViewModel.class);
 
-        adapter = new LectureRecyclerViewAdapter(lecturesEntities, getActivity());
+        adapter = new LectureRecyclerViewAdapter(lecturesEntities, getActivity(), groupNum, dayName);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);

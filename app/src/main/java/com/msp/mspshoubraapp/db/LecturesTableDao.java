@@ -44,10 +44,12 @@ public interface LecturesTableDao {
             "sections.subjectName," +
             "sections.instructor," +
             "sections.place," +
-            "sections.lectureNum FROM dayLectures,sections WHERE sections.lectureNum = :lecNum AND " +
-            "sections.dayId = dayLectures.id ORDER BY sections.secNum ASC")
-    List<SectionsEntity> loadAllSections(int lecNum/*,long dayId*/);
+            "sections.lectureNum FROM groupdays,dayLectures,sections WHERE sections.lectureNum = :lecNum AND " +
+            "sections.dayId = dayLectures.id AND groupdays.id =:groupId AND groupdays.id  = dayLectures.groupId ORDER BY sections.secNum ASC")
+    List<SectionsEntity> loadAllSections(int lecNum/*,long dayId*/, int groupId);
 
+    @Query("SELECT  id FROM groupDays WHERE groupNum= :groupNum AND day=:dayName")
+    int getGroupId(String groupNum, String dayName);
     @Query("DELETE FROM sections")
     void deleteAllSections();
 
