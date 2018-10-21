@@ -57,12 +57,12 @@ public class SubjectsActivity extends AppCompatActivity
         subjectTitle = new ArrayList<>();
 
         subjectTitle.clear();
-        addSubjects(30,15,15,0,0,0,90,"Maths");
-        addSubjects(30,10,0,0,0,20,115,"Physics");
-        addSubjects(30,0,0,0,0,30,90,"Chemistry");
-        addSubjects(40,60,0,0,0,0,100,"Eng. Drawing");
-        addSubjects(40,15,15,0,0,30,125,"Mechanics");
-        addSubjects(10,0,0,5,0,0,35,"Tech. Language");
+        addSubjects(50, 0, 0, 0, 0, 0, 0, 0, 100, "Maths");
+        addSubjects(30, 0, 0, 0, 0, 0, 30, 0, 115, "Physics");
+        addSubjects(30, 0, 0, 0, 0, 0, 30, 0, 90, "Chemistry");
+        addSubjects(40, 0, 30, 0, 0, 0, 0, 30, 100, "Eng. Drawing");
+        addSubjects(60, 0, 0, 0, 0, 0, 30, 0, 135, "Mechanics");
+        addSubjects(10, 0, 0, 0, 5, 0, 0, 0, 35, "Tech. Language");
 
         adapter = new SubjectsExpandableRecyclerviewAdapter(subjectTitle);
         subjectsRV.setAdapter(adapter);
@@ -146,23 +146,27 @@ public class SubjectsActivity extends AppCompatActivity
         return true;
     }
 
-    public void addSubjects(int midterm, int sectionAttendance,int quizes, int oral, int project,
-                            int labTest, int Final, String subjectName) {
+    public void addSubjects(int midterm, int sectionAttendance, int assignments, int quizes, int oral, int project,
+                            int labTest, int other, int Final, String subjectName) {
         subjectsDetailsListItems = new ArrayList<>();
-        int total = midterm + sectionAttendance + quizes + oral + project + labTest + Final;
-        if(midterm>0)
+        int total = midterm + sectionAttendance + assignments + quizes + oral + project + labTest + other + Final;
+        if (midterm > 0)
             subjectsDetailsListItems.add(new SubjectsDetailsListItem("Midterm", midterm));
-        if(sectionAttendance>0)
+        if (sectionAttendance > 0)
             subjectsDetailsListItems.add(new SubjectsDetailsListItem("Section Attendance", sectionAttendance));
-        if(quizes>0)
+        if (assignments > 0)
+            subjectsDetailsListItems.add(new SubjectsDetailsListItem("Assignments", assignments));
+        if (quizes > 0)
             subjectsDetailsListItems.add(new SubjectsDetailsListItem("Quiz", quizes));
-        if(oral>0)
+        if (oral > 0)
             subjectsDetailsListItems.add(new SubjectsDetailsListItem("Oral", oral));
-        if(project>0)
+        if (project > 0)
             subjectsDetailsListItems.add(new SubjectsDetailsListItem("Project", project));
-        if(labTest>0)
+        if (labTest > 0)
             subjectsDetailsListItems.add(new SubjectsDetailsListItem("Lab test", labTest));
-        if(Final>0)
+        if (other > 0)
+            subjectsDetailsListItems.add(new SubjectsDetailsListItem("Other", other));
+        if (Final > 0)
             subjectsDetailsListItems.add(new SubjectsDetailsListItem("Final", Final));
         subjectsDetailsListItems.add(new SubjectsDetailsListItem("Total", total));
 
