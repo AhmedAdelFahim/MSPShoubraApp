@@ -52,5 +52,15 @@
     <string name="math">Math</string>
     <string name="statics">Statics</string>
 
+    <string name="MSPAssisstant">MSP Assistant</string>
+    <string name="aboutDescription">This App is developed by MSP Android Committee'18</string>
+    <string name="Developers">Developers</string>
+    <string name="Adel">Ahmed Adel</string>
+    <string name="AdelPos">Developer (Head)</string>
+    <string name="Laila">Laila Al-Ashkar</string>
+    <string name="LailaPos">Developer</string>
+    <string name="Massoud">Mohammad Massoud</string>
+    <string name="MassoudPos">Designer/Developer</string>
+
 
 </resources>
