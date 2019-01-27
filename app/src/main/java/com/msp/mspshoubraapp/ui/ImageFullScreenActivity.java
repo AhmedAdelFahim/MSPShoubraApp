@@ -33,7 +33,6 @@ public class ImageFullScreenActivity extends AppCompatActivity {
         final ProgressBar progressBar = findViewById(R.id.FS_progressBar);
 
         final ZoomageView imageView = findViewById(R.id.image_full_screen);
-        //Picasso.get().load(imgs.get(pos)).into(imageView);
         Picasso
                 .get()
                 .load(imgs.get(pos))
@@ -58,13 +57,10 @@ public class ImageFullScreenActivity extends AppCompatActivity {
                 if (pos > 0)
                     pos--;
                 progressBar.setVisibility(View.VISIBLE);
-                //Picasso.get().load(imgs.get(pos)).into(imageView);
                 Picasso
                         .get()
                         .load(imgs.get(pos))
-                        //.placeholder(R.drawable.ic_landscape_black_24dp)
                         .error(R.drawable.ic_error_black_24dp)
-                        // .into(imageView);
                         .into(imageView, new Callback() {
                             @Override
                             public void onSuccess() {
@@ -95,9 +91,7 @@ public class ImageFullScreenActivity extends AppCompatActivity {
                 Picasso
                         .get()
                         .load(imgs.get(pos))
-                        //.placeholder(R.drawable.ic_landscape_black_24dp)
                         .error(R.drawable.ic_error_black_24dp)
-                        //.into(imageView);
                         .into(imageView, new Callback() {
                             @Override
                             public void onSuccess() {

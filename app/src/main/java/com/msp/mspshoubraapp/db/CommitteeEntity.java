@@ -3,7 +3,6 @@ package com.msp.mspshoubraapp.db;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
-
 @Entity(tableName = "committees")
 public class CommitteeEntity {
 

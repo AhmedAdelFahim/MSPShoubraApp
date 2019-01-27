@@ -53,8 +53,6 @@ public class LectureRecyclerViewAdapter extends RecyclerView.Adapter<LectureRecy
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false);
         holder.recyclerView.setHasFixedSize(true);
         holder.recyclerView.setLayoutManager(layoutManager);
-        /*IntervalRecyclerViewAdapter intervalRecyclerViewAdapter = new IntervalRecyclerViewAdapter(sectionsEntities, activity);
-        holder.recyclerView.setAdapter(intervalRecyclerViewAdapter);*/
         ArrayList<SectionsEntity> sectionsEntities = new ArrayList<>();
         final IntervalRecyclerViewAdapter intervalRecyclerViewAdapter = new IntervalRecyclerViewAdapter(sectionsEntities, activity);
         holder.recyclerView.setAdapter(intervalRecyclerViewAdapter);

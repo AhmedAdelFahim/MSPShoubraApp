@@ -3,8 +3,6 @@ package com.msp.mspshoubraapp.ui;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,7 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
@@ -47,14 +44,14 @@ public class MaterialsActivity extends AppCompatActivity
         mathImg = findViewById(R.id.math_img);
         staticsImg = findViewById(R.id.statics_img);
 
-        englishImg.setOnClickListener(new View.OnClickListener() {
+       /* englishImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(Constants.URL_ENGLISH));
                 startActivity(i);
             }
-        });
+        });*/
 
         chemistryImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,27 +101,7 @@ public class MaterialsActivity extends AppCompatActivity
         }
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.materials, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -136,47 +113,32 @@ public class MaterialsActivity extends AppCompatActivity
             case R.id.nav_food:
 
                 intent = new Intent(this, FoodActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
+
                 finish();
                 break;
-            /*case R.id.nav_tools:
-                intent = new Intent(this, GalleryActivity.class);
-                intent.putExtra("title", "Tools");
-                //startActivity(intent);
-                //currFragment=4;
-                break;*/
+
             case R.id.nav_lec_table:
                 intent = new Intent(this, LecTableActivity.class);
                 intent.putExtra("title", "Lecture Table");
-                //startActivity(intent);
-                //currFragment=4;
+
                 finish();
                 break;
 
             case R.id.nav_coworkingspaces:
                 intent = new Intent(this, CoworkingSpacesActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
+
                 finish();
                 break;
 
             case R.id.nav_studentactivities:
                 intent = new Intent(this, StudentActivitiesActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
+
                 finish();
                 break;
-            /*case R.id.nav_materials:
-                intent = new Intent(this, MaterialsActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
-                finish();
-                break;*/
+
             case R.id.nav_subjects:
                 intent = new Intent(this, SubjectsActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
+
                 finish();
                 break;
             case R.id.nav_privacypolicy:

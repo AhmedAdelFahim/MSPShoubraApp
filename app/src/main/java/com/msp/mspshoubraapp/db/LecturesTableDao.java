@@ -50,6 +50,7 @@ public interface LecturesTableDao {
 
     @Query("SELECT  id FROM groupDays WHERE groupNum= :groupNum AND day=:dayName")
     int getGroupId(String groupNum, String dayName);
+
     @Query("DELETE FROM sections")
     void deleteAllSections();
 

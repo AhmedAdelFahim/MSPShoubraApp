@@ -52,7 +52,6 @@ public class FoodActivity extends AppCompatActivity
             }
 
         }
-        //FetchDataFromApi.loadRestaurants(this, false);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -63,7 +62,6 @@ public class FoodActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //itemList.add(new FoodListItem("Maxicno", "0101234567", "Haret Mongi, Al Hanafi, El-Sayeda Zainab", "https://scontent-cai1-1.xx.fbcdn.net/v/t1.0-9/31265219_1311493952328670_8886136977208901632_n.jpg", 30.0589, 31.2215, "max"));
         recyclerView = findViewById(R.id.foodCustomRecycleview);
         adapter = new FoodRecyclerviewAdapter(this, itemList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -90,44 +88,22 @@ public class FoodActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         Intent intent = null;
         switch (item.getItemId()) {
-            /*case R.id.nav_food:
 
-                intent = new Intent(this, FoodActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
-                break;*/
-           /* case R.id.nav_tools:
-                intent = new Intent(this, GalleryActivity.class);
-                intent.putExtra("title", "Tools");
-                //startActivity(intent);
-                //currFragment=4;
-                break;*/
             case R.id.nav_lec_table:
                 intent = new Intent(this, LecTableActivity.class);
                 intent.putExtra("title", "Lecture Table");
-                //startActivity(intent);
-                //currFragment=4;
                 finish();
                 break;
-
             case R.id.nav_coworkingspaces:
                 intent = new Intent(this, CoworkingSpacesActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
                 finish();
-
                 break;
-
             case R.id.nav_studentactivities:
                 intent = new Intent(this, StudentActivitiesActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
                 finish();
                 break;
             case R.id.nav_materials:
                 intent = new Intent(this, MaterialsActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
                 finish();
                 break;
             case R.id.nav_subjects:

@@ -12,7 +12,6 @@ import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CommitteesExpandableRecyclerviewAdapter extends
@@ -53,24 +52,17 @@ public class CommitteesExpandableRecyclerviewAdapter extends
         holder.setViewHolderTitle(group.getTitle());
     }
 
-    /*public void setCommittees(ArrayList<CommitteeEntity> committeeEntities)
-    {
-        if (committeeEntities == null) {
-            return;
-        }
-        this.dataList = studentActivityEntities;
-        notifyDataSetChanged();
-    }*/
-    public class ParentViewHolder extends GroupViewHolder {
+
+    class ParentViewHolder extends GroupViewHolder {
 
         TextView viewHolderTitle;
 
-        public ParentViewHolder(View itemView) {
+        ParentViewHolder(View itemView) {
             super(itemView);
             viewHolderTitle = itemView.findViewById(R.id.ERV_title);
         }
 
-        public void setViewHolderTitle(String viewHolderTitle) {
+        void setViewHolderTitle(String viewHolderTitle) {
             this.viewHolderTitle.setText(viewHolderTitle);
         }
     }
@@ -81,7 +73,7 @@ public class CommitteesExpandableRecyclerviewAdapter extends
         private TextView title;
         private TextView description;
 
-        public DescriptionViewHolder(View itemView) {
+        DescriptionViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.committee_name);
             description = itemView.findViewById(R.id.committee_description_textview);

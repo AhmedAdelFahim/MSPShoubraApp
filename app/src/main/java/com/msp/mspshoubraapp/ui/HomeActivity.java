@@ -125,7 +125,6 @@ public class HomeActivity extends AppCompatActivity
             } else if (previousActivity == 4) {
                 previousActivity = 0;
                 finish();
-                //startActivity(new Intent(this,CoworkingSpacesActivity.class));
             }
         }
     }
@@ -136,7 +135,6 @@ public class HomeActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
 
         Fragment fragment = null;
-        // boolean addToStack = false;
         int id = item.getItemId();
         Intent intent = null;
         switch (item.getItemId()) {
@@ -147,26 +145,17 @@ public class HomeActivity extends AppCompatActivity
             case R.id.nav_lec_table:
                 intent = new Intent(this, LecTableActivity.class);
                 intent.putExtra("title", "Lecture Table");
-                //startActivity(intent);
-                //currFragment=4;
                 break;
 
             case R.id.nav_coworkingspaces:
                 intent = new Intent(this, CoworkingSpacesActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
-
                 break;
 
             case R.id.nav_studentactivities:
                 intent = new Intent(this, StudentActivitiesActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
                 break;
             case R.id.nav_materials:
                 intent = new Intent(this, MaterialsActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
                 break;
             case R.id.nav_subjects:
                 intent = new Intent(this, SubjectsActivity.class);
@@ -185,7 +174,6 @@ public class HomeActivity extends AppCompatActivity
             startActivity(intent);
         } else if (previousActivity == 4) {
             finish();
-            //startActivity(new Intent(this,CoworkingSpacesActivity.class));
         }
         previousActivity = 0;
 

@@ -93,31 +93,23 @@ public class SubjectsActivity extends AppCompatActivity
                 finish();
 
                 break;
-            /*case R.id.nav_tools:
-                intent = new Intent(this, GalleryActivity.class);
-                intent.putExtra("title", "Tools");
-                startActivity(intent);
-                currFragment=4;
-                break;*/
+
             case R.id.nav_lec_table:
                 intent = new Intent(this, LecTableActivity.class);
                 intent.putExtra("title", "Lecture Table");
-                //startActivity(intent);
-                //currFragment=4;
+
                 finish();
                 break;
 
             case R.id.nav_coworkingspaces:
                 intent = new Intent(this, CoworkingSpacesActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
+
                 finish();
                 break;
 
             case R.id.nav_studentactivities:
                 intent = new Intent(this, StudentActivitiesActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
+
                 finish();
                 break;
             case R.id.nav_materials:
@@ -125,11 +117,7 @@ public class SubjectsActivity extends AppCompatActivity
 
                 finish();
                 break;
-            /*case R.id.nav_subjects:
-                intent = new Intent(this, SubjectsActivity.class);
-                //intent.putExtra("title", "Tools");
-                //startActivity(intent);
-                break;*/
+
             case R.id.nav_privacypolicy:
                 intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(Constants.URL_PRIVACYPOLICY));

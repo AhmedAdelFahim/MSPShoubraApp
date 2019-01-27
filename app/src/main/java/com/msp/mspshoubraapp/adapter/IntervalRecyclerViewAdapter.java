@@ -49,7 +49,6 @@ public class IntervalRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
         if (holder.getItemViewType() == 0) {
             LectureHolder lectureHolder = (LectureHolder) holder;
-            //holder.sectionNum.setText(Integer.toString(periodType));
             lectureHolder.subjectName.setText(intervalData.getSubjectName());
             lectureHolder.instructor.setText(intervalData.getInstructor());
             lectureHolder.place.setText(intervalData.getPlace());

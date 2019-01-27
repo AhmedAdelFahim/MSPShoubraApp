@@ -47,14 +47,11 @@ public class StudentActivityRecyclerviewAdapter extends RecyclerView.Adapter<Stu
         final StudentActivityEntity currItem = dataList.get(position);
 
         holder.titleTextView.setText(currItem.getName());
-        //Picasso.get().load(currItem.getImg()).into(holder.imageView);
-        //Picasso.get().load(new File(currItem.getImgLogo() + "/" + currItem.getName())).into(holder.imageView);
+
         Picasso
                 .get()
                 .load(new File(currItem.getImgLogo() + "/" + currItem.getName()))
-                //.placeholder(R.drawable.ic_landscape_black_24dp)
                 .error(R.drawable.ic_error_black_24dp)
-                //.into(holder.imageView);
                 .into(holder.imageView, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -66,7 +63,6 @@ public class StudentActivityRecyclerviewAdapter extends RecyclerView.Adapter<Stu
 
                     }
                 });
-        //holder.imageView.setImageResource(R.drawable.ieee_logo);
     }
 
     @Override
@@ -109,23 +105,6 @@ public class StudentActivityRecyclerviewAdapter extends RecyclerView.Adapter<Stu
         void onListItemClick(int clickedItemIndex);
     }
 
-    /*private boolean loadFragment(Fragment fragment, String addToStack) {
-        if (fragment != null) {
-            FragmentManager fragmentManager = ((FragmentActivity) currActivity).getSupportFragmentManager();
-            if (addToStack.equals("")) {
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, fragment)
-                        .commit();
-                return true;
-            } else {
-                // Add the new tab fragment
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, fragment, addToStack)
-                        .addToBackStack(addToStack + "Fragment")
-                        .commit();
-            }
-        }
-        return false;
-    }*/
+
 }
 

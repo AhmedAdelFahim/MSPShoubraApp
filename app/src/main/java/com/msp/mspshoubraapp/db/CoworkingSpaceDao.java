@@ -13,7 +13,7 @@ import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 public interface CoworkingSpaceDao {
 
     @Insert(onConflict = REPLACE)
-    long insertCoworkingSpace(CoworkingSpaceEntity coworkingSpaceEntity);
+    void insertCoworkingSpace(CoworkingSpaceEntity coworkingSpaceEntity);
 
     @Query("SELECT * FROM coworkingSpaces")
     LiveData<List<CoworkingSpaceEntity>> loadAllCoworkingSpaces();

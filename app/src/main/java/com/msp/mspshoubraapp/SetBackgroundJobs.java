@@ -13,8 +13,6 @@ import static android.content.Context.ALARM_SERVICE;
 public class SetBackgroundJobs {
 
     public static void updateNewsFeed(Context context) {
-        //Log.d("ZXCVBN","BBB");
-        //Toast.makeText(context,"BBB",Toast.LENGTH_LONG).show();
         Intent intent = new Intent(context, BackgroundJobs.class);
         intent.putExtra("id", Constants.NEWSFEED_BACKGROUND_ID);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, Constants.NEWSFEED_BACKGROUND_ID, intent, FLAG_UPDATE_CURRENT);

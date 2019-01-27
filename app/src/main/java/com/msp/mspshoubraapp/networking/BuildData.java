@@ -11,8 +11,6 @@ import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
@@ -59,7 +57,6 @@ public class BuildData {
         Iterator<String> iter = response.keys();
         while (iter.hasNext()) {
             final String key = iter.next();
-            //Log.d("Test Keys",key);
             try {
                 final JSONObject jsonObject = (JSONObject) response.get(key);
                 final String name = jsonObject.getString("name");
@@ -97,7 +94,6 @@ public class BuildData {
                                     JSONObject obj = (JSONObject) jsonArray.get(i);
                                     String committeeName = obj.getString("committeeName");
                                     String committeeDescription = obj.getString("committeeDescription");
-                                    //Log.d("ASDFGHJKL", name + " " + committeeName);
                                     appDatabase.committeesDao().insertCommittee(new CommitteeEntity(key, committeeName, committeeDescription));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -128,7 +124,6 @@ public class BuildData {
         Iterator<String> iter = response.keys();
         while (iter.hasNext()) {
             final String key = iter.next();
-            //Log.d("Test Keys",key);
             try {
                 final JSONObject jsonObject = (JSONObject) response.get(key);
                 final String name = jsonObject.getString("placeName");
@@ -170,7 +165,6 @@ public class BuildData {
                                     JSONObject obj = (JSONObject) jsonArray.get(i);
                                     String itemName = obj.getString("name");
                                     String itemPrice = obj.getString("price");
-                                    //Log.d("ASDFGHJKL",name+" "+committeeName);
                                     appDatabase.restaurantMenuDao().insertItem(new RestaurantMenuEntity(key, itemName, itemPrice));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -204,9 +198,6 @@ public class BuildData {
                     }
                 });
             } else {
-                //Toast.makeText(context, "" + contextType, Toast.LENGTH_LONG).show();
-                //Log.d("ZXCVBN","AAA");
-                //oast.makeText(context,"AAA",Toast.LENGTH_LONG).show();
                 pushNotification(key, context);
             }
 
@@ -251,7 +242,6 @@ public class BuildData {
         Iterator<String> iter = response.keys();
         while (iter.hasNext()) {
             final String key = iter.next();
-            //Log.d("Test Keys",key);
             try {
                 final JSONObject jsonObject = (JSONObject) response.get(key);
                 final String name = jsonObject.getString("placeName");
@@ -294,7 +284,6 @@ public class BuildData {
                                     JSONObject obj = (JSONObject) jsonArrayPrices.get(i);
                                     String itemName = obj.getString("name");
                                     String itemPrice = obj.getString("price");
-                                    //Log.d("ASDFGHJKL",name+" "+committeeName);
                                     appDatabase.coworkingSpacePriceDao().insertCoworkingSpacePrice(new CoworkingSpacePriceEntity(key, itemName, itemPrice));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -310,7 +299,6 @@ public class BuildData {
                         try {
                             String url = (String) jsonArrayImages.get(i);
 
-                            //Log.d("ASDFGHJKL",name+" "+committeeName);
                             final String[] imgPath = new String[1];
                             final int finalI = i;
                             ImageLoader imageLoader1 = VolleySingleton.getInstance(context).getImageLoader();
@@ -319,14 +307,12 @@ public class BuildData {
                                 public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
                                     //final String tempKey = key;
                                     imgPath[0] = saveToInternalStorage(response.getBitmap(), context, key + finalI, "coworkingSpace");
-                                    //Log.d("ZXCVBN",imgPath[0]+"/"+key+ finalI);
                                     AppExecutors.getInstance().diskIO().execute(new Runnable() {
                                         @Override
                                         public void run() {
                                             ArrayList<CoworkingSpaceImageEntity> coworkingSpaceImageEntities =
                                                     (ArrayList<CoworkingSpaceImageEntity>) appDatabase.coworkingSpaceImageDao().findImage(imgPath[0] + "/" + key + finalI);
                                             if (coworkingSpaceImageEntities.size() == 0) {
-                                                Log.d("ZXCVBN", imgPath[0] + "/" + key + finalI);
                                                 appDatabase.coworkingSpaceImageDao().insertImage(new CoworkingSpaceImageEntity(key, imgPath[0] + "/" + key + finalI));
                                             }
                                         }
@@ -416,18 +402,15 @@ public class BuildData {
 
     }
 
-    public static String saveToInternalStorage(Bitmap bitmapImage, Context context, String name, String folderName) {
-        //Log.e("QWERTY ", "AAAAA");
+    private static String saveToInternalStorage(Bitmap bitmapImage, Context context, String name, String folderName) {
 
         ContextWrapper cw = new ContextWrapper(context);
         // path to /data/data/yourapp/app_data/imageDir
 
         //String name_="foldername"; //Folder name in device android/data/
         File directory = cw.getDir(folderName, Context.MODE_PRIVATE);
-        //Log.e("QWERTY ", directory.getAbsolutePath());
         // Create imageDir
         File mypath = new File(directory, name);
-        //Log.e("QWERTY ", mypath.getAbsolutePath());
         FileOutputStream fos = null;
         try {
 
@@ -439,7 +422,6 @@ public class BuildData {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.e("ASDFGHJKL", directory.getName());
         return directory.getAbsolutePath();
     }
 
@@ -448,10 +430,7 @@ public class BuildData {
             @Override
             public void run() {
                 ArrayList<PostsIdEntity> postsIdEntities = (ArrayList<PostsIdEntity>) appDatabase.postsIdDao().findPost(key);
-                //Log.d("ZXCVBN",key+" "+postsIdEntities.size()+" "+postsIdEntities.isEmpty());
                 if (postsIdEntities.isEmpty()) {
-                    //Log.d("ZXCVBN","BBB");
-                    //Toast.makeText(context,"BBB",Toast.LENGTH_LONG).show();
                     long id = appDatabase.postsIdDao().insertPostId(new PostsIdEntity(key));
                     buildNotification(context, id);
                 }

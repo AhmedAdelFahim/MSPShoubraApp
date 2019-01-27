@@ -1,13 +1,11 @@
 package com.msp.mspshoubraapp.ui;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -17,7 +15,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -42,6 +39,7 @@ public class LecTableActivity extends AppCompatActivity
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private String groupNum = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +52,6 @@ public class LecTableActivity extends AppCompatActivity
         navigationView = findViewById(R.id.nav_view);
         tabLayout = findViewById(R.id.tabs);
         drawer = findViewById(R.id.drawer_layout);
-
-        //String title = getIntent().getStringExtra("title");
-        //getSupportActionBar().setTitle(title);
         setSupportActionBar(toolbar);
         SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
         if (sharedPreferences.getBoolean(getResources().getString(R.string.lecturesTable), true)) {
@@ -69,10 +64,8 @@ public class LecTableActivity extends AppCompatActivity
         }
 
 
-        //sharedPreferences = getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
         groupNum = sharedPreferences.getString(getResources().getString(R.string.group_num), "");
         if (groupNum.equals("")) {
-            //FetchDataFromApi.loadLecturesTable(this,false);
             chooseGroupDialog();
         } else {
             getSupportActionBar().setTitle("Lecture Table " + groupNum);
@@ -187,16 +180,6 @@ public class LecTableActivity extends AppCompatActivity
                 intent = new Intent(this, SubjectsActivity.class);
                 finish();
                 startActivity(intent);
-                break;
-           /* case R.id.nav_tools:
-                intent = new Intent(this, GalleryActivity.class);
-                intent.putExtra("title", "Tools");
-                startActivity(intent);
-                break;*/
-            case R.id.nav_lec_table:
-                /*intent = new Intent(this, LecTableActivity.class);
-                intent.putExtra("title", "Lecture");
-                startActivity(intent);*/
                 break;
             case R.id.nav_privacypolicy:
                 intent = new Intent(Intent.ACTION_VIEW);

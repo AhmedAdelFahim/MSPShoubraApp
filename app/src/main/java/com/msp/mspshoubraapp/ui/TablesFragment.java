@@ -1,10 +1,7 @@
 package com.msp.mspshoubraapp.ui;
 
 import android.app.AlertDialog;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
-import android.content.DialogInterface;
-import android.content.Intent;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -75,9 +72,6 @@ public class TablesFragment extends Fragment {
                         return view;
                     }
                 }
-                //SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
-                //factory = new DayFragmentViewModelFactory(appDatabase, dayName, groupNum);
-                //viewModel = ViewModelProviders.of(this, factory).get(DayFragmentViewModel.class);
                 recyclerView.setHasFixedSize(true);
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
                 recyclerView.setLayoutManager(layoutManager);
@@ -86,13 +80,11 @@ public class TablesFragment extends Fragment {
                 if (groupNum.equals("")) {
                     chooseGroupDialog();
                 } else {
-                    //setupViewModel();
                     loadTodayTable(recyclerView);
                 }
 
 
             }
-            //dayName = "Sun";
         }
 
         return view;
@@ -139,7 +131,6 @@ public class TablesFragment extends Fragment {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(getResources().getString(R.string.group_num), groupNum);
                 editor.apply();
-                //setupViewModel();
                 loadTodayTable(recyclerView);
                 alert.dismiss();
 

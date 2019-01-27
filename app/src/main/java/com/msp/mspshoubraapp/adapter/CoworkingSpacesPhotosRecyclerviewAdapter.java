@@ -1,9 +1,7 @@
 package com.msp.mspshoubraapp.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.jsibbold.zoomage.ZoomageView;
+
 import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.db.CoworkingSpaceImageEntity;
 import com.squareup.picasso.Callback;
@@ -45,13 +43,10 @@ public class CoworkingSpacesPhotosRecyclerviewAdapter
     public void onBindViewHolder(@NonNull final CoworkingSpacesPhotosRecyclerviewAdapter.ViewHolder holder, final int position) {
         final CoworkingSpaceImageEntity currItem = photosList.get(position);
 
-        //Picasso.get().load(new File(currItem.getImage())).into(holder.imageView);
         Picasso
                 .get()
                 .load(new File(currItem.getImage()))
-                //.placeholder(R.drawable.ic_landscape_black_24dp)
                 .error(R.drawable.ic_error_black_24dp)
-                //.into(holder.imageView);
                 .into(holder.imageView, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -66,7 +61,6 @@ public class CoworkingSpacesPhotosRecyclerviewAdapter
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //enterFullScreen(position, photosList);
             }
         });
 

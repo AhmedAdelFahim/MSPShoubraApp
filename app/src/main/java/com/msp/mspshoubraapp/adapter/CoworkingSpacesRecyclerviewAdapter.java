@@ -1,11 +1,8 @@
 package com.msp.mspshoubraapp.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
+
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,15 +48,11 @@ public class CoworkingSpacesRecyclerviewAdapter extends RecyclerView.Adapter<Cow
         final CoworkingSpaceEntity currItem = dataList.get(position);
 
         holder.titleTextView.setText(currItem.getName());
-        //holder.addressTextView.setText(currItem.getAddress());
-        //holder.telephoneTextView.setText(currItem.getTelephone());
-        //Picasso.get().load(new File(currItem.getImgLogo())).into(holder.imageView);
+
         Picasso
                 .get()
                 .load(new File(currItem.getImgLogo()))
-                //.placeholder(R.drawable.ic_landscape_black_24dp)
                 .error(R.drawable.ic_error_black_24dp)
-                //.into(holder.imageView);
                 .into(holder.imageView, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -71,7 +64,6 @@ public class CoworkingSpacesRecyclerviewAdapter extends RecyclerView.Adapter<Cow
 
                     }
                 });
-        //holder.imageView.setImageResource(R.drawable.majal_logo);
     }
 
     @Override
@@ -92,16 +84,13 @@ public class CoworkingSpacesRecyclerviewAdapter extends RecyclerView.Adapter<Cow
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView titleTextView;
-        TextView addressTextView;
-        TextView telephoneTextView;
+
         ImageView imageView;
         ProgressBar progressBar;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.coworking_title_textview);
-            //addressTextView = itemView.findViewById(R.id.coworking_address_textview);
-            //telephoneTextView = itemView.findViewById(R.id.coworking_telephone_textView);
             imageView = itemView.findViewById(R.id.coworking_logo);
             progressBar = itemView.findViewById(R.id.cs_progressBar);
             itemView.setOnClickListener(this);

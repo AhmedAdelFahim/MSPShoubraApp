@@ -20,7 +20,6 @@ import com.msp.mspshoubraapp.R;
 import com.msp.mspshoubraapp.adapter.CoworkingSpacesPhotosRecyclerviewAdapter;
 import com.msp.mspshoubraapp.adapter.PricesExpandableRecyclerviewAdapter;
 import com.msp.mspshoubraapp.data.ExpandableRecyclerViewItem;
-import com.msp.mspshoubraapp.data.MenuListItem;
 import com.msp.mspshoubraapp.db.AppDatabase;
 import com.msp.mspshoubraapp.db.CoworkingSpaceEntity;
 import com.msp.mspshoubraapp.db.CoworkingSpaceImageEntity;
@@ -76,7 +75,6 @@ public class CoworkingSpacesActivityDetails extends AppCompatActivity {
         phone = findViewById(R.id.coworking_telephone_textView);
         progressBar = findViewById(R.id.csd_progressBar);
 
-        //Intent intent = getIntent();
         getSupportActionBar().setTitle(coworkingSpaceEntity.getName());
 
         titleTextView.setText(coworkingSpaceEntity.getName());
@@ -87,13 +85,10 @@ public class CoworkingSpacesActivityDetails extends AppCompatActivity {
         } else {
             phone.setText(coworkingSpaceEntity.getPhone1() + "\n" + phone2);
         }
-        //Picasso.get().load(new File(coworkingSpaceEntity.getImgLogo())).into(logoImageView);
         Picasso
                 .get()
                 .load(new File(coworkingSpaceEntity.getImgLogo()))
-                //.placeholder(R.drawable.ic_landscape_black_24dp)
                 .error(R.drawable.ic_error_black_24dp)
-                //.into(logoImageView);
                 .into(logoImageView, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -137,10 +132,10 @@ public class CoworkingSpacesActivityDetails extends AppCompatActivity {
                 finish();
                 finish();
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" +
-                        coworkingSpaceEntity.getLat()+
-                        ","+
-                        coworkingSpaceEntity.getLng()+
-                        "("+coworkingSpaceEntity.getName()+")"));
+                        coworkingSpaceEntity.getLat() +
+                        "," +
+                        coworkingSpaceEntity.getLng() +
+                        "(" + coworkingSpaceEntity.getName() + ")"));
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivity(mapIntent);
             }
@@ -152,7 +147,6 @@ public class CoworkingSpacesActivityDetails extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            //NavUtils.navigateUpFromSameTask(this);
             finish();
         }
         return super.onOptionsItemSelected(item);

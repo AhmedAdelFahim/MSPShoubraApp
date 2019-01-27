@@ -64,13 +64,10 @@ public class StudentActivitiesActivityDetails extends AppCompatActivity {
 
         titleTextView.setText(studentActivityEntity.getName());
         description.setText(studentActivityEntity.getDescription());
-        //Picasso.get().load(new File(studentActivityEntity.getImgLogo() + "/" + studentActivityEntity.getName())).into(logoImageView);
         Picasso
                 .get()
                 .load(new File(studentActivityEntity.getImgLogo() + "/" + studentActivityEntity.getName()))
-                //.placeholder(R.drawable.ic_landscape_black_24dp)
                 .error(R.drawable.ic_error_black_24dp)
-                //.into(logoImageView);
                 .into(logoImageView, new Callback() {
                     @Override
                     public void onSuccess() {

@@ -52,7 +52,6 @@ public class FetchDataFromApi {
             public void onErrorResponse(VolleyError error) {
                 if (!contextType) {
                     progressDialog.dismiss();
-                    //Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -117,7 +116,6 @@ public class FetchDataFromApi {
             public void onErrorResponse(VolleyError error) {
                 if (!contextType) {
                     progressDialog.dismiss();
-                    //Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -154,7 +152,6 @@ public class FetchDataFromApi {
             public void onErrorResponse(VolleyError error) {
                 if (!contextType) {
                     progressDialog.dismiss();
-                    //Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -192,7 +189,6 @@ public class FetchDataFromApi {
             public void onErrorResponse(VolleyError error) {
                 if (!contextType) {
                     progressDialog.dismiss();
-                    //Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });

@@ -64,7 +64,6 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
         final PostData newsItem = newsItemList.get(position);
-        //Log.d("QWEERTYUUIOP",position+" BIND "+newsItem.getImageList().size());
         final ArrayList<String> images = newsItem.getImages();
         if (holder.getItemViewType() == 0) {
             final Holder holder0 = (Holder) holder;
@@ -164,12 +163,10 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     }
                 }
             });
-            //Picasso.get().load(images.get(0)).into(holder1.img1);
             Picasso
                     .get()
                     .load(images.get(0))
                     .error(R.drawable.ic_error_black_24dp)
-                    //.into(holder1.img1);
                     .into(holder1.img1, new Callback() {
                         @Override
                         public void onSuccess() {
@@ -205,7 +202,6 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             holder2.seeMoreImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Log.d("QWEERTYUUIOP",newsItem.isExpanded()+"");
                     if (!newsItem.isExpanded()) {
                         holder2.news_title.setMaxLines(100);
                         holder2.seeMoreImg.setImageResource(R.drawable.ic_arrow_up_24px);
@@ -223,7 +219,6 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             holder2.seeMoreTxt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Log.d("QWEERTYUUIOP",newsItem.isExpanded()+"");
                     if (!newsItem.isExpanded()) {
                         holder2.news_title.setMaxLines(100);
                         holder2.seeMoreImg.setImageResource(R.drawable.ic_arrow_up_24px);
@@ -237,15 +232,11 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     }
                 }
             });
-            //holder2.img1.setImageResource(images.get(0));
-            //holder2.img2.setImageResource(images.get(1));
-            //Picasso.get().load(images.get(0)).into(holder2.img1);
+
             Picasso
                     .get()
                     .load(images.get(0))
-                    //.placeholder(R.drawable.loading)
                     .error(R.drawable.ic_error_black_24dp)
-                    //.into(holder2.img1);
                     .into(holder2.img1, new Callback() {
                         @Override
                         public void onSuccess() {
@@ -259,13 +250,10 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     });
 
 
-            //Picasso.get().load(images.get(1)).into(holder2.img2);
             Picasso
                     .get()
                     .load(images.get(1))
-                    //.placeholder(R.drawable.loading)
                     .error(R.drawable.ic_error_black_24dp)
-                    //.into(holder2.img2);
                     .into(holder2.img2, new Callback() {
                         @Override
                         public void onSuccess() {
@@ -339,13 +327,10 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     }
                 }
             });
-            //Picasso.get().load(images.get(0)).into(holder3.img1);
             Picasso
                     .get()
                     .load(images.get(0))
-                    //   .placeholder(R.drawable.loading)
                     .error(R.drawable.ic_error_black_24dp)
-                    // .into(holder3.img1);
                     .into(holder3.img1, new Callback() {
                         @Override
                         public void onSuccess() {
@@ -357,13 +342,10 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
                         }
                     });
-            //Picasso.get().load(images.get(1)).into(holder3.img2);
             Picasso
                     .get()
                     .load(images.get(1))
-                    //.placeholder(R.drawable.loading)
                     .error(R.drawable.ic_error_black_24dp)
-                    //.into(holder3.img2);
                     .into(holder3.img2, new Callback() {
                         @Override
                         public void onSuccess() {
@@ -375,13 +357,10 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
                         }
                     });
-            //Picasso.get().load(images.get(2)).into(holder3.img3);
             Picasso
                     .get()
                     .load(images.get(2))
-                    //.placeholder(R.drawable.loading)
                     .error(R.drawable.ic_error_black_24dp)
-                    // .into(holder3.img3);
                     .into(holder3.img3, new Callback() {
                         @Override
                         public void onSuccess() {
@@ -461,13 +440,10 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 }
             });
 
-            //Picasso.get().load(images.get(0)).into(holder4.img1);
             Picasso
                     .get()
                     .load(images.get(0))
-                    // .placeholder(R.drawable.loading)
                     .error(R.drawable.ic_error_black_24dp)
-                    //.into(holder4.img1);
                     .into(holder4.img1, new Callback() {
                         @Override
                         public void onSuccess() {
@@ -479,13 +455,10 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
                         }
                     });
-            //Picasso.get().load(images.get(1)).into(holder4.img2);
             Picasso
                     .get()
                     .load(images.get(1))
-                    //.placeholder(R.drawable.loading)
                     .error(R.drawable.ic_error_black_24dp)
-                    //.into(holder4.img2);
                     .into(holder4.img2, new Callback() {
                         @Override
                         public void onSuccess() {
@@ -497,13 +470,10 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
                         }
                     });
-            //Picasso.get().load(images.get(2)).into(holder4.img3);
             Picasso
                     .get()
                     .load(images.get(2))
-                    //.placeholder(R.drawable.loading)
                     .error(R.drawable.ic_error_black_24dp)
-                    //.into(holder4.img3);
                     .into(holder4.img3, new Callback() {
                         @Override
                         public void onSuccess() {
@@ -544,50 +514,6 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         intent.putExtra("pos", pos);
         intent.putExtra("images", imageList);
         activity.startActivity(intent);
-        /*final int[] index = {pos};
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-        LayoutInflater inflater = activity.getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.image_full_screen_dialog, null);
-        builder.setView(dialogView);
-
-        final ZoomageView imageView = dialogView.findViewById(R.id.image_full_screen);
-        imageView.setImageResource(imageList.get(pos));
-
-        ImageView backBtn = dialogView.findViewById(R.id.back_btn);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (index[0] > 0)
-                    index[0]--;
-                imageView.setImageResource(imageList.get(index[0]));
-                imageView.setZoomable(true);
-                imageView.setAnimateOnReset(true);
-                imageView.setAutoCenter(true);
-                imageView.setRestrictBounds(false);
-                imageView.setTranslatable(true);
-                imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            }
-        });
-
-        ImageView forwardBtn = dialogView.findViewById(R.id.forward_btn);
-        forwardBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (index[0] < imageList.size() - 1)
-                    index[0]++;
-                imageView.setImageResource(imageList.get(index[0]));
-                imageView.setZoomable(true);
-                imageView.setAnimateOnReset(true);
-                imageView.setAutoCenter(true);
-                imageView.setRestrictBounds(false);
-                imageView.setTranslatable(true);
-                imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            }
-        });
-
-        builder.create().show();*/
-
-
     }
 
     @Override
@@ -613,8 +539,6 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         public Holder(View itemView) {
             super(itemView);
             news_title = itemView.findViewById(R.id.recyclerview_item_txt);
-            // up = itemView.findViewById(R.id.up);
-            //down = itemView.findViewById(R.id.down);
             seeMoreImg = itemView.findViewById(R.id.see_more_img);
             seeMoreTxt = itemView.findViewById(R.id.see_more_txt);
             timePosted = itemView.findViewById(R.id.time_post);
@@ -636,7 +560,6 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         public HolderWithOneImage(View itemView) {
             super(itemView);
 
-            //news_img = itemView.findViewById(R.id.recyclerview_item_img);
             news_title = itemView.findViewById(R.id.recyclerview_item_txt);
 
             galleryView = itemView.findViewById(R.id.gallery_view);
@@ -715,7 +638,6 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
             galleryView.setVisibility(View.VISIBLE);
 
-            //hLine.setGuidelinePercent(1);
 
 
         }

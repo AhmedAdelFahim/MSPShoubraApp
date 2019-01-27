@@ -76,7 +76,6 @@ public class NewsFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                //Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 
