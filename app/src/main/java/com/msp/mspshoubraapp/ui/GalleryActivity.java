@@ -116,6 +116,10 @@ public class GalleryActivity extends AppCompatActivity
                 intent.setData(Uri.parse(Constants.URL_PRIVACYPOLICY));
                 startActivity(intent);
                 break;
+            case R.id.nav_about_dev:
+                intent = new Intent(this, AboutDevelopersActivity.class);
+                finish();
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

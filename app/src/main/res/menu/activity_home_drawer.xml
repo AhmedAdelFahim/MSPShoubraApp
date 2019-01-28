@@ -49,6 +49,11 @@
             android:icon="@drawable/ic_protected_profile"
             android:title="@string/privacypolicy"/>
 
+        <item
+            android:id="@+id/nav_about_dev"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="@string/about_developers"/>
+
 
     </group>
 

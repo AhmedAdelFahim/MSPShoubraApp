@@ -45,6 +45,7 @@
     <string name="lecturesTable">lecturesTable</string>
     <string name="title_activity_materials">MaterialsActivity</string>
     <string name="materials">Materials</string>
+    <string name="about_developers">About Developers</string>
 
     <string name="chemistry">Chemistry</string>
     <string name="english">English</string>
@@ -53,7 +54,7 @@
     <string name="statics">Statics</string>
 
     <string name="MSPAssisstant">MSP Assistant</string>
-    <string name="aboutDescription">This App is developed by MSP Android Committee'18</string>
+    <string name="aboutDescription">This App is developed by MSP Android Committee\'18</string>
     <string name="Developers">Developers</string>
     <string name="Adel">Ahmed Adel</string>
     <string name="AdelPos">Developer (Head)</string>

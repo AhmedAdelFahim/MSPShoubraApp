@@ -1,14 +1,8 @@
 package com.msp.mspshoubraapp.ui;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,42 +10,24 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.msp.mspshoubraapp.Constants;
 import com.msp.mspshoubraapp.R;
-import com.msp.mspshoubraapp.adapter.FoodRecyclerviewAdapter;
-import com.msp.mspshoubraapp.db.RestaurantEntity;
-import com.msp.mspshoubraapp.networking.ConnectivityStatus;
-import com.msp.mspshoubraapp.networking.FetchDataFromApi;
-import com.msp.mspshoubraapp.viewmodel.RestaurantViewModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class FoodActivity extends AppCompatActivity
+public class AboutDevelopersActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private RecyclerView recyclerView;
-    private FoodRecyclerviewAdapter adapter;
-    private ArrayList<RestaurantEntity> itemList = new ArrayList<>();
+    ImageView adelLI, adelGH, lailaLI, lailaGH, massoudLI, massoudGH;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_food);
+        setContentView(R.layout.activity_about_developers);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.msp_preferences), MODE_PRIVATE);
-        if (sharedPreferences.getBoolean(getResources().getString(R.string.restaurant), true)) {
-            if (ConnectivityStatus.isConnected(this)) {
-                FetchDataFromApi.loadRestaurants(this, false);
-            } else {
-                Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
-            }
-
-        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -62,13 +38,68 @@ public class FoodActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        recyclerView = findViewById(R.id.foodCustomRecycleview);
-        adapter = new FoodRecyclerviewAdapter(this, itemList);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(adapter);
+        adelLI = findViewById(R.id.AdelLI);
+        adelGH = findViewById(R.id.AdelGH);
+        lailaLI = findViewById(R.id.LailaLI);
+        lailaGH = findViewById(R.id.LailaGH);
+        massoudLI = findViewById(R.id.MassoudLI);
+        massoudGH = findViewById(R.id.MassoudGH);
 
-        setupViewModel();
+
+        adelLI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(Constants.AHMED_LINKEDIN));
+                startActivity(i);
+            }
+        });
+
+        adelGH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(Constants.AHMED_GIT));
+                startActivity(i);
+            }
+        });
+
+        lailaLI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(Constants.LAILA_LINKEDIN));
+                startActivity(i);
+            }
+        });
+
+        lailaGH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(Constants.LAILA_GIT));
+                startActivity(i);
+            }
+        });
+
+        massoudLI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(Constants.MOHAMMAD_LINKEDIN));
+                startActivity(i);
+            }
+        });
+
+        massoudGH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(Constants.MOHAMMAD_GIT));
+                startActivity(i);
+            }
+        });
+
     }
 
     @Override
@@ -82,62 +113,63 @@ public class FoodActivity extends AppCompatActivity
     }
 
 
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        int id = item.getItemId();
         Intent intent = null;
         switch (item.getItemId()) {
+            case R.id.nav_food:
+
+                intent = new Intent(this, FoodActivity.class);
+
+                finish();
+                break;
 
             case R.id.nav_lec_table:
                 intent = new Intent(this, LecTableActivity.class);
                 intent.putExtra("title", "Lecture Table");
+
                 finish();
                 break;
+
             case R.id.nav_coworkingspaces:
                 intent = new Intent(this, CoworkingSpacesActivity.class);
+
                 finish();
                 break;
+
             case R.id.nav_studentactivities:
                 intent = new Intent(this, StudentActivitiesActivity.class);
+
                 finish();
+                break;
+
+            case R.id.nav_subjects:
+                intent = new Intent(this, SubjectsActivity.class);
+
+                finish();
+                break;
+
+            case R.id.nav_privacypolicy:
+                intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(Constants.URL_PRIVACYPOLICY));
                 break;
             case R.id.nav_materials:
                 intent = new Intent(this, MaterialsActivity.class);
                 finish();
                 break;
-            case R.id.nav_subjects:
-                intent = new Intent(this, SubjectsActivity.class);
-                finish();
-                break;
-            case R.id.nav_privacypolicy:
-                intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(Constants.URL_PRIVACYPOLICY));
-                break;
-            case R.id.nav_about_dev:
-                intent = new Intent(this, AboutDevelopersActivity.class);
-                finish();
-                break;
+
         }
 
         if (intent != null) {
             startActivity(intent);
         }
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private void setupViewModel() {
-        RestaurantViewModel viewModel = ViewModelProviders.of(this).get(RestaurantViewModel.class);
-        viewModel.getAllRestaurants().observe(this, new Observer<List<RestaurantEntity>>() {
-            @Override
-            public void onChanged(@Nullable List<RestaurantEntity> restaurantEntities) {
-                itemList = (ArrayList<RestaurantEntity>) restaurantEntities;
-                adapter.setRestaurant(restaurantEntities);
-            }
-        });
     }
 }

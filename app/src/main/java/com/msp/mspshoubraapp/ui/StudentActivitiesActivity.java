@@ -128,6 +128,10 @@ public class StudentActivitiesActivity extends AppCompatActivity
                 intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(Constants.URL_PRIVACYPOLICY));
                 break;
+            case R.id.nav_about_dev:
+                intent = new Intent(this, AboutDevelopersActivity.class);
+                finish();
+                break;
         }
 
         if (intent != null) {

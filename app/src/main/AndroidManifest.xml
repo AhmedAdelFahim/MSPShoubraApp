@@ -92,6 +92,11 @@
             android:name=".ui.MaterialsActivity"
             android:label="@string/materials"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.AboutDevelopersActivity"
+            android:label="@string/about_developers"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
