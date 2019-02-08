@@ -35,12 +35,22 @@ public class CoworkingSpacesPhotosRecyclerviewAdapter
     @NonNull
     @Override
     public CoworkingSpacesPhotosRecyclerviewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        /*
+         * Construct a new view by inflate it from an XML layout file to be used in
+         *  onBindViewHolder method it will be re-used to display different items.
+         */
+
         View itemView = inflater.inflate(R.layout.item_recyclerview_coworkingspace_photos, parent, false);
         return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final CoworkingSpacesPhotosRecyclerviewAdapter.ViewHolder holder, final int position) {
+        /*
+         * Get entities and bind them to the view holder using the entity model
+         *  using Picasso to load an image through the internet
+         */
+
         final CoworkingSpaceImageEntity currItem = photosList.get(position);
 
         Picasso
@@ -69,10 +79,12 @@ public class CoworkingSpacesPhotosRecyclerviewAdapter
 
     @Override
     public int getItemCount() {
+        //return number of current item.
         return photosList.size();
     }
 
     public void setImages(ArrayList<CoworkingSpaceImageEntity> imageList) {
+        //if getting successes set images and notify.
         if (imageList == null) {
             return;
         }
@@ -81,7 +93,9 @@ public class CoworkingSpacesPhotosRecyclerviewAdapter
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
+        /**
+         * ViewHolder model that is being inflated from XML file
+         */
         ImageView imageView;
         ProgressBar progressBar;
 

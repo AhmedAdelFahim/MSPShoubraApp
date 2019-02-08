@@ -25,6 +25,11 @@ public class CommitteesExpandableRecyclerviewAdapter extends
 
     @Override
     public ParentViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
+        /*
+         * Construct a new view by inflate it from an XML layout file to be used in
+         *  onBindViewHolder method it will be re-used to display different items.
+         *      for outer list
+         */
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.expandable_recyclerview_item, parent, false);
 
@@ -33,6 +38,11 @@ public class CommitteesExpandableRecyclerviewAdapter extends
 
     @Override
     public DescriptionViewHolder onCreateChildViewHolder(ViewGroup parent, int viewType) {
+        /*
+         * Construct a new view by inflate it from an XML layout file to be used in
+         *  onBindViewHolder method it will be re-used to display different items.
+         *      for inner list
+         */
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.committees_list_item, parent, false);
 
@@ -41,6 +51,10 @@ public class CommitteesExpandableRecyclerviewAdapter extends
 
     @Override
     public void onBindChildViewHolder(DescriptionViewHolder holder, int flatPosition, ExpandableGroup group, int childIndex) {
+        /*
+         * Get entities and bind them to the view holder using the entity model
+         *  for inner recycler view.
+         */
         CommitteeEntity committeesListItem = (CommitteeEntity) group.getItems().get(childIndex);
 
         holder.setTitle(committeesListItem.getCommitteeName());
@@ -49,11 +63,19 @@ public class CommitteesExpandableRecyclerviewAdapter extends
 
     @Override
     public void onBindGroupViewHolder(ParentViewHolder holder, int flatPosition, ExpandableGroup group) {
+        /*
+         * Get entities and bind them to the view holder using the entity model
+         *  for outer recycler view.
+         */
         holder.setViewHolderTitle(group.getTitle());
     }
 
 
     class ParentViewHolder extends GroupViewHolder {
+        /**
+         * ViewHolder model that is being inflated from XML file
+         *  for outer list
+         */
 
         TextView viewHolderTitle;
 
@@ -69,7 +91,10 @@ public class CommitteesExpandableRecyclerviewAdapter extends
 
 
     public class DescriptionViewHolder extends ChildViewHolder {
-
+        /**
+         * ViewHolder model that is being inflated from XML file
+         *  for inner list
+         */
         private TextView title;
         private TextView description;
 

@@ -39,12 +39,20 @@ public class CoworkingSpacesRecyclerviewAdapter extends RecyclerView.Adapter<Cow
     @NonNull
     @Override
     public CoworkingSpacesRecyclerviewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        /*
+         * Construct a new view by inflate it from an XML layout file to be used in
+         *  onBindViewHolder method it will be re-used to display different items.
+         */
         View itemView = inflater.inflate(R.layout.coworkingspaces_list_item, parent, false);
         return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final CoworkingSpacesRecyclerviewAdapter.ViewHolder holder, int position) {
+        /*
+         * Get entities and bind them to the view holder using the entity model
+         *  using Picasso to load an image through the internet
+         */
         final CoworkingSpaceEntity currItem = dataList.get(position);
 
         holder.titleTextView.setText(currItem.getName());
@@ -68,6 +76,7 @@ public class CoworkingSpacesRecyclerviewAdapter extends RecyclerView.Adapter<Cow
 
     @Override
     public int getItemCount() {
+        //return number of current item.
         if (dataList == null) {
             return 0;
         }
@@ -75,6 +84,7 @@ public class CoworkingSpacesRecyclerviewAdapter extends RecyclerView.Adapter<Cow
     }
 
     public void setCoworkingSpaces(List<CoworkingSpaceEntity> coworkingSpaceEntities) {
+        //if getting successes set entities and notify.
         if (coworkingSpaceEntities == null) {
             return;
         }
@@ -83,6 +93,9 @@ public class CoworkingSpacesRecyclerviewAdapter extends RecyclerView.Adapter<Cow
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        /**
+         * ViewHolder model that is being inflated from XML file
+         */
         TextView titleTextView;
 
         ImageView imageView;
@@ -104,6 +117,10 @@ public class CoworkingSpacesRecyclerviewAdapter extends RecyclerView.Adapter<Cow
     }
 
     public interface listItemClickListener {
+        /**
+         * interface for item action event.
+         */
+
         void onListItemClick(int clickedItemIndex);
     }
 }
