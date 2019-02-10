@@ -26,6 +26,11 @@ public class PricesExpandableRecyclerviewAdapter extends
 
     @Override
     public ParentViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
+        /*
+         * Construct a new view by inflate it from an XML layout file to be used in
+         *  onBindViewHolder method it will be re-used to display different items.
+         *   for the group.
+         */
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.expandable_recyclerview_item,parent,false);
 
@@ -34,6 +39,11 @@ public class PricesExpandableRecyclerviewAdapter extends
 
     @Override
     public PricesViewHolder onCreateChildViewHolder(ViewGroup parent, int viewType) {
+        /*
+         * Construct a new view by inflate it from an XML layout file to be used in
+         *  onBindViewHolder method it will be re-used to display different items.
+         *   for the group.
+         */
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.menu_list_item,parent,false);
 
@@ -42,6 +52,11 @@ public class PricesExpandableRecyclerviewAdapter extends
 
     @Override
     public void onBindChildViewHolder(PricesViewHolder holder, int flatPosition, ExpandableGroup group, int childIndex) {
+        /*
+         * Get entities and bind them to the view holder using the entity model
+         *  using Picasso to load an image through the internet
+         *   for the child
+         */
         CoworkingSpacePriceEntity priceEntity = (CoworkingSpacePriceEntity) group.getItems().get(childIndex);
         holder.setPrice(priceEntity.getItemPrice());
         holder.setDuration(priceEntity.getItemName());
@@ -49,12 +64,19 @@ public class PricesExpandableRecyclerviewAdapter extends
 
     @Override
     public void onBindGroupViewHolder(ParentViewHolder holder, int flatPosition, ExpandableGroup group) {
+        /*
+         * Get entities and bind them to the view holder using the entity model
+         *  using Picasso to load an image through the internet
+         *   for the group
+         */
         holder.setViewHolderTitle(group.getTitle());
     }
 
 
     public class ParentViewHolder extends GroupViewHolder{
-
+        /**
+         * ViewHolder model that is being inflated from XML file
+         */
         TextView viewHolderTitle;
         public ParentViewHolder(View itemView){
             super(itemView);
@@ -66,7 +88,9 @@ public class PricesExpandableRecyclerviewAdapter extends
 
 
     public class PricesViewHolder extends ChildViewHolder{
-
+        /**
+         * ViewHolder model that is being inflated from XML file
+         */
         private TextView duration;
         private TextView price;
         public PricesViewHolder(View itemView){

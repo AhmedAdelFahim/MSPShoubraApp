@@ -32,6 +32,10 @@ public class IntervalRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        /*
+         * Construct a new view by inflate it from an XML layout file to be used in
+         *  onBindViewHolder method it will be re-used to display different items.
+         */
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_recyclerview_interval, parent, false);
         if (viewType == 0) {
@@ -43,6 +47,9 @@ public class IntervalRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        /*
+         * Get entities and bind them to the view holder using the entity model
+         */
         SectionsEntity intervalData = intervalDataList.get(position);
 
         int periodType = intervalData.getSecNum();
@@ -67,6 +74,7 @@ public class IntervalRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public int getItemCount() {
+        //return the current element
         if (intervalDataList == null) {
             return 0;
         }
@@ -82,6 +90,10 @@ public class IntervalRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     }
 
     public class SectionHolder extends RecyclerView.ViewHolder {
+        /**
+         * ViewHolder model that is being inflated from XML file
+         *  for the section
+         */
         private TextView sectionNum, subjectName, instructor, place, periodType;
 
 
@@ -98,6 +110,10 @@ public class IntervalRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     }
 
     public class LectureHolder extends RecyclerView.ViewHolder {
+        /**
+         * ViewHolder model that is being inflated from XML file
+         *  for the lecture
+         */
         private TextView sectionNum, subjectName, instructor, place, periodType;
 
 

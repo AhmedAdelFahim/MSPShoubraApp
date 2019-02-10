@@ -45,6 +45,10 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        /*
+         * Construct a new view by inflate it from an XML layout file to be used in
+         *  onBindViewHolder method it will be re-used to display different items.
+         */
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_recyclerview_news, parent, false);
         if (viewType == 0) {
@@ -63,6 +67,11 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
+        /*
+         * Get entities and bind them to the view holder using the entity model
+         *  using Picasso to load an image through the internet
+         *   and setting events
+         */
         final PostData newsItem = newsItemList.get(position);
         final ArrayList<String> images = newsItem.getImages();
         if (holder.getItemViewType() == 0) {
@@ -510,6 +519,7 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     }
 
     public void enterFullScreen(int pos, final ArrayList<String> imageList) {
+        //full screen for each item
         Intent intent = new Intent(activity, ImageFullScreenActivity.class);
         intent.putExtra("pos", pos);
         intent.putExtra("images", imageList);
@@ -531,7 +541,9 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
     public class Holder extends RecyclerView.ViewHolder {
 
-
+        /**
+         * the holder model
+         */
         private TextView news_title, seeMoreTxt, timePosted;
         private ImageView up, down, seeMoreImg;
         private ProgressBar img1ProgressBar, img2ProgressBar, img3ProgressBar;
@@ -550,7 +562,9 @@ public class NewsFeedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     }
 
     public class HolderWithOneImage extends RecyclerView.ViewHolder {
-
+        /**
+         * View Holder one image model
+         */
         private TextView news_title, seeMoreTxt, timePosted;
         private ImageView img1, seeMoreImg;
         private ConstraintLayout galleryView;

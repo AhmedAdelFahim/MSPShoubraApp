@@ -19,6 +19,8 @@ public class FragmentAdapter extends FragmentPagerAdapter {
         Fragment fragment = null;
         Bundle bundle;
         switch (position) {
+            /* return current fragment
+             */
             case 0:
                 bundle = new Bundle();
                 bundle.putString("day", "Sun");
@@ -61,6 +63,7 @@ public class FragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
+        //return fragment title
         switch (position) {
             case 0:
                 return "Sun";

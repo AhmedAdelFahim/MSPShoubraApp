@@ -40,6 +40,10 @@ public class LectureRecyclerViewAdapter extends RecyclerView.Adapter<LectureRecy
     @NonNull
     @Override
     public LectureRecyclerViewAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        /*
+         * Construct a new view by inflate it from an XML layout file to be used in
+         *  onBindViewHolder method it will be re-used to display different items.
+         */
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_recyclerview_day, parent, false);
         return new Holder(view);
@@ -47,6 +51,9 @@ public class LectureRecyclerViewAdapter extends RecyclerView.Adapter<LectureRecy
 
     @Override
     public void onBindViewHolder(@NonNull final LectureRecyclerViewAdapter.Holder holder, final int position) {
+        /*
+         * Get entities and bind them to the view holder using the entity model
+         */
         final DayLecturesEntity lectureDataItem = lectureData.get(position);
         holder.startTime.setText(lectureDataItem.getStartTime());
         holder.endTime.setText(lectureDataItem.getEndTime());
@@ -91,6 +98,9 @@ public class LectureRecyclerViewAdapter extends RecyclerView.Adapter<LectureRecy
 
 
     public class Holder extends RecyclerView.ViewHolder {
+        /**
+         * ViewHolder model that is being inflated from XML file
+         */
         private TextView startTime, endTime;
         private RecyclerView recyclerView;
 

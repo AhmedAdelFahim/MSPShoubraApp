@@ -37,12 +37,21 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
     @NonNull
     @Override
     public FoodRecyclerviewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        /*
+         * Construct a new view by inflate it from an XML layout file to be used in
+         *  onBindViewHolder method it will be re-used to display different items.
+         */
         View itemView = inflater.inflate(R.layout.food_list_item, parent, false);
         return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        /*
+         * Get entities and bind them to the view holder using the entity model
+         *  using Picasso to load an image through the internet
+         *   and assign the event to the buttons
+         */
         final RestaurantEntity currItem = dataList.get(position);
         holder.tilteTextview.setText(currItem.getName());
         String phones = currItem.getPhone1();
@@ -93,6 +102,7 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
 
     @Override
     public int getItemCount() {
+        //return current element
         if (dataList == null) {
             return 0;
         }
@@ -100,6 +110,7 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
     }
 
     public void setRestaurant(List<RestaurantEntity> restaurantEntities) {
+        //if getting successes set entities and notify.
         if (restaurantEntities == null) {
             return;
         }
@@ -108,6 +119,9 @@ public class FoodRecyclerviewAdapter extends RecyclerView.Adapter<FoodRecyclervi
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        /**
+         * ViewHolder model that is being inflated from XML file
+         */
         TextView tilteTextview;
         TextView addressTextview;
         TextView telephoneTextview;

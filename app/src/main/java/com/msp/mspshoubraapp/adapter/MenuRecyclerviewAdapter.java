@@ -27,12 +27,19 @@ public class MenuRecyclerviewAdapter extends RecyclerView.Adapter<MenuRecyclervi
     @NonNull
     @Override
     public MenuRecyclerviewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        /*
+         * Construct a new view by inflate it from an XML layout file to be used in
+         *  onBindViewHolder method it will be re-used to display different items.
+         */
         View itemView = inflater.inflate(R.layout.menu_list_item,parent,false);
         return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        /*
+         * Get entities and bind them to the view holder using the entity model
+         */
         final RestaurantMenuEntity currItem = dataList.get(position);
         holder.tilteTextview.setText(currItem.getName());
         holder.valueTextview.setText(currItem.getValue());
@@ -44,6 +51,9 @@ public class MenuRecyclerviewAdapter extends RecyclerView.Adapter<MenuRecyclervi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+        /**
+         * ViewHolder model that is being inflated from XML file
+         */
         TextView tilteTextview;
         TextView valueTextview;
 
