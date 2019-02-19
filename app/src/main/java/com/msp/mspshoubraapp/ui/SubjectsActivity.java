@@ -57,12 +57,30 @@ public class SubjectsActivity extends AppCompatActivity
         subjectTitle = new ArrayList<>();
 
         subjectTitle.clear();
-        addSubjects(50, 0, 0, 0, 0, 0, 0, 0, 100, "Maths");
-        addSubjects(30, 0, 0, 0, 0, 0, 30, 0, 115, "Physics");
-        addSubjects(30, 0, 0, 0, 0, 0, 30, 0, 90, "Chemistry");
-        addSubjects(40, 0, 30, 0, 0, 0, 0, 30, 100, "Eng. Drawing");
-        addSubjects(60, 0, 0, 0, 0, 0, 30, 0, 135, "Mechanics");
-        addSubjects(10, 0, 0, 0, 5, 0, 0, 0, 35, "Tech. Language");
+        addSubjects(50, 0, 0, 0, 0, 0, 0,
+                0, 100, "Maths 1A");
+        addSubjects(30, 0, 0, 0, 0, 0, 30,
+                0, 115, "Physics 1A");
+        addSubjects(30, 0, 0, 0, 0, 0, 30,
+                0, 90, "Chemistry");
+        addSubjects(10, 0, 0, 0, 5, 0, 0,
+                0, 35, "Tech. Language");
+
+
+        addSubjects(40, 0, 30, 0, 0, 0, 0,
+                30, 125, "Eng. Drawing");
+        addSubjects(60, 0, 0, 0, 0, 0, 30,
+                0, 110, "Mechanics");
+        addSubjects(50, 0, 0, 0, 0, 0, 0,
+                0, 100, "Maths 1B");
+        addSubjects(30, 0, 0, 0, 0, 0, 30,
+                0, 90, "Physics 1B");
+        addSubjects(20, 0, 0, 0, 15, 0, 0,
+                0, 40, "Computer");
+        addSubjects(25, 0, 0, 0, 25, 0, 0,
+                0,75, "Production");
+        addSubjects(10, 0, 0, 0, 0, 0, 0,
+                0, 40, "History of Engineering");
 
         adapter = new SubjectsExpandableRecyclerviewAdapter(subjectTitle);
         subjectsRV.setAdapter(adapter);
