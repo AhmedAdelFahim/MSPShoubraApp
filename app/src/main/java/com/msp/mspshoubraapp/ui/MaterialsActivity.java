@@ -38,7 +38,7 @@ public class MaterialsActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        englishImg = findViewById(R.id.english_img);
+        //englishImg = findViewById(R.id.english_img);
         chemistryImg = findViewById(R.id.chemistry_img);
         physicsImg = findViewById(R.id.physics_img);
         mathImg = findViewById(R.id.math_img);
@@ -113,32 +113,27 @@ public class MaterialsActivity extends AppCompatActivity
             case R.id.nav_food:
 
                 intent = new Intent(this, FoodActivity.class);
-
                 finish();
                 break;
 
             case R.id.nav_lec_table:
                 intent = new Intent(this, LecTableActivity.class);
                 intent.putExtra("title", "Lecture Table");
-
                 finish();
                 break;
 
             case R.id.nav_coworkingspaces:
                 intent = new Intent(this, CoworkingSpacesActivity.class);
-
                 finish();
                 break;
 
             case R.id.nav_studentactivities:
                 intent = new Intent(this, StudentActivitiesActivity.class);
-
                 finish();
                 break;
 
             case R.id.nav_subjects:
                 intent = new Intent(this, SubjectsActivity.class);
-
                 finish();
                 break;
             case R.id.nav_privacypolicy:

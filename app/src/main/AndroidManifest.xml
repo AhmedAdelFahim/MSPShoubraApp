@@ -47,10 +47,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.GalleryActivity"
-            android:label="@string/title_activity_gallery"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ui.LecTableActivity"
             android:label="@string/title_activity_lec_table"
             android:theme="@style/AppTheme.NoActionBar" />

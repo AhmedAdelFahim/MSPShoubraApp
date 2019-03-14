@@ -24,6 +24,11 @@ public class FetchDataFromApi {
 
     private static ProgressDialog progressDialog;
 
+    /**
+     * load student activities data from api
+     * display progress dialog if function is called from activity
+     */
+
     public static void loadStudentActivities(final Context context, final boolean contextType) {
         if (!contextType) {
             progressDialog = new ProgressDialog(context);
@@ -58,6 +63,11 @@ public class FetchDataFromApi {
 
         VolleySingleton.getInstance(context).addToRequestQueue(studentActivitiesJsonObject);
     }
+
+    /**
+     * load Restaurants data from api
+     * display progress dialog if function is called from activity
+     */
 
     public static void loadRestaurants(final Context context, final boolean contextType) {
         if (!contextType) {
@@ -95,6 +105,11 @@ public class FetchDataFromApi {
         VolleySingleton.getInstance(context).addToRequestQueue(restaurantsJsonObject);
     }
 
+    /**
+     * load Posts data from api
+     * display progress dialog if function is called from activity
+     */
+
     public static void loadPosts(final Context context, final boolean contextType) {
         if (!contextType) {
             progressDialog = new ProgressDialog(context);
@@ -123,6 +138,11 @@ public class FetchDataFromApi {
         VolleySingleton.getInstance(context).addToRequestQueue(postsJsonObject);
     }
 
+
+    /**
+     * load co-working Spaces data from api
+     * display progress dialog if function is called from activity
+     */
     public static void loadcoworkingSpaces(final Context context, final boolean contextType) {
         if (!contextType) {
             progressDialog = new ProgressDialog(context);
@@ -159,6 +179,11 @@ public class FetchDataFromApi {
         VolleySingleton.getInstance(context).addToRequestQueue(coworkingSpaceObject);
     }
 
+
+    /**
+     * load Lectures data from api
+     * display progress dialog if function is called from activity
+     */
 
     public static void loadLecturesTable(final Context context, final boolean contextType) {
         if (!contextType) {

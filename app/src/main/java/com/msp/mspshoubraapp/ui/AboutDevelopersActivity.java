@@ -124,32 +124,27 @@ public class AboutDevelopersActivity extends AppCompatActivity
             case R.id.nav_food:
 
                 intent = new Intent(this, FoodActivity.class);
-
                 finish();
                 break;
 
             case R.id.nav_lec_table:
                 intent = new Intent(this, LecTableActivity.class);
                 intent.putExtra("title", "Lecture Table");
-
                 finish();
                 break;
 
             case R.id.nav_coworkingspaces:
                 intent = new Intent(this, CoworkingSpacesActivity.class);
-
                 finish();
                 break;
 
             case R.id.nav_studentactivities:
                 intent = new Intent(this, StudentActivitiesActivity.class);
-
                 finish();
                 break;
 
             case R.id.nav_subjects:
                 intent = new Intent(this, SubjectsActivity.class);
-
                 finish();
                 break;
 

@@ -166,7 +166,6 @@ public class HomeActivity extends AppCompatActivity
                 break;
             case R.id.nav_about_dev:
                 intent = new Intent(this, AboutDevelopersActivity.class);
-                finish();
                 break;
         }
 

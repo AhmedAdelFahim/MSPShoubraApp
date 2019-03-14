@@ -45,6 +45,11 @@ import java.util.Iterator;
 public class BuildData {
     private static AppDatabase appDatabase;
 
+    /*
+     * extract data from Json obj
+     * save data in db & internal storage
+     *
+     * */
     public static void extractStudentActivitiesJson(JSONObject response, final Context context) {
         appDatabase = AppDatabase.getInstance(context);
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
@@ -110,6 +115,11 @@ public class BuildData {
         }
     }
 
+    /*
+     * extract data from Json obj
+     * save data in db & internal storage
+     *
+     * */
     public static void extractRestaurantsJson(JSONObject response, final Context context) {
 
         appDatabase = AppDatabase.getInstance(context);
@@ -182,6 +192,12 @@ public class BuildData {
 
     }
 
+    /*
+     * extract data from Json obj
+     * save data in db & internal storage
+     *
+     * */
+
     public static ArrayList<PostData> extractNewsFeedJson(JSONObject response, Context context, boolean contextType) {
 
         appDatabase = AppDatabase.getInstance(context);
@@ -228,6 +244,11 @@ public class BuildData {
         return postDataList;
     }
 
+    /*
+     * extract data from Json obj
+     * save data in db & internal storage
+     *
+     * */
     public static void extractCoworkingSpaceJson(JSONObject response, final Context context, boolean contextType) {
         appDatabase = AppDatabase.getInstance(context);
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
@@ -338,6 +359,11 @@ public class BuildData {
         }
     }
 
+    /*
+     * extract data from Json obj
+     * save data in db & internal storage
+     *
+     * */
     public static void extractLecturesTableJson(JSONObject response, Context context, boolean contextType) {
 
         appDatabase = AppDatabase.getInstance(context);
@@ -402,12 +428,12 @@ public class BuildData {
 
     }
 
+    /*
+     * save image in internal storage
+     * */
     private static String saveToInternalStorage(Bitmap bitmapImage, Context context, String name, String folderName) {
 
         ContextWrapper cw = new ContextWrapper(context);
-        // path to /data/data/yourapp/app_data/imageDir
-
-        //String name_="foldername"; //Folder name in device android/data/
         File directory = cw.getDir(folderName, Context.MODE_PRIVATE);
         // Create imageDir
         File mypath = new File(directory, name);
@@ -425,6 +451,10 @@ public class BuildData {
         return directory.getAbsolutePath();
     }
 
+
+    /*
+     * push notification for new news feed
+     * */
     private static void pushNotification(final String key, final Context context) {
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override

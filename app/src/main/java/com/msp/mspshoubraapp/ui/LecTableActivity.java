@@ -188,6 +188,7 @@ public class LecTableActivity extends AppCompatActivity
                 break;
             case R.id.nav_about_dev:
                 intent = new Intent(this, AboutDevelopersActivity.class);
+                startActivity(intent);
                 finish();
                 break;
         }
